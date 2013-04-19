@@ -48,4 +48,42 @@ public class OperatorGUI extends JFrame {
 		pack();
 		setVisible(true);
 	}
+
+	public void changeView(String mode) {
+		switch (mode) {
+			case "New":
+				/*
+				 * Skapa ett gäng JTextPanels
+				 * Skapa några buttons etc.
+				 * boolean mandatoryField = true/false
+				 */
+				break;
+			case "Edit":
+				/*
+                 * Skapa ett gäng JTextPanels
+				 * Fyll i nuvarande info i dem
+                 * Skapa några buttons etc.
+                 * boolean mandatoryField = true/false
+                 */
+				break;
+			case "Search":
+				/*
+                 * 
+                 * 
+                 * 
+                 */
+
+				break;
+			default:
+				/*
+                 * Standardvyn, typ som search på wildcard?
+                 * 
+                 * 
+                 */
+
+				break;
+			//pack();
+			//repaint();
+		}
+	}
 }

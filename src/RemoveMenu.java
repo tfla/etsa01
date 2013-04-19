@@ -13,6 +13,6 @@ public class RemoveMenu extends JMenuItem implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-	
+		
 	}
 }
