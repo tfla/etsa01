@@ -15,6 +15,8 @@ public class NewBikerButton extends JButton implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		gui.changeView("New");
+		gui.changeView(1);
+		gui.pack();
+        gui.setVisible(true);
 	}
 }

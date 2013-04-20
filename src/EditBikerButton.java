@@ -20,6 +20,8 @@ public class EditBikerButton extends JButton implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		gui.changeView("Edit");	
+		gui.changeView(2);
+		gui.pack();
+		gui.setVisible(true);
 	}
 }
