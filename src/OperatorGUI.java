@@ -1,4 +1,5 @@
 package GUI;
+
 import javax.swing.*;
 import java.util.List;
 import java.util.Set;
@@ -7,9 +8,17 @@ import java.awt.BorderLayout;
 
 public class OperatorGUI extends JFrame {
 	private JTextArea messageArea;
-	private boolean repaint;
-	private JPanel centerPanel;
+	private JPanel startPanel;
 	private JPanel southPanel;
+	private JPanel createBikerPanel;
+	private JPanel editBikerPanel;
+	private JPanel searchPanel;
+	private JPanel bp;
+
+	private JTextField pin;
+	private JTextField tfn;
+	private JTextField bar;
+	private JTextField nam;
 
 	public OperatorGUI() {
 		super("Operator Interface");
@@ -30,58 +39,63 @@ public class OperatorGUI extends JFrame {
 		menubar.add(viewMenu);
 		viewMenu.add(new ViewAllMenu(this));
 		
-		southPanel = new JPanel();
-		southPanel.add(new NewBikerButton(this));
-		southPanel.add(new EditBikerButton(this));
-		southPanel.add(new SearchForm(this));
-		southPanel.add(new SearchButton(this));
-				
-		centerPanel = new JPanel();
+		bp = new JPanel();
+		bp.add(new NewBikerButton(this));
+		bp.add(new EditBikerButton(this));
+		bp.add(new SearchForm(this));
+		bp.add(new SearchButton(this));
+
+		startPanel = new JPanel();
 		messageArea = new JTextArea(50,100);
 		messageArea.setEditable(false);
-		centerPanel.add(messageArea);
-		centerPanel.add(new JScrollPane(messageArea));
+		startPanel.add(messageArea);
+		startPanel.add(new JScrollPane(messageArea));
 
-		add(southPanel, BorderLayout.PAGE_END);		
-		add(centerPanel, BorderLayout.CENTER);
+		add(bp, BorderLayout.PAGE_END);		
+		add(startPanel, BorderLayout.CENTER);
 
 		pack();
 		setVisible(true);
-		repaint = true;
 	}
 
 	public void changeView(int mode) {
-		centerPanel = new JPanel();
-		JTextField pin, tfn, bar, nam;
 		switch (mode) {
 			case 1:
+				startPanel.removeAll();
+				dispose();
 				pin = new JTextField("Personal Identity Number");
 				tfn = new JTextField("Telephone Number");
 				bar = new JTextField("Barcode");
 				nam = new JTextField("Name");
-				centerPanel.add(pin);
-				centerPanel.add(tfn);
-				centerPanel.add(bar);
-				centerPanel.add(nam);
-				centerPanel.add(new SaveButton(this));
-				centerPanel.add(new CancelButton(this));
+				startPanel.add(pin);
+				startPanel.add(tfn);
+				startPanel.add(bar);
+				startPanel.add(nam);
+				startPanel.add(new SaveButton(this));
+				startPanel.add(new CancelButton(this));
+				add(bp, BorderLayout.PAGE_END);
+				add(startPanel, BorderLayout.CENTER);
 				break;
 			case 2:
-				String bpin = "850213-1234"; 	//biker.getPin();
-				String btfn = "070-1234567"; 	//biker.getTfn();
-				String bbar = "12345"; 			//biker.getBar();
-				String bnam = "Sven Svensson"; 	//biker.getNam();
-				pin = new JTextField(bpin);
-                tfn = new JTextField(btfn);
-                bar = new JTextField(bbar);
-                nam = new JTextField(bnam);
-                centerPanel.add(pin);
-                centerPanel.add(tfn);
-                centerPanel.add(bar);
-                centerPanel.add(nam);
-                centerPanel.add(new SaveButton(this));
-                centerPanel.add(new CancelButton(this));
-				centerPanel.add(new DeleteBikerButton(this));
+				startPanel.removeAll();
+				dispose();
+				String bpin = "910112-1234";    //biker.getPin(); typ JNåntingDialog
+				String btfn = "070-1234567";    //biker.getTfn();
+		        String bbar = "12345";          //biker.getBar();
+		        String bnam = "Sven Svensson";  //biker.getNam();
+		        pin = new JTextField(bpin);
+		        tfn = new JTextField(btfn);
+		        bar = new JTextField(bbar);
+		        nam = new JTextField(bnam);
+		        startPanel.add(pin);
+		        startPanel.add(tfn);
+		        startPanel.add(bar);
+		        startPanel.add(nam);
+		        startPanel.add(new SaveButton(this));
+		        startPanel.add(new CancelButton(this));
+    		    startPanel.add(new DeleteBikerButton(this));
+				add(bp, BorderLayout.PAGE_END);
+				add(startPanel, BorderLayout.CENTER);
 				break;
 			case 3:
 				/*
@@ -94,10 +108,7 @@ public class OperatorGUI extends JFrame {
 			default:
 				break;
 		}
-		add(centerPanel, BorderLayout.CENTER);
-		if (repaint) {
-			pack();
-			setVisible(true);
-		}
+		pack();
+		setVisible(true);
 	}
 }
