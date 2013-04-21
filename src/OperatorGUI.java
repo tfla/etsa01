@@ -10,9 +10,6 @@ public class OperatorGUI extends JFrame {
 	private JTextArea messageArea;
 	private JPanel startPanel;
 	private JPanel southPanel;
-	private JPanel createBikerPanel;
-	private JPanel editBikerPanel;
-	private JPanel searchPanel;
 	private JPanel bp;
 
 	private JTextField pin;
@@ -27,6 +24,9 @@ public class OperatorGUI extends JFrame {
 		/* To avoid hardcoded Swedish text on OptionPane dialogs */
 		UIManager.put("OptionPane.cancelButtonText","Cancel");
 		
+		/*
+		 * Create and populate the MenuBar.
+		 */
 		setLayout(new BorderLayout());
 		JMenuBar menubar = new JMenuBar();
 		setJMenuBar(menubar);
@@ -39,21 +39,29 @@ public class OperatorGUI extends JFrame {
 		menubar.add(viewMenu);
 		viewMenu.add(new ViewAllMenu(this));
 		
+		/*
+		 * Create and populate the ButtonPanel.
+		 */
 		bp = new JPanel();
 		bp.add(new NewBikerButton(this));
 		bp.add(new EditBikerButton(this));
 		bp.add(new SearchForm(this));
 		bp.add(new SearchButton(this));
 
+		/*
+		 * Create and populate the StartPanel (default view).
+		 */
 		startPanel = new JPanel();
 		messageArea = new JTextArea(50,100);
 		messageArea.setEditable(false);
 		startPanel.add(messageArea);
 		startPanel.add(new JScrollPane(messageArea));
 
+		/*
+		 * Put things where they belong, pack and paint.
+		 */
 		add(bp, BorderLayout.PAGE_END);		
 		add(startPanel, BorderLayout.CENTER);
-
 		pack();
 		setVisible(true);
 	}
@@ -61,6 +69,9 @@ public class OperatorGUI extends JFrame {
 	public void changeView(int mode) {
 		switch (mode) {
 			case 1:
+				/*
+				 * Mode: Create New Biker.
+				 */
 				startPanel.removeAll();
 				dispose();
 				pin = new JTextField("Personal Identity Number");
@@ -77,6 +88,9 @@ public class OperatorGUI extends JFrame {
 				add(startPanel, BorderLayout.CENTER);
 				break;
 			case 2:
+				/*
+				 * Mode: Edit Existing Biker.
+				 */
 				startPanel.removeAll();
 				dispose();
 				String bpin = "910112-1234";    //biker.getPin(); typ JNåntingDialog
@@ -99,9 +113,7 @@ public class OperatorGUI extends JFrame {
 				break;
 			case 3:
 				/*
-                 * search-mode 
-                 * 
-                 * 
+                 * Mode: Search. 
                  */
 
 				break;
