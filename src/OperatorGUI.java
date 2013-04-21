@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.Locale;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 public class OperatorGUI extends JFrame {
 	private JTextArea messageArea;
@@ -21,6 +22,7 @@ public class OperatorGUI extends JFrame {
 		super("Operator Interface");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Locale.setDefault(new Locale("en"));
+		setPreferredSize(new Dimension(600, 500));
 		/* To avoid hardcoded Swedish text on OptionPane dialogs */
 		UIManager.put("OptionPane.cancelButtonText","Cancel");
 		
@@ -52,7 +54,7 @@ public class OperatorGUI extends JFrame {
 		 * Create and populate the StartPanel (default view).
 		 */
 		startPanel = new JPanel();
-		messageArea = new JTextArea(50,100);
+		messageArea = new JTextArea(20,20);
 		messageArea.setEditable(false);
 		startPanel.add(messageArea);
 		startPanel.add(new JScrollPane(messageArea));

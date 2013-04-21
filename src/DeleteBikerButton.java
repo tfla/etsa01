@@ -12,7 +12,7 @@ public class DeleteBikerButton extends JButton implements ActionListener {
 	private JFileChooser fc;
 
 	public DeleteBikerButton(OperatorGUI gui) {
-		super("Edit biker");
+		super("Delete");
 		this.gui = gui;
 		fc = new JFileChooser();
 		fc.setDialogTitle("Select and edit an existing biker.");
