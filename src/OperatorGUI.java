@@ -8,9 +8,10 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 public class OperatorGUI extends JFrame {
-	private JTextArea messageArea;
+	private JTextArea bikeArea;
+	private JTextArea bikerArea;
+
 	private JPanel startPanel;
-	private JPanel southPanel;
 	private JPanel bp;
 
 	private JTextField pin;
@@ -54,10 +55,30 @@ public class OperatorGUI extends JFrame {
 		 * Create and populate the StartPanel (default view).
 		 */
 		startPanel = new JPanel();
-		messageArea = new JTextArea(20,20);
-		messageArea.setEditable(false);
-		startPanel.add(messageArea);
-		startPanel.add(new JScrollPane(messageArea));
+		bikerArea = new JTextArea(20,20);
+		bikerArea.setEditable(false);
+		startPanel.add(bikerArea);
+		startPanel.add(new JScrollPane(bikerArea));
+
+		bikeArea = new JTextArea(20,20);
+		bikeArea.setEditable(false);
+		startPanel.add(bikeArea);
+		startPanel.add(new JScrollPane(bikeArea));
+
+		// for (Biker b : bikersInGarage) {
+		//}
+		bikerArea.append("Bikers currently in garage\n");
+		for (int i = 0; i < 10; i++) {
+			bikerArea.append("Sven Svensson");
+			bikerArea.append("\n");
+		}
+		// for (Bike bi : bikesInGarage) {
+		//}
+		bikeArea.append("Bikes currently in garage:\n");
+		for (int i = 0; i < 50; i++) {
+			bikeArea.append("91932");
+			bikeArea.append("\n");
+		}
 
 		/*
 		 * Put things where they belong, pack and paint.
