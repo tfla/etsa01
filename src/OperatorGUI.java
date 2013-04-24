@@ -10,6 +10,7 @@ import java.awt.Dimension;
 public class OperatorGUI extends JFrame {
 	private JTextArea bikeArea;
 	private JTextArea bikerArea;
+	private JTextArea resultArea;
 
 	private JPanel startPanel;
 	private JPanel bp;
@@ -138,7 +139,15 @@ public class OperatorGUI extends JFrame {
 				/*
                  * Mode: Search. 
                  */
-
+				startPanel.removeAll();
+				dispose();
+				resultArea = new JTextArea(20, 40);
+				resultArea.setEditable(false);
+				startPanel.add(resultArea);
+				startPanel.add(new JScrollPane(resultArea));
+				/*
+				 * Some code that fills the result-area with results...
+				 */
 				break;
 			default:
 				break;
