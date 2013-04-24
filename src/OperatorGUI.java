@@ -92,6 +92,8 @@ public class OperatorGUI extends JFrame {
 		        tfn = new JTextField(btfn);
 		        bar = new JTextField(bbar);
 		        nam = new JTextField(bnam);
+				pin.setEditable(false);
+				bar.setEditable(false);
 		        startPanel.add(pin);
 		        startPanel.add(tfn);
 		        startPanel.add(bar);
@@ -106,10 +108,11 @@ public class OperatorGUI extends JFrame {
                  */
 				startPanel.removeAll();
 				dispose();
-				resultArea = new JTextArea(20, 40);
+				resultArea = new JTextArea(20, 45);
 				resultArea.setEditable(false);
 				startPanel.add(resultArea);
 				startPanel.add(new JScrollPane(resultArea));
+				startPanel.add(new CancelButton(this));
 				/*
 				 * Some code that fills the result-area with results...
 				 */
