@@ -56,38 +56,7 @@ public class OperatorGUI extends JFrame {
 		 * Create and populate the StartPanel (default view).
 		 */
 		startPanel = new JPanel();
-		bikerArea = new JTextArea(20,20);
-		bikerArea.setEditable(false);
-		startPanel.add(bikerArea);
-		startPanel.add(new JScrollPane(bikerArea));
-
-		bikeArea = new JTextArea(20,20);
-		bikeArea.setEditable(false);
-		startPanel.add(bikeArea);
-		startPanel.add(new JScrollPane(bikeArea));
-
-		// for (Biker b : bikersInGarage) {
-		//}
-		bikerArea.append("Bikers currently in garage\n");
-		for (int i = 0; i < 10; i++) {
-			bikerArea.append("Sven Svensson");
-			bikerArea.append("\n");
-		}
-		// for (Bike bi : bikesInGarage) {
-		//}
-		bikeArea.append("Bikes currently in garage:\n");
-		for (int i = 0; i < 50; i++) {
-			bikeArea.append("91932");
-			bikeArea.append("\n");
-		}
-
-		/*
-		 * Put things where they belong, pack and paint.
-		 */
-		add(bp, BorderLayout.PAGE_END);		
-		add(startPanel, BorderLayout.CENTER);
-		pack();
-		setVisible(true);
+		changeView(0);
 	}
 
 	public void changeView(int mode) {
@@ -108,8 +77,6 @@ public class OperatorGUI extends JFrame {
 				startPanel.add(nam);
 				startPanel.add(new SaveButton(this));
 				startPanel.add(new CancelButton(this));
-				add(bp, BorderLayout.PAGE_END);
-				add(startPanel, BorderLayout.CENTER);
 				break;
 			case 2:
 				/*
@@ -132,8 +99,6 @@ public class OperatorGUI extends JFrame {
 		        startPanel.add(new SaveButton(this));
 		        startPanel.add(new CancelButton(this));
     		    startPanel.add(new DeleteBikerButton(this));
-				add(bp, BorderLayout.PAGE_END);
-				add(startPanel, BorderLayout.CENTER);
 				break;
 			case 3:
 				/*
@@ -150,8 +115,39 @@ public class OperatorGUI extends JFrame {
 				 */
 				break;
 			default:
+				/*
+				 * Mode: Default-view.
+				 */
+				startPanel.removeAll();
+				dispose();
+				bikerArea = new JTextArea(20,20);
+				bikerArea.setEditable(false);
+				startPanel.add(bikerArea);
+				startPanel.add(new JScrollPane(bikerArea));
+
+				bikeArea = new JTextArea(20,20);
+				bikeArea.setEditable(false);
+				startPanel.add(bikeArea);
+				startPanel.add(new JScrollPane(bikeArea));
+
+				// for (Biker b : bikersInGarage) {
+				//}
+				bikerArea.append("Bikers currently in garage\n");
+				for (int i = 0; i < 10; i++) {
+					bikerArea.append("Sven Svensson");
+					bikerArea.append("\n");
+				}
+				// for (Bike bi : bikesInGarage) {
+				//}
+				bikeArea.append("Bikes currently in garage:\n");
+				for (int i = 0; i < 50; i++) {
+					bikeArea.append("91932");
+					bikeArea.append("\n");
+				}
 				break;
 		}
+		add(bp, BorderLayout.PAGE_END);
+		add(startPanel, BorderLayout.CENTER);
 		pack();
 		setVisible(true);
 	}
