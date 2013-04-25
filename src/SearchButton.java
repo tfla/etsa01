@@ -16,7 +16,5 @@ public class SearchButton extends JButton implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		gui.changeView(3);
-		gui.pack();
-        gui.setVisible(true);
 	}
 }

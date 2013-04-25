@@ -6,6 +6,11 @@ import java.util.Set;
 import java.util.Locale;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.SystemColor;
+import java.awt.Color;
+import java.awt.GridLayout;
+import javax.swing.border.EmptyBorder;
+import java.awt.Component;
 
 public class OperatorGUI extends JFrame {
 	private JTextArea bikeArea;
@@ -14,11 +19,18 @@ public class OperatorGUI extends JFrame {
 
 	private JPanel startPanel;
 	private JPanel bp;
+	private JPanel searchResultPanel;
+	private JPanel panel;
 
 	private JTextField pin;
 	private JTextField tfn;
 	private JTextField bar;
 	private JTextField nam;
+
+	private String bpin;
+	private String btfn;
+	private String bnam;
+	private String bbar;
 
 	public OperatorGUI() {
 		super("Operator Interface");
@@ -60,13 +72,19 @@ public class OperatorGUI extends JFrame {
 	}
 
 	public void changeView(int mode) {
+		startPanel.removeAll();
+		if (searchResultPanel != null) {
+			searchResultPanel.removeAll();
+		}
+		if (panel != null) {
+			panel.removeAll();
+		}
+		dispose();
 		switch (mode) {
 			case 1:
 				/*
 				 * Mode: Create New Biker.
 				 */
-				startPanel.removeAll();
-				dispose();
 				pin = new JTextField("Personal Identity Number");
 				tfn = new JTextField("Telephone Number");
 				bar = new JTextField("Barcode");
@@ -82,12 +100,10 @@ public class OperatorGUI extends JFrame {
 				/*
 				 * Mode: Edit Existing Biker.
 				 */
-				startPanel.removeAll();
-				dispose();
-				String bpin = "910112-1234";    //biker.getPin(); typ JNåntingDialog
-				String btfn = "070-1234567";    //biker.getTfn();
-		        String bbar = "12345";          //biker.getBar();
-		        String bnam = "Sven Svensson";  //biker.getNam();
+				bpin = "910112-1234";    //biker.getPin(); typ JNåntingDialog
+				btfn = "070-1234567";    //biker.getTfn();
+		        bbar = "12345";          //biker.getBar();
+		        bnam = "Sven Svensson";  //biker.getNam();
 		        pin = new JTextField(bpin);
 		        tfn = new JTextField(btfn);
 		        bar = new JTextField(bbar);
@@ -106,23 +122,62 @@ public class OperatorGUI extends JFrame {
 				/*
                  * Mode: Search. 
                  */
-				startPanel.removeAll();
-				dispose();
-				resultArea = new JTextArea(20, 45);
-				resultArea.setEditable(false);
-				startPanel.add(resultArea);
-				startPanel.add(new JScrollPane(resultArea));
-				startPanel.add(new CancelButton(this));
+				searchResultPanel = new JPanel();
+				setContentPane(searchResultPanel);
+				searchResultPanel.setLayout(null);
+
+				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setBounds(32, 32, 500, 400);
+				searchResultPanel.add(scrollPane);
+
+				panel = new JPanel();
+				scrollPane.setViewportView(panel);
+				panel.setLayout(new GridLayout(100, 1));
+
+				for(int i = 0; i < 100; i++) {
+					JPanel panel_1 = new JPanel();
+					JTextField jtf = new JTextField("Sven Svensson");
+					jtf.setEditable(false);
+					panel_1.add(jtf);
+					panel_1.add(new ViewBikerButton(this));
+					if(i%2==0) {
+						panel_1.setBackground(SystemColor.inactiveCaptionBorder);
+					}
+					panel.add(panel_1);
+				}
 				/*
 				 * Some code that fills the result-area with results...
 				 */
+				break;
+			case 4:
+				/*
+				 * Mode: View.
+				 */
+				bpin = "910112-1234";    //biker.getPin(); typ JNåntingDialog
+				btfn = "070-1234567";    //biker.getTfn();
+				bbar = "12345";          //biker.getBar();
+				bnam = "Sven Svensson";  //biker.getNam();
+				pin = new JTextField(bpin);
+				tfn = new JTextField(btfn);
+				bar = new JTextField(bbar);
+				nam = new JTextField(bnam);
+				pin.setEditable(false);
+				bar.setEditable(false);
+				tfn.setEditable(false);
+				nam.setEditable(false);
+				startPanel.add(pin);
+				startPanel.add(tfn);
+				startPanel.add(bar);
+				startPanel.add(nam);
+				startPanel.add(new SaveButton(this));
+				startPanel.add(new CancelButton(this));
+				startPanel.add(new DeleteBikerButton(this));
+				startPanel.add(new PrintBarcodeButton(this));
 				break;
 			default:
 				/*
 				 * Mode: Default-view.
 				 */
-				startPanel.removeAll();
-				dispose();
 				bikerArea = new JTextArea(20,20);
 				bikerArea.setEditable(false);
 				startPanel.add(bikerArea);
