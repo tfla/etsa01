@@ -15,7 +15,6 @@ import java.awt.Component;
 public class OperatorGUI extends JFrame {
 	private JTextArea bikeArea;
 	private JTextArea bikerArea;
-	private JTextArea resultArea;
 
 	private JPanel startPanel;
 	private JPanel bp;
@@ -23,11 +22,13 @@ public class OperatorGUI extends JFrame {
 	private JPanel panel;
 
 	private JTextField pin;
+	private JTextField pinc;
 	private JTextField tfn;
 	private JTextField bar;
 	private JTextField nam;
 
 	private String bpin;
+	private String bpinc;
 	private String btfn;
 	private String bnam;
 	private String bbar;
@@ -36,7 +37,7 @@ public class OperatorGUI extends JFrame {
 		super("Operator Interface");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Locale.setDefault(new Locale("en"));
-		setPreferredSize(new Dimension(600, 500));
+		setPreferredSize(new Dimension(600, 600));
 		/* To avoid hardcoded Swedish text on OptionPane dialogs */
 		UIManager.put("OptionPane.cancelButtonText","Cancel");
 		
@@ -54,7 +55,7 @@ public class OperatorGUI extends JFrame {
 		JMenu viewMenu = new JMenu("View");
 		menubar.add(viewMenu);
 		viewMenu.add(new ViewAllMenu(this));
-		
+	
 		/*
 		 * Create and populate the ButtonPanel.
 		 */
@@ -85,11 +86,13 @@ public class OperatorGUI extends JFrame {
 				/*
 				 * Mode: Create New Biker.
 				 */
-				pin = new JTextField("Personal Identity Number");
+				pin = new JTextField("Personal Identity Number (PIN)");
+				pinc = new JTextField("PIN-code");
 				tfn = new JTextField("Telephone Number");
 				bar = new JTextField("Barcode");
 				nam = new JTextField("Name");
 				startPanel.add(pin);
+				startPanel.add(pinc);
 				startPanel.add(tfn);
 				startPanel.add(bar);
 				startPanel.add(nam);
@@ -101,16 +104,20 @@ public class OperatorGUI extends JFrame {
 				 * Mode: Edit Existing Biker.
 				 */
 				bpin = "910112-1234";    //biker.getPin(); typ JNåntingDialog
+				bpinc = "02034";
 				btfn = "070-1234567";    //biker.getTfn();
 		        bbar = "12345";          //biker.getBar();
 		        bnam = "Sven Svensson";  //biker.getNam();
 		        pin = new JTextField(bpin);
+				pinc = new JTextField(bpinc);
 		        tfn = new JTextField(btfn);
 		        bar = new JTextField(bbar);
 		        nam = new JTextField(bnam);
 				pin.setEditable(false);
+				pinc.setEditable(false);
 				bar.setEditable(false);
 		        startPanel.add(pin);
+				startPanel.add(pinc);
 		        startPanel.add(tfn);
 		        startPanel.add(bar);
 		        startPanel.add(nam);
@@ -134,38 +141,43 @@ public class OperatorGUI extends JFrame {
 				scrollPane.setViewportView(panel);
 				panel.setLayout(new GridLayout(100, 1));
 
+				/*
+				 * Some code that fills the result-area with results...
+				 */
 				for(int i = 0; i < 100; i++) {
 					JPanel panel_1 = new JPanel();
 					JTextField jtf = new JTextField("Sven Svensson");
 					jtf.setEditable(false);
 					panel_1.add(jtf);
 					panel_1.add(new ViewBikerButton(this));
-					if(i%2==0) {
+					if(i % 2 == 0) {
 						panel_1.setBackground(SystemColor.inactiveCaptionBorder);
 					}
 					panel.add(panel_1);
 				}
-				/*
-				 * Some code that fills the result-area with results...
-				 */
+				searchResultPanel.add(new CancelButton(this));
 				break;
 			case 4:
 				/*
 				 * Mode: View.
 				 */
 				bpin = "910112-1234";    //biker.getPin(); typ JNåntingDialog
+				bpinc = "02034";
 				btfn = "070-1234567";    //biker.getTfn();
 				bbar = "12345";          //biker.getBar();
 				bnam = "Sven Svensson";  //biker.getNam();
 				pin = new JTextField(bpin);
+				pinc = new JTextField(bpinc);
 				tfn = new JTextField(btfn);
 				bar = new JTextField(bbar);
 				nam = new JTextField(bnam);
 				pin.setEditable(false);
+				pinc.setEditable(false);
 				bar.setEditable(false);
 				tfn.setEditable(false);
 				nam.setEditable(false);
 				startPanel.add(pin);
+				startPanel.add(pinc);
 				startPanel.add(tfn);
 				startPanel.add(bar);
 				startPanel.add(nam);
