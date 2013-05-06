@@ -15,6 +15,6 @@ public class CancelButton extends JButton implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		gui.changeView(0);
+		gui.changeView(OperatorGUI.DEFAULT_MODE);
 	}
 }

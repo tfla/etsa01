@@ -33,6 +33,12 @@ public class OperatorGUI extends JFrame {
 	private String bnam;
 	private String bbar;
 
+	public static final int DEFAULT_MODE = 0;
+	public static final int CREATE_MODE = 1;
+	public static final int EDIT_MODE = 2;
+	public static final int SEARCH_MODE = 3;
+	public static final int VIEW_MODE = 4;
+
 	public OperatorGUI() {
 		super("Operator Interface");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,7 +75,7 @@ public class OperatorGUI extends JFrame {
 		 * Create and populate the StartPanel (default view).
 		 */
 		startPanel = new JPanel();
-		changeView(0);
+		changeView(DEFAULT_MODE);
 	}
 
 	public void changeView(int mode) {
@@ -82,10 +88,7 @@ public class OperatorGUI extends JFrame {
 		}
 		dispose();
 		switch (mode) {
-			case 1:
-				/*
-				 * Mode: Create New Biker.
-				 */
+			case CREATE_MODE:
 				pin = new JTextField("Personal Identity Number (PIN)");
 				pinc = new JTextField("PIN-code");
 				tfn = new JTextField("Telephone Number");
@@ -99,10 +102,7 @@ public class OperatorGUI extends JFrame {
 				startPanel.add(new SaveButton(this));
 				startPanel.add(new CancelButton(this));
 				break;
-			case 2:
-				/*
-				 * Mode: Edit Existing Biker.
-				 */
+			case EDIT_MODE:
 				bpin = "910112-1234";    //biker.getPin(); typ JNåntingDialog
 				bpinc = "02034";
 				btfn = "070-1234567";    //biker.getTfn();
@@ -125,10 +125,7 @@ public class OperatorGUI extends JFrame {
 		        startPanel.add(new CancelButton(this));
     		    startPanel.add(new DeleteBikerButton(this));
 				break;
-			case 3:
-				/*
-                 * Mode: Search. 
-                 */
+			case SEARCH_MODE:
 				searchResultPanel = new JPanel();
 				setContentPane(searchResultPanel);
 				searchResultPanel.setLayout(null);
@@ -157,10 +154,7 @@ public class OperatorGUI extends JFrame {
 				}
 				searchResultPanel.add(new CancelButton(this));
 				break;
-			case 4:
-				/*
-				 * Mode: View.
-				 */
+			case VIEW_MODE:
 				bpin = "910112-1234";    //biker.getPin(); typ JNåntingDialog
 				bpinc = "02034";
 				btfn = "070-1234567";    //biker.getTfn();
@@ -187,9 +181,6 @@ public class OperatorGUI extends JFrame {
 				startPanel.add(new PrintBarcodeButton(this));
 				break;
 			default:
-				/*
-				 * Mode: Default-view.
-				 */
 				bikerArea = new JTextArea(20,20);
 				bikerArea.setEditable(false);
 				startPanel.add(bikerArea);

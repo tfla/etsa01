@@ -20,6 +20,6 @@ public class ViewBikerButton extends JButton implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		gui.changeView(4);
+		gui.changeView(OperatorGUI.VIEW_MODE);
 	}
 }
