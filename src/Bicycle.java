@@ -1,6 +1,6 @@
 package SYS;
 
-public class Bicycle {
+public class Bicycle implements Comparable<Bicycle> {
 	private boolean inGarage;
 	private String barcode;
 
@@ -8,8 +8,9 @@ public class Bicycle {
 	 * Creates a new Bicycle
 	 *
 	 */
-	public Bicycle() {
-
+	public Bicycle(String barcode) {
+		this.barcode = barcode;
+		inGarage = false;
 	}
 
 	/*
@@ -17,7 +18,7 @@ public class Bicycle {
 	 * @return The status of a bike (true/false).
 	 */
 	public boolean inGarage() {
-		return false;
+		return inGarage;
 	}
 
 	/*
@@ -25,7 +26,7 @@ public class Bicycle {
 	 * @return The barcode of a bike.
 	 */
 	public String getBarcode() {
-		return "";
+		return barcode;
 	}
 
 	/*
@@ -33,7 +34,7 @@ public class Bicycle {
 	 * @param barcode The new barcode of a bike.
 	 */
 	public void setBarcode(String barcode) {
-
+		this.barcode = barcode;
 	}
 
 	/*
@@ -41,6 +42,10 @@ public class Bicycle {
 	 * @param status The new status of a bike (true/false).
 	 */
 	public void setInGarage(boolean status) {
+		inGarage = status;
+	}
 
+	public int compareTo(Bicycle b) {
+		return Integer.parseInt(barcode) - Integer.parseInt(b.getBarcode());
 	}
 }

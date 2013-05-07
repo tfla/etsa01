@@ -1,21 +1,26 @@
 package SYS;
 
-import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class BicycleGarageManager {
-	private BarcodePrinterDriver printer;
-	private ElectronicLockDriver entryLock;
-	private ElectronicLockDriver exitLock;
-	private PinCodeTerminalDriver terminal;
-	private List users;
-	private List bikes;
-
+	private BarcodePrinterTestDriver printer;
+	private BarcodeReaderEntryTestDriver entryBarcodeReader;
+	private BarcodeReaderExitTestDriver exitBarcodeReader;
+	private ElectronicLockTestDriver entryLock;
+	private ElectronicLockTestDriver exitLock;
+	private PinCodeTerminalTestDriver terminal;
+	private TreeSet<User> users;
+	private TreeSet<Bicycle> bikes;
+	
 	/*
 	 * Creates a new BicycleGarageManager
 	 *
 	 */
 	public BicycleGarageManager(){
-
+		users = new TreeSet<User>();
+		bikes = new TreeSet<Bicycle>();
+		
 	}
 
 	/*
@@ -26,11 +31,16 @@ public class BicycleGarageManager {
 	 * @param terminal
 	 *
 	 */
-	public void registerHardwareDrivers(BarcodePrinterDriver printer,
-										ElectronicLockDriver entryLock,
-										ElectronicLockDriver exitLock,
-										PinCodeTerminalDriver terminal) {
-
+	public void registerHardwareDrivers(BarcodePrinterTestDriver printer,
+										BarcodeReaderEntryTestDriver entryBarcodeReader,
+										BarcodeReaderExitTestDriver exitBarcodeReader,
+										ElectronicLockTestDriver entryLock,
+										ElectronicLockTestDriver exitLock,
+										PinCodeTerminalTestDriver terminal) {
+		this.printer = printer;
+		this.entryLock = entryLock;
+		this.exitLock = exitLock;
+		this.terminal = terminal;	
 	}
 
 	/*
@@ -38,7 +48,7 @@ public class BicycleGarageManager {
 	 * 
 	 */
 	public void entryBarcode(String bicycleID) {
-
+		
 	}
 
 	/*
@@ -56,4 +66,22 @@ public class BicycleGarageManager {
 	public void entryCharacter(char c) {
 
 	}
+
+	public Bicycle getBicycle(String barcode) {
+		return null;
+	}
+
+	public User getUser(String pin) {
+		return null;
+	}
+
+	public void addNewUser(String name, String pinCode, String pin, String phoneNum, String barcode) {
+
+	}
+
+	public SortedSet<User> searchUsers(String searchString) {
+		return null;
+	}
+
+	
 }

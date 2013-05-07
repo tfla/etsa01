@@ -1,6 +1,6 @@
 package SYS;
 
-public class User {
+public class User implements Comparable<User> {
 	private String name;
 	private String barcode;
 	private String pinCode;
@@ -11,8 +11,34 @@ public class User {
 	 * Creates a new biker.
 	 *
 	 */
-	public User() {
+	public User(String pin, String pinCode, String barcode) {
+		this.barcode = barcode;
+		this.pinCode = pinCode;
+		this.pin = pin;
+		this.name = "Name";
+		this.phoneNum = "Telephone Number";
+	}
 
+	public User(String pin, String pinCode, String barcode, String s) {
+		this.barcode = barcode;
+		this.pinCode = pinCode;
+		this.pin = pin;
+		if (s.contains(" ")) {
+			name = s;
+			this.phoneNum = "Telephone Number";
+		}
+		else {
+			this.name = "Name";
+			phoneNum = s;
+		}
+	}
+
+	public User(String pin, String pinCode, String barcode, String name, String phoneNum) {
+		this.pin = pin;
+		this.pinCode = pinCode;
+		this.barcode = barcode;
+		this.name = name;
+		this.phoneNum = phoneNum;
 	}
 
 	/*
@@ -20,7 +46,7 @@ public class User {
 	 * @return The PIN-code of a user.
 	 */
 	public String getPINCode() {
-		return "";
+		return pinCode;
 	}
 
 	/*
@@ -28,7 +54,7 @@ public class User {
 	 * @return The Personal Identity Numer (PIN) of a user.
 	 */
 	public String getPIN() {
-		return "";
+		return pin;
 	}
 
 	/*
@@ -36,7 +62,7 @@ public class User {
 	 * @return The name of a user.
 	 */
 	public String getName() {
-		return "";
+		return name;
 	}
 
 	/*
@@ -44,7 +70,7 @@ public class User {
 	 * @return The barcode of a user.
 	 */
 	public String getBarcode() {
-		return "";
+		return barcode;
 	}
 
 	/*
@@ -52,7 +78,7 @@ public class User {
 	 * @param name The new name for the user.
 	 */
 	public void setName(String name) {
-
+		this.name = name;
 	}
 
 	/*
@@ -60,7 +86,7 @@ public class User {
 	 * @param phoneNum The new phone number of a user.
 	 */
 	public void setPhone(String phoneNum) {
-
+		this.phoneNum = phoneNum;
 	}
 
 	/*
@@ -68,6 +94,10 @@ public class User {
 	 * @param barcode The new barcode of a user.
 	 */
 	public void setBarcode(String barcode) {
+		this.barcode = barcode;
+	}
 
+	public int compareTo(User u) {
+		return Integer.parseInt(pin) - Integer.parseInt(u.getPIN());
 	}
 }

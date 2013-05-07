@@ -12,6 +12,13 @@ public class Main {
 	public static void main(String[] args) {	
 		//File f = new File(args[0]);
 
-		new OperatorGUI();		
+		new OperatorGUI();
+		SYS.BicycleGarageManager bgm = new SYS.BicycleGarageManager();
+		bgm.registerHardwareDrivers(new SYS.BarcodePrinterTestDriver(),
+									new SYS.BarcodeReaderEntryTestDriver(),
+									new SYS.BarcodeReaderExitTestDriver(),
+									new SYS.ElectronicLockTestDriver("Entry"),
+									new SYS.ElectronicLockTestDriver("Exit"),
+									new SYS.PinCodeTerminalTestDriver());
 	}
 }
