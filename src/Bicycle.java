@@ -4,7 +4,7 @@ public class Bicycle implements Comparable<Bicycle> {
 	private boolean inGarage;
 	private String barcode;
 
-	/*
+	/**
 	 * Creates a new Bicycle
 	 *
 	 */
@@ -13,7 +13,7 @@ public class Bicycle implements Comparable<Bicycle> {
 		inGarage = false;
 	}
 
-	/*
+	/**
 	 * Returns the status of a bike (true/false).
 	 * @return The status of a bike (true/false).
 	 */
@@ -21,7 +21,7 @@ public class Bicycle implements Comparable<Bicycle> {
 		return inGarage;
 	}
 
-	/*
+	/**
 	 * Returns the barcode of a bike.
 	 * @return The barcode of a bike.
 	 */
@@ -29,7 +29,7 @@ public class Bicycle implements Comparable<Bicycle> {
 		return barcode;
 	}
 
-	/*
+	/**
 	 * Sets the barcode of a bike to barcode.
 	 * @param barcode The new barcode of a bike.
 	 */
@@ -37,7 +37,7 @@ public class Bicycle implements Comparable<Bicycle> {
 		this.barcode = barcode;
 	}
 
-	/*
+	/**
 	 * Sets the status of a bike (true/false) to status.
 	 * @param status The new status of a bike (true/false).
 	 */

@@ -13,7 +13,7 @@ public class BicycleGarageManager {
 	private TreeSet<User> users;
 	private TreeSet<Bicycle> bikes;
 	
-	/*
+	/**
 	 * Creates a new BicycleGarageManager
 	 *
 	 */
@@ -29,7 +29,7 @@ public class BicycleGarageManager {
                                 new PinCodeTerminalTestDriver());
 	}
 
-	/*
+	/**
 	 * Registers the hardware drivers for the system.
 	 * @param printer
 	 * @param entryLock
@@ -49,7 +49,7 @@ public class BicycleGarageManager {
 		this.terminal = terminal;	
 	}
 
-	/*
+	/**
 	 * Whenever a barcode is read at the entrance.
 	 * 
 	 */
@@ -57,7 +57,7 @@ public class BicycleGarageManager {
 		
 	}
 
-	/*
+	/**
 	 * Whenever a barcode is read at the exit.
 	 *
 	 */
@@ -65,7 +65,7 @@ public class BicycleGarageManager {
 
 	}
 
-	/*
+	/**
 	 * Reads the characters entered at the PIN-code terminal.
 	 *
 	 */
