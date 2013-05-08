@@ -8,31 +8,13 @@ public class User implements Comparable<User> {
 	private String pin;
 
 	/*
-	 * Creates a new biker.
-	 *
+	 * Creates a new user.
+	 * @param pin The PIN of the user.
+	 * @param pinCode The PIN-code of the user.
+	 * @param barcode The barcode of the user.
+	 * @param name The name of the user.
+	 * @param phoneNum The telephone number of the user.
 	 */
-	public User(String pin, String pinCode, String barcode) {
-		this.barcode = barcode;
-		this.pinCode = pinCode;
-		this.pin = pin;
-		this.name = "Name";
-		this.phoneNum = "Telephone Number";
-	}
-
-	public User(String pin, String pinCode, String barcode, String s) {
-		this.barcode = barcode;
-		this.pinCode = pinCode;
-		this.pin = pin;
-		if (s.contains(" ")) {
-			name = s;
-			this.phoneNum = "Telephone Number";
-		}
-		else {
-			this.name = "Name";
-			phoneNum = s;
-		}
-	}
-
 	public User(String pin, String pinCode, String barcode, String name, String phoneNum) {
 		this.pin = pin;
 		this.pinCode = pinCode;

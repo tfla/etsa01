@@ -81,8 +81,18 @@ public class BicycleGarageManager {
 		return null;
 	}
 
-	public void addNewUser(String name, String pinCode, String pin, String phoneNum, String barcode) {
-
+	public void addNewUser(String pin, String pinCode, String barcode, String name, String phoneNum) {
+		if (users.size() >= 10000) {
+			if (users.add(new User(pin, pinCode, barcode, name, phoneNum))) {
+				gui.showMessageDialog("User was successfully added.");
+			}
+			else {
+				gui.showErrorDialog("The Personal Identity Number is entered on an incorrect form and/or is already registered to another biker.");
+			}
+		}
+		else {
+			gui.showErrorDialog("The system biker limit has been reached.");
+		}
 	}
 
 	public TreeSet<User> searchUsers(String searchString) {

@@ -22,11 +22,11 @@ public class OperatorGUI extends JFrame {
 	private JPanel searchResultPanel;
 	private JPanel panel;
 
-	private JTextField pin;
-	private JTextField pinc;
-	private JTextField tfn;
+	public JTextField PIN_TEXT_FIELD;
+	public JTextField PINCODE_TEXT_FIELD;
+	public JTextField PHONENUM_TEXT_FIELD;
 	public JTextField BARCODE_TEXT_FIELD;
-	private JTextField nam;
+	public JTextField NAME_TEXT_FIELD;
 
 	private String bpin;
 	private String bpinc;
@@ -93,16 +93,16 @@ public class OperatorGUI extends JFrame {
 		dispose();
 		switch (mode) {
 			case CREATE_MODE:
-				pin = new JTextField("Personal Identity Number (PIN)");
-				pinc = new JTextField("PIN-code");
-				tfn = new JTextField("Telephone Number");
+				PIN_TEXT_FIELD = new JTextField("Personal Identity Number (PIN)");
+				PINCODE_TEXT_FIELD = new JTextField("PIN-code");
+				PHONENUM_TEXT_FIELD = new JTextField("Telephone Number");
 				BARCODE_TEXT_FIELD = new JTextField("Barcode");
-				nam = new JTextField("Name");
-				startPanel.add(pin);
-				startPanel.add(pinc);
-				startPanel.add(tfn);
+				NAME_TEXT_FIELD = new JTextField("Name");
+				startPanel.add(PIN_TEXT_FIELD);
+				startPanel.add(PINCODE_TEXT_FIELD);
+				startPanel.add(PHONENUM_TEXT_FIELD);
 				startPanel.add(BARCODE_TEXT_FIELD);
-				startPanel.add(nam);
+				startPanel.add(NAME_TEXT_FIELD);
 				startPanel.add(new SaveButton(this));
 				startPanel.add(new CancelButton(this));
 				break;
@@ -112,19 +112,19 @@ public class OperatorGUI extends JFrame {
 				btfn = "070-1234567";    //biker.getTfn();
 		        bbar = "12345";          //biker.getBar();
 		        bnam = "Sven Svensson";  //biker.getNam();
-		        pin = new JTextField(bpin);
-				pinc = new JTextField(bpinc);
-		        tfn = new JTextField(btfn);
+		        PIN_TEXT_FIELD = new JTextField(bpin);
+				PINCODE_TEXT_FIELD = new JTextField(bpinc);
+		        PHONENUM_TEXT_FIELD = new JTextField(btfn);
 		        BARCODE_TEXT_FIELD = new JTextField(bbar);
-		        nam = new JTextField(bnam);
-				pin.setEditable(false);
-				pinc.setEditable(false);
+		        NAME_TEXT_FIELD = new JTextField(bnam);
+				PIN_TEXT_FIELD.setEditable(false);
+				PINCODE_TEXT_FIELD.setEditable(false);
 				BARCODE_TEXT_FIELD.setEditable(false);
-		        startPanel.add(pin);
-				startPanel.add(pinc);
-		        startPanel.add(tfn);
+		        startPanel.add(PIN_TEXT_FIELD);
+				startPanel.add(PINCODE_TEXT_FIELD);
+		        startPanel.add(PHONENUM_TEXT_FIELD);
 		        startPanel.add(BARCODE_TEXT_FIELD);
-		        startPanel.add(nam);
+		        startPanel.add(NAME_TEXT_FIELD);
 		        startPanel.add(new SaveButton(this));
 		        startPanel.add(new CancelButton(this));
     		    startPanel.add(new DeleteBikerButton(this));
@@ -164,21 +164,21 @@ public class OperatorGUI extends JFrame {
 				btfn = "070-1234567";    //biker.getTfn();
 				bbar = "12345";          //biker.getBar();
 				bnam = "Sven Svensson";  //biker.getNam();
-				pin = new JTextField(bpin);
-				pinc = new JTextField(bpinc);
-				tfn = new JTextField(btfn);
+				PIN_TEXT_FIELD = new JTextField(bpin);
+				PINCODE_TEXT_FIELD = new JTextField(bpinc);
+				PHONENUM_TEXT_FIELD = new JTextField(btfn);
 				BARCODE_TEXT_FIELD = new JTextField(bbar);
-				nam = new JTextField(bnam);
-				pin.setEditable(false);
-				pinc.setEditable(false);
+				NAME_TEXT_FIELD = new JTextField(bnam);
+				PIN_TEXT_FIELD.setEditable(false);
+				PINCODE_TEXT_FIELD.setEditable(false);
 				BARCODE_TEXT_FIELD.setEditable(false);
-				tfn.setEditable(false);
-				nam.setEditable(false);
-				startPanel.add(pin);
-				startPanel.add(pinc);
-				startPanel.add(tfn);
+				PHONENUM_TEXT_FIELD.setEditable(false);
+				NAME_TEXT_FIELD.setEditable(false);
+				startPanel.add(PIN_TEXT_FIELD);
+				startPanel.add(PINCODE_TEXT_FIELD);
+				startPanel.add(PHONENUM_TEXT_FIELD);
 				startPanel.add(BARCODE_TEXT_FIELD);
-				startPanel.add(nam);
+				startPanel.add(NAME_TEXT_FIELD);
 				startPanel.add(new SaveButton(this));
 				startPanel.add(new CancelButton(this));
 				startPanel.add(new DeleteBikerButton(this));
@@ -221,4 +221,15 @@ public class OperatorGUI extends JFrame {
 		bgm.printBarcode(bicycleID);
 	}
 
+	public void saveUser(String pin, String pinCode, String barcode, String name, String phoneNum) {
+		bgm.addNewUser(pin, pinCode, barcode, name, phoneNum);
+	}
+
+	public void showMessageDialog(String msg) {
+		JOptionPane.showMessageDialog(null, msg, "Message", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	public void showErrorDialog(String msg) {
+		JOptionPane.showMessageDialog(null, msg, "Error", JOptionPane.ERROR_MESSAGE);
+	}
 }
