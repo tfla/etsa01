@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Component;
 
 public class OperatorGUI extends JFrame {
+	private SYS.BicycleGarageManager bgm;
 	private JTextArea bikeArea;
 	private JTextArea bikerArea;
 
@@ -24,7 +25,7 @@ public class OperatorGUI extends JFrame {
 	private JTextField pin;
 	private JTextField pinc;
 	private JTextField tfn;
-	private JTextField bar;
+	public JTextField BARCODE_TEXT_FIELD;
 	private JTextField nam;
 
 	private String bpin;
@@ -39,8 +40,11 @@ public class OperatorGUI extends JFrame {
 	public static final int SEARCH_MODE = 3;
 	public static final int VIEW_MODE = 4;
 
-	public OperatorGUI() {
+	public OperatorGUI(SYS.BicycleGarageManager bgm) {
 		super("Operator Interface");
+		
+		this.bgm = bgm;
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Locale.setDefault(new Locale("en"));
 		setPreferredSize(new Dimension(600, 600));
@@ -92,12 +96,12 @@ public class OperatorGUI extends JFrame {
 				pin = new JTextField("Personal Identity Number (PIN)");
 				pinc = new JTextField("PIN-code");
 				tfn = new JTextField("Telephone Number");
-				bar = new JTextField("Barcode");
+				BARCODE_TEXT_FIELD = new JTextField("Barcode");
 				nam = new JTextField("Name");
 				startPanel.add(pin);
 				startPanel.add(pinc);
 				startPanel.add(tfn);
-				startPanel.add(bar);
+				startPanel.add(BARCODE_TEXT_FIELD);
 				startPanel.add(nam);
 				startPanel.add(new SaveButton(this));
 				startPanel.add(new CancelButton(this));
@@ -111,15 +115,15 @@ public class OperatorGUI extends JFrame {
 		        pin = new JTextField(bpin);
 				pinc = new JTextField(bpinc);
 		        tfn = new JTextField(btfn);
-		        bar = new JTextField(bbar);
+		        BARCODE_TEXT_FIELD = new JTextField(bbar);
 		        nam = new JTextField(bnam);
 				pin.setEditable(false);
 				pinc.setEditable(false);
-				bar.setEditable(false);
+				BARCODE_TEXT_FIELD.setEditable(false);
 		        startPanel.add(pin);
 				startPanel.add(pinc);
 		        startPanel.add(tfn);
-		        startPanel.add(bar);
+		        startPanel.add(BARCODE_TEXT_FIELD);
 		        startPanel.add(nam);
 		        startPanel.add(new SaveButton(this));
 		        startPanel.add(new CancelButton(this));
@@ -163,17 +167,17 @@ public class OperatorGUI extends JFrame {
 				pin = new JTextField(bpin);
 				pinc = new JTextField(bpinc);
 				tfn = new JTextField(btfn);
-				bar = new JTextField(bbar);
+				BARCODE_TEXT_FIELD = new JTextField(bbar);
 				nam = new JTextField(bnam);
 				pin.setEditable(false);
 				pinc.setEditable(false);
-				bar.setEditable(false);
+				BARCODE_TEXT_FIELD.setEditable(false);
 				tfn.setEditable(false);
 				nam.setEditable(false);
 				startPanel.add(pin);
 				startPanel.add(pinc);
 				startPanel.add(tfn);
-				startPanel.add(bar);
+				startPanel.add(BARCODE_TEXT_FIELD);
 				startPanel.add(nam);
 				startPanel.add(new SaveButton(this));
 				startPanel.add(new CancelButton(this));
@@ -212,4 +216,9 @@ public class OperatorGUI extends JFrame {
 		pack();
 		setVisible(true);
 	}
+
+	public void printBarcode(String bicycleID) {
+		bgm.printBarcode(bicycleID);
+	}
+
 }

@@ -1,6 +1,5 @@
 package SYS;
 
-import java.util.SortedSet;
 import java.util.TreeSet;
 
 public class BicycleGarageManager {
@@ -10,6 +9,7 @@ public class BicycleGarageManager {
 	private ElectronicLockTestDriver entryLock;
 	private ElectronicLockTestDriver exitLock;
 	private PinCodeTerminalTestDriver terminal;
+	private GUI.OperatorGUI gui;
 	private TreeSet<User> users;
 	private TreeSet<Bicycle> bikes;
 	
@@ -20,7 +20,13 @@ public class BicycleGarageManager {
 	public BicycleGarageManager(){
 		users = new TreeSet<User>();
 		bikes = new TreeSet<Bicycle>();
-		
+		gui = new GUI.OperatorGUI(this);
+		registerHardwareDrivers(new BarcodePrinterTestDriver(),
+                                new BarcodeReaderEntryTestDriver(),
+                                new BarcodeReaderExitTestDriver(),
+                                new ElectronicLockTestDriver("Entry"),
+                                new ElectronicLockTestDriver("Exit"),
+                                new PinCodeTerminalTestDriver());
 	}
 
 	/*
@@ -79,9 +85,12 @@ public class BicycleGarageManager {
 
 	}
 
-	public SortedSet<User> searchUsers(String searchString) {
+	public TreeSet<User> searchUsers(String searchString) {
 		return null;
 	}
 
+	public void printBarcode(String barcode) {
+		printer.printBarcode(barcode);		
+	}
 	
 }
