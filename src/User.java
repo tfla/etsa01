@@ -27,7 +27,7 @@ public class User implements Comparable<User> {
 	 * Returns the PIN-code of a user.
 	 * @return The PIN-code of a user.
 	 */
-	public String getPINCode() {
+	public String getPinCode() {
 		return pinCode;
 	}
 

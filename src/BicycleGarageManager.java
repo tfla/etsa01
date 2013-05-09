@@ -14,6 +14,9 @@ public class BicycleGarageManager {
 	private TreeSet<User> users;
 	private TreeSet<Bicycle> bikes;
 	
+	private String pinCode;
+	private boolean asterix;
+
 	/**
 	 * Creates a new BicycleGarageManager
 	 *
@@ -28,7 +31,7 @@ public class BicycleGarageManager {
                                 new ElectronicLockTestDriver("Entry"),
                                 new ElectronicLockTestDriver("Exit"),
                                 new PinCodeTerminalTestDriver());
-		bikes.add(new Bicycle("12345"));
+		users.add(new User("000000-0000", "12345", new Bicycle("12345"), "Hej Hopp", "071234556"));
 	}
 
 	/**
@@ -52,7 +55,8 @@ public class BicycleGarageManager {
 		entryBarcodeReader.register(this);
 		this.entryLock = entryLock;
 		this.exitLock = exitLock;
-		this.terminal = terminal;	
+		this.terminal = terminal;
+		terminal.register(this);
 	}
 
 	/**
@@ -98,7 +102,22 @@ public class BicycleGarageManager {
 	 *
 	 */
 	public void entryCharacter(char c) {
-
+		if (c == '*') {
+			asterix = true;
+			pinCode = "";
+		}
+		if (c == '#' && asterix) {
+			for (User u : users) {
+				if (u.getPinCode().equals(pinCode)) {
+					entryLock.open(15);
+					terminal.lightLED(terminal.GREEN_LED, 15);
+				}
+			}
+			terminal.lightLED(terminal.RED_LED, 15);
+		}
+		if (c != '*' && c != '#' && asterix) {
+			pinCode += c;
+		}
 	}
 
 	public Bicycle getBicycle(String barcode) {
