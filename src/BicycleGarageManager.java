@@ -45,10 +45,11 @@ public class BicycleGarageManager {
 										ElectronicLockTestDriver entryLock,
 										ElectronicLockTestDriver exitLock,
 										PinCodeTerminalTestDriver terminal) {
-		barcodeReader.register(this);
 		this.printer = printer;
 		this.entryBarcodeReader = entryBarcodeReader;
 		this.exitBarcodeReader = exitBarcodeReader;
+		exitBarcodeReader.register(this);
+		entryBarcodeReader.register(this);
 		this.entryLock = entryLock;
 		this.exitLock = exitLock;
 		this.terminal = terminal;	
