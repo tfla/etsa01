@@ -35,10 +35,7 @@ public class BicycleGarageManager {
                                 new ElectronicLockTestDriver("Entry"),
                                 new ElectronicLockTestDriver("Exit"),
                                 new PinCodeTerminalTestDriver());
-<<<<<<< HEAD
-=======
 		openGarage();
->>>>>>> 68204334f098b1e4ec204f4ee12ccc220059b929
 	}
 
 	/**
@@ -108,7 +105,7 @@ public class BicycleGarageManager {
 		try {
 			PrintStream outprint = new PrintStream(new File("storage.csv"));
 			for(User us: users){
-				outprint.println(us.getPIN() + " " + us.getPINCode() + " " + us.getBicycle().getBarcode() + " " + us.getPhone() + " " + us.getName());
+				outprint.println(us.getPIN() + " " + us.getPinCode() + " " + us.getBicycle().getBarcode() + " " + us.getPhone() + " " + us.getName());
 			}
 			
 		}catch (Exception ex){
