@@ -25,7 +25,7 @@ public class OperatorGUI extends JFrame {
 	public JTextField PIN_TEXT_FIELD;
 	public JTextField PINCODE_TEXT_FIELD;
 	public JTextField PHONENUM_TEXT_FIELD;
-	public JTextField BARCODE_TEXT_FIELD;
+	public JTextField BICYCLE_TEXT_FIELD;
 	public JTextField NAME_TEXT_FIELD;
 
 	private String bpin;
@@ -96,12 +96,12 @@ public class OperatorGUI extends JFrame {
 				PIN_TEXT_FIELD = new JTextField("Personal Identity Number (PIN)");
 				PINCODE_TEXT_FIELD = new JTextField("PIN-code");
 				PHONENUM_TEXT_FIELD = new JTextField("Telephone Number");
-				BARCODE_TEXT_FIELD = new JTextField("Barcode");
+				BICYCLE_TEXT_FIELD = new JTextField("Bicycle");
 				NAME_TEXT_FIELD = new JTextField("Name");
 				startPanel.add(PIN_TEXT_FIELD);
 				startPanel.add(PINCODE_TEXT_FIELD);
 				startPanel.add(PHONENUM_TEXT_FIELD);
-				startPanel.add(BARCODE_TEXT_FIELD);
+				startPanel.add(BICYCLE_TEXT_FIELD);
 				startPanel.add(NAME_TEXT_FIELD);
 				startPanel.add(new SaveButton(this));
 				startPanel.add(new CancelButton(this));
@@ -115,15 +115,15 @@ public class OperatorGUI extends JFrame {
 		        PIN_TEXT_FIELD = new JTextField(bpin);
 				PINCODE_TEXT_FIELD = new JTextField(bpinc);
 		        PHONENUM_TEXT_FIELD = new JTextField(btfn);
-		        BARCODE_TEXT_FIELD = new JTextField(bbar);
+		        BICYCLE_TEXT_FIELD = new JTextField(bbar);
 		        NAME_TEXT_FIELD = new JTextField(bnam);
 				PIN_TEXT_FIELD.setEditable(false);
 				PINCODE_TEXT_FIELD.setEditable(false);
-				BARCODE_TEXT_FIELD.setEditable(false);
+				BICYCLE_TEXT_FIELD.setEditable(false);
 		        startPanel.add(PIN_TEXT_FIELD);
 				startPanel.add(PINCODE_TEXT_FIELD);
 		        startPanel.add(PHONENUM_TEXT_FIELD);
-		        startPanel.add(BARCODE_TEXT_FIELD);
+		        startPanel.add(BICYCLE_TEXT_FIELD);
 		        startPanel.add(NAME_TEXT_FIELD);
 		        startPanel.add(new SaveButton(this));
 		        startPanel.add(new CancelButton(this));
@@ -167,17 +167,17 @@ public class OperatorGUI extends JFrame {
 				PIN_TEXT_FIELD = new JTextField(bpin);
 				PINCODE_TEXT_FIELD = new JTextField(bpinc);
 				PHONENUM_TEXT_FIELD = new JTextField(btfn);
-				BARCODE_TEXT_FIELD = new JTextField(bbar);
+				BICYCLE_TEXT_FIELD = new JTextField(bbar);
 				NAME_TEXT_FIELD = new JTextField(bnam);
 				PIN_TEXT_FIELD.setEditable(false);
 				PINCODE_TEXT_FIELD.setEditable(false);
-				BARCODE_TEXT_FIELD.setEditable(false);
+				BICYCLE_TEXT_FIELD.setEditable(false);
 				PHONENUM_TEXT_FIELD.setEditable(false);
 				NAME_TEXT_FIELD.setEditable(false);
 				startPanel.add(PIN_TEXT_FIELD);
 				startPanel.add(PINCODE_TEXT_FIELD);
 				startPanel.add(PHONENUM_TEXT_FIELD);
-				startPanel.add(BARCODE_TEXT_FIELD);
+				startPanel.add(BICYCLE_TEXT_FIELD);
 				startPanel.add(NAME_TEXT_FIELD);
 				startPanel.add(new SaveButton(this));
 				startPanel.add(new CancelButton(this));
@@ -221,8 +221,8 @@ public class OperatorGUI extends JFrame {
 		bgm.printBarcode(bicycleID);
 	}
 
-	public void saveUser(String pin, String pinCode, String barcode, String name, String phoneNum) {
-		bgm.addNewUser(pin, pinCode, barcode, name, phoneNum);
+	public void saveUser(String pin, String pinCode, SYS.Bicycle bicycle, String name, String phoneNum) {
+		bgm.addNewUser(pin, pinCode, bicycle, name, phoneNum);
 	}
 
 	public void showMessageDialog(String msg) {

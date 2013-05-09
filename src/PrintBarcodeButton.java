@@ -15,6 +15,6 @@ public class PrintBarcodeButton extends JButton implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		gui.printBarcode(gui.BARCODE_TEXT_FIELD.getText());		
+		gui.printBarcode(gui.BICYCLE_TEXT_FIELD.getText());		
 	}
 }

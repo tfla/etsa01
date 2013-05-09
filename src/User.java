@@ -2,7 +2,7 @@ package SYS;
 
 public class User implements Comparable<User> {
 	private String name;
-	private String barcode;
+	private Bicycle bicycle;
 	private String pinCode;
 	private String phoneNum;
 	private String pin;
@@ -15,10 +15,10 @@ public class User implements Comparable<User> {
 	 * @param name The name of the user.
 	 * @param phoneNum The telephone number of the user.
 	 */
-	public User(String pin, String pinCode, String barcode, String name, String phoneNum) {
+	public User(String pin, String pinCode, Bicycle bicycle, String name, String phoneNum) {
 		this.pin = pin;
 		this.pinCode = pinCode;
-		this.barcode = barcode;
+		this.bicycle = bicycle;
 		this.name = name;
 		this.phoneNum = phoneNum;
 	}
@@ -51,8 +51,8 @@ public class User implements Comparable<User> {
 	 * Returns the barcode of a user.
 	 * @return The barcode of a user.
 	 */
-	public String getBarcode() {
-		return barcode;
+	public Bicycle getBarcode() {
+		return bicycle;
 	}
 
 	/**
@@ -75,8 +75,8 @@ public class User implements Comparable<User> {
 	 * Sets the barcode of a user to barcode.
 	 * @param barcode The new barcode of a user.
 	 */
-	public void setBarcode(String barcode) {
-		this.barcode = barcode;
+	public void setBicycle(Bicycle bicycle) {
+		this.bicycle = bicycle;
 	}
 
 	public int compareTo(User u) {

@@ -81,9 +81,9 @@ public class BicycleGarageManager {
 		return null;
 	}
 
-	public void addNewUser(String pin, String pinCode, String barcode, String name, String phoneNum) {
-		if (users.size() >= 10000) {
-			if (users.add(new User(pin, pinCode, barcode, name, phoneNum))) {
+	public void addNewUser(String pin, String pinCode, Bicycle bicycle, String name, String phoneNum) {
+		if (users.size() <= 10000) {
+			if (users.add(new User(pin, pinCode, bicycle, name, phoneNum))) {
 				gui.showMessageDialog("User was successfully added.");
 			}
 			else {
