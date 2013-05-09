@@ -27,6 +27,7 @@ public class BicycleGarageManager {
                                 new ElectronicLockTestDriver("Entry"),
                                 new ElectronicLockTestDriver("Exit"),
                                 new PinCodeTerminalTestDriver());
+		bikes.add(new Bicycle("12345"));
 	}
 
 	/**
@@ -54,7 +55,18 @@ public class BicycleGarageManager {
 	 * 
 	 */
 	public void entryBarcode(String bicycleID) {
-		
+		for (Bicycle b : bikes) {
+			if (b.getBarcode().equals(bicycleID)) {
+				entryLock.open(15);
+				if (!b.inGarage()) {
+					b.setInGarage(true);
+				}
+				/** Intervall! */
+				terminal.lightLED(terminal.GREEN_LED, 15);
+			}
+		}
+		/** Intervall! */
+		terminal.lightLED(terminal.RED_LED, 15);
 	}
 
 	/**
@@ -62,7 +74,18 @@ public class BicycleGarageManager {
 	 *
 	 */
 	public void exitBarcode(String bicycleID) {
-
+		for (Bicycle b : bikes) {
+			if (b.getBarcode().equals(bicycleID)) {
+				entryLock.open(15);
+				if (b.inGarage()) {
+					b.setInGarage(false);
+				}
+				/** Intervall! */
+				terminal.lightLED(terminal.GREEN_LED, 15);
+			}
+		}
+		/** Intervall! */
+		terminal.lightLED(terminal.RED_LED, 15);
 	}
 
 	/**
