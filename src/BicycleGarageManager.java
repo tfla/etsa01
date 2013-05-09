@@ -4,6 +4,7 @@ import java.util.TreeSet;
 
 public class BicycleGarageManager {
 	private BarcodePrinterTestDriver printer;
+	private BarcodeReaderTestDriver barcodeReader;
 	private BarcodeReaderEntryTestDriver entryBarcodeReader;
 	private BarcodeReaderExitTestDriver exitBarcodeReader;
 	private ElectronicLockTestDriver entryLock;
@@ -22,8 +23,8 @@ public class BicycleGarageManager {
 		bikes = new TreeSet<Bicycle>();
 		gui = new GUI.OperatorGUI(this);
 		registerHardwareDrivers(new BarcodePrinterTestDriver(),
-                                new BarcodeReaderEntryTestDriver(),
                                 new BarcodeReaderExitTestDriver(),
+								new BarcodeReaderEntryTestDriver(),
                                 new ElectronicLockTestDriver("Entry"),
                                 new ElectronicLockTestDriver("Exit"),
                                 new PinCodeTerminalTestDriver());
@@ -39,12 +40,15 @@ public class BicycleGarageManager {
 	 *
 	 */
 	public void registerHardwareDrivers(BarcodePrinterTestDriver printer,
-										BarcodeReaderEntryTestDriver entryBarcodeReader,
 										BarcodeReaderExitTestDriver exitBarcodeReader,
+										BarcodeReaderEntryTestDriver entryBarcodeReader,
 										ElectronicLockTestDriver entryLock,
 										ElectronicLockTestDriver exitLock,
 										PinCodeTerminalTestDriver terminal) {
+		barcodeReader.register(this);
 		this.printer = printer;
+		this.entryBarcodeReader = entryBarcodeReader;
+		this.exitBarcodeReader = exitBarcodeReader;
 		this.entryLock = entryLock;
 		this.exitLock = exitLock;
 		this.terminal = terminal;	
