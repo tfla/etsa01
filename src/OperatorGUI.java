@@ -10,6 +10,11 @@ import java.awt.SystemColor;
 import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.border.EmptyBorder;
+
+import GUI.CancelButton;
+import GUI.DeleteBikerButton;
+import GUI.EditBikerButton;
+
 import java.awt.Component;
 
 public class OperatorGUI extends JFrame {

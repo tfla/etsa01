@@ -19,18 +19,18 @@ public class SaveAsMenu extends JMenuItem implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		/*
+		
 		int i = fc.showSaveDialog(null);
 		if (i == JFileChooser.APPROVE_OPTION) {
-			File f = fc.getSelectedFile();i
+			File f = fc.getSelectedFile();
 		}
 		try {
-			ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream(f));
-			out.writeObject(data);
+//			ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream(f));
+//			out.writeObject(data);
 		}
-		catch (Exception e) {
-			e.printStackTrace();
+		catch (Exception ex) {
+			ex.printStackTrace();
 			System.exit(1);
-		}*/
+		}
 	}
 }

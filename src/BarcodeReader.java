@@ -1,5 +1,6 @@
 package SYS;
 
+
 public interface BarcodeReader {
 	
 	/* Register bicycle garage manager so that the bar code

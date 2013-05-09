@@ -1,5 +1,6 @@
 package SYS;
 
+
 public class User implements Comparable<User> {
 	private String name;
 	private Bicycle bicycle;
@@ -48,10 +49,10 @@ public class User implements Comparable<User> {
 	}
 
 	/**
-	 * Returns the barcode of a user.
-	 * @return The barcode of a user.
+	 * Returns the Bicycle of a user.
+	 * @return The Bicycle of a user.
 	 */
-	public Bicycle getBarcode() {
+	public Bicycle getBicycle() {
 		return bicycle;
 	}
 
@@ -81,5 +82,12 @@ public class User implements Comparable<User> {
 
 	public int compareTo(User u) {
 		return Integer.parseInt(pin) - Integer.parseInt(u.getPIN());
+	}
+    /**
+     * Returns the phonenumber for the user
+     * @return The phonenumber of the user
+     */
+	public String getPhone() {
+		return phoneNum;
 	}
 }

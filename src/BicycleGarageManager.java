@@ -1,5 +1,9 @@
 package SYS;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+import java.util.Scanner;
 import java.util.TreeSet;
 
 public class BicycleGarageManager {
@@ -31,6 +35,10 @@ public class BicycleGarageManager {
                                 new ElectronicLockTestDriver("Entry"),
                                 new ElectronicLockTestDriver("Exit"),
                                 new PinCodeTerminalTestDriver());
+<<<<<<< HEAD
+=======
+		openGarage();
+>>>>>>> 68204334f098b1e4ec204f4ee12ccc220059b929
 	}
 
 	/**
@@ -79,6 +87,38 @@ public class BicycleGarageManager {
 		terminal.lightLED(terminal.RED_LED, 15);
 	}
 
+	public boolean openGarage(){
+		/** reads info from file on form 'pin,pincode,Barcode,name,phonenum' */ 
+		try {
+			Scanner scan = new Scanner(new File("storage.csv"));
+			while (scan.hasNext()){
+				users.add(new User(scan.next(),scan.next(),new Bicycle(scan.next()),scan.next(),scan.next())); 
+			}
+			return true;
+		} catch (Exception ex){
+			System.out.println("Couldn't");
+			return false;
+		}
+		
+	}
+	
+	public boolean saveGarage(){
+		/** saves to file on the form 'pin, pincode, Barcode, name, phonenum' */
+		 
+		try {
+			PrintStream outprint = new PrintStream(new File("storage.csv"));
+			for(User us: users){
+				outprint.println(us.getPIN() + " " + us.getPINCode() + " " + us.getBicycle().getBarcode() + " " + us.getPhone() + " " + us.getName());
+			}
+			
+		}catch (Exception ex){
+			return false;
+		}
+		
+		
+		return true; 
+	}
+	
 	/**
 	 * Unlocks the exit lock and makes the PIN-Code terminal LED light green for 15 seconds if bicycleID is known by the system.
      * @param bicycleID The barcode that needs to be checked.
@@ -160,6 +200,7 @@ public class BicycleGarageManager {
 		else {
 			gui.showErrorDialog("The system biker limit has been reached.");
 		}
+		saveGarage();
 	}
 
 	public TreeSet<User> searchUsers(String searchString) {
