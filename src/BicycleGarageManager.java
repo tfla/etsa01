@@ -84,36 +84,40 @@ public class BicycleGarageManager {
 		terminal.lightLED(terminal.RED_LED, 15);
 	}
 
+	/** 
+	 * Reads info from the storage file on the form 'pin pinCode barcode name phoneNum', newline represents a new object.
+	 * @return true if no exceptions were thrown.
+	 */ 
 	public boolean openGarage(){
-		/** reads info from file on form 'pin,pincode,Barcode,name,phonenum' */ 
 		try {
 			Scanner scan = new Scanner(new File("storage.csv"));
 			while (scan.hasNext()){
 				users.add(new User(scan.next(),scan.next(),new Bicycle(scan.next()),scan.next(),scan.next())); 
 			}
 			return true;
-		} catch (Exception ex){
+		}
+		catch (Exception ex){
 			System.out.println("Couldn't");
 			return false;
 		}
 		
 	}
 	
+	/** 
+	 * Saves info to the storage file on the form 'pin pinCode, barcode, name, phoneNum', newline represents a new object.
+	 * @return true if no exceptions were thrown.
+	 */
 	public boolean saveGarage(){
-		/** saves to file on the form 'pin, pincode, Barcode, name, phonenum' */
-		 
 		try {
 			PrintStream outprint = new PrintStream(new File("storage.csv"));
 			for(User us: users){
 				outprint.println(us.getPIN() + " " + us.getPinCode() + " " + us.getBicycle().getBarcode() + " " + us.getPhone() + " " + us.getName());
 			}
-			
-		}catch (Exception ex){
-			return false;
+			return true; 
 		}
-		
-		
-		return true; 
+		catch (Exception ex){
+			return false;
+		}	
 	}
 	
 	/**
@@ -165,8 +169,9 @@ public class BicycleGarageManager {
 	}
 
 	/**
-	 * Returns the Bicycle that has barcode barcode, null if there is no bike with taht barcode.
+	 * Returns the Bicycle that has barcode barcode, null if there is no Bicycle with that barcode.
 	 * @param barcode The barcode to check for.
+	 * @return The Bicycle with that barcode, if it exists.
 	 */
 	public Bicycle getBicycle(String barcode) {
 		if (bikes != null) {
@@ -181,10 +186,33 @@ public class BicycleGarageManager {
 		return null;
 	}
 
+	/**
+	 * Returns the User that has PIN pin, null if there is no User with that PIN.
+	 * @param pin The PIN to check for.
+	 * @return The User with that PIN, if it exists.
+	 */
 	public User getUser(String pin) {
+		if (users != null) {
+			if (users.size() > 0) {
+				for (User u : users) {
+					if (u.getPin().equals(pin)) {
+						return u;
+					}
+				}
+			}
+		}
 		return null;
 	}
 
+	/**
+	 * Adds a new User to the system.
+	 * @param pin The PIN of the new user.
+	 * @param pinCode The PIN-Code of the new user.
+	 * @param bicycle The Bicycle of the new user.
+	 * @param name The name of the new user.
+	 * @param phoneNum The telephone number of the new user.
+	 *
+	 */
 	public void addNewUser(String pin, String pinCode, Bicycle bicycle, String name, String phoneNum) {
 		if (users.size() <= 10000) {
 			if (users.add(new User(pin, pinCode, bicycle, name, phoneNum))) {
@@ -200,10 +228,19 @@ public class BicycleGarageManager {
 		saveGarage();
 	}
 
+	/**
+	 * Returns a TreeSet<User> of search results for the searchString.
+	 * @param searchString The string to search for.
+	 * @return A TreeSet<User> containing the search results.
+	 */
 	public TreeSet<User> searchUsers(String searchString) {
 		return null;
 	}
 
+	/**
+	 * Prints a barcode.
+	 * @param barcode The barcode to print.
+	 */
 	public void printBarcode(String barcode) {
 		printer.printBarcode(barcode);		
 	}

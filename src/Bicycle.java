@@ -5,8 +5,8 @@ public class Bicycle implements Comparable<Bicycle> {
 	private String barcode;
 
 	/**
-	 * Creates a new Bicycle
-	 *
+	 * Creates a new Bicycle and sets it to "not in garage".
+	 * @param barcode The barcode of the new Bicycle.
 	 */
 	public Bicycle(String barcode) {
 		this.barcode = barcode;
@@ -45,6 +45,11 @@ public class Bicycle implements Comparable<Bicycle> {
 		inGarage = status;
 	}
 
+	/**
+	 * Compares a Bicycle to another.
+	 * @param b The Bicycle to compare to.
+	 * @return A negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object.
+	 */
 	public int compareTo(Bicycle b) {
 		return Integer.parseInt(barcode) - Integer.parseInt(b.getBarcode());
 	}

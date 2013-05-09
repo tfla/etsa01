@@ -80,12 +80,17 @@ public class User implements Comparable<User> {
 		this.bicycle = bicycle;
 	}
 
+	/**
+     * Compares a User to another.
+     * @param u The User to compare to.
+     * @return A negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object.
+     */
 	public int compareTo(User u) {
 		return Integer.parseInt(pin) - Integer.parseInt(u.getPIN());
 	}
     /**
-     * Returns the phonenumber for the user
-     * @return The phonenumber of the user
+     * Returns the Telephone Number of the User.
+     * @return The Telephone Number of the User.
      */
 	public String getPhone() {
 		return phoneNum;
