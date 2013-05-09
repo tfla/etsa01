@@ -31,7 +31,6 @@ public class BicycleGarageManager {
                                 new ElectronicLockTestDriver("Entry"),
                                 new ElectronicLockTestDriver("Exit"),
                                 new PinCodeTerminalTestDriver());
-		users.add(new User("000000-0000", "12345", new Bicycle("12345"), "Hej Hopp", "071234556"));
 	}
 
 	/**
