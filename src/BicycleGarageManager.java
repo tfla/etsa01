@@ -35,10 +35,12 @@ public class BicycleGarageManager {
 
 	/**
 	 * Registers the hardware drivers for the system.
-	 * @param printer
-	 * @param entryLock
-	 * @param exitLock
-	 * @param terminal
+	 * @param printer The BarcodePrinterDriver to register.
+	 * @param exitBarcodeReader The BarcodeReaderDriver to register for exit.
+	 * @param entryBarcodeReader The BarcodeReaderDriver to register for entrance.
+	 * @param entryLock The ElectronicLockDriver to register for entrance.
+	 * @param exitLock The ElectronicLockDriver to register for exit.
+	 * @param terminal The PinCodeTerminalDriver to register.
 	 *
 	 */
 	public void registerHardwareDrivers(BarcodePrinterTestDriver printer,
@@ -59,7 +61,8 @@ public class BicycleGarageManager {
 	}
 
 	/**
-	 * Whenever a barcode is read at the entrance.
+	 * Unlocks the entrance lock and makes the PIN-Code terminal LED light green for 15 seconds if bicycleID is known by the system.
+	 * @param bicycleID The barcode that needs to be checked.
 	 * 
 	 */
 	public void entryBarcode(String bicycleID) {
@@ -69,17 +72,16 @@ public class BicycleGarageManager {
 				if (!b.inGarage()) {
 					b.setInGarage(true);
 				}
-				/** Intervall! */
 				terminal.lightLED(terminal.GREEN_LED, 15);
 				return;
 			}
 		}
-		/** Intervall! */
 		terminal.lightLED(terminal.RED_LED, 15);
 	}
 
 	/**
-	 * Whenever a barcode is read at the exit.
+	 * Unlocks the exit lock and makes the PIN-Code terminal LED light green for 15 seconds if bicycleID is known by the system.
+     * @param bicycleID The barcode that needs to be checked.
 	 *
 	 */
 	public void exitBarcode(String bicycleID) {
@@ -89,18 +91,16 @@ public class BicycleGarageManager {
 				if (b.inGarage()) {
 					b.setInGarage(false);
 				}
-				/** Intervall! */
 				terminal.lightLED(terminal.GREEN_LED, 15);
 				return;
 			}
 		}
-		/** Intervall! */
 		terminal.lightLED(terminal.RED_LED, 15);
 	}
 
 	/**
-	 * Reads the characters entered at the PIN-code terminal.
-	 *
+	 * Unlocks the entrance lock and makes the PIN-Code terminal LED light green for 15 seconds if a valid PIN-Code has been entered.
+	 * @param c The character that needs to be checked.
 	 */
 	public void entryCharacter(char c) {
 		if (c == '*') {
@@ -127,7 +127,20 @@ public class BicycleGarageManager {
 		}
 	}
 
+	/**
+	 * Returns the Bicycle that has barcode barcode, null if there is no bike with taht barcode.
+	 * @param barcode The barcode to check for.
+	 */
 	public Bicycle getBicycle(String barcode) {
+		if (bikes != null) {
+			if (bikes.size() > 0) {
+				for (Bicycle b : bikes) {
+					if (b.getBarcode().equals(barcode)) {
+						return b;
+					}
+				}
+			}
+		}
 		return null;
 	}
 
