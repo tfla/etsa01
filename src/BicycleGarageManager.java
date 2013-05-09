@@ -72,6 +72,7 @@ public class BicycleGarageManager {
 				}
 				/** Intervall! */
 				terminal.lightLED(terminal.GREEN_LED, 15);
+				return;
 			}
 		}
 		/** Intervall! */
@@ -91,6 +92,7 @@ public class BicycleGarageManager {
 				}
 				/** Intervall! */
 				terminal.lightLED(terminal.GREEN_LED, 15);
+				return;
 			}
 		}
 		/** Intervall! */
@@ -107,13 +109,19 @@ public class BicycleGarageManager {
 			pinCode = "";
 		}
 		if (c == '#' && asterix) {
-			for (User u : users) {
-				if (u.getPinCode().equals(pinCode)) {
-					entryLock.open(15);
-					terminal.lightLED(terminal.GREEN_LED, 15);
+			if (pinCode.length() == 5) {
+				for (User u : users) {
+					if (u.getPinCode().equals(pinCode)) {
+						entryLock.open(15);
+						terminal.lightLED(terminal.GREEN_LED, 15);
+						return;
+					}
 				}
+				terminal.lightLED(terminal.RED_LED, 15);
 			}
-			terminal.lightLED(terminal.RED_LED, 15);
+			else {
+				terminal.lightLED(terminal.RED_LED, 15);
+			}
 		}
 		if (c != '*' && c != '#' && asterix) {
 			pinCode += c;
