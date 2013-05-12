@@ -86,13 +86,26 @@ public class User implements Comparable<User> {
      * @return A negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object.
      */
 	public int compareTo(User u) {
-		return Integer.parseInt(pin) - Integer.parseInt(u.getPIN());
+		String s = "";
+		String t = "";
+		for (int i = 0; i < 6; i++) {
+			s += pin.charAt(i);
+			t += u.getPIN().charAt(i);
+			System.out.println(s + " " + t);
+		}
+		for (int i = 7; i < 11; i++) {
+			s += pin.charAt(i);
+			t += u.getPIN().charAt(i);
+			System.out.println(s + " " + t);
+		}
+		return (int) (Double.parseDouble(s) - Double.parseDouble(t));
 	}
-    /**
+    
+	/**
      * Returns the Telephone Number of the User.
      * @return The Telephone Number of the User.
      */
-	public String getPhone() {
+	public String getPhoneNum() {
 		return phoneNum;
 	}
 }

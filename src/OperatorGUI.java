@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.util.List;
 import java.util.Set;
 import java.util.Locale;
+import java.util.TreeSet;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.SystemColor;
@@ -11,11 +12,9 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.border.EmptyBorder;
 
-import GUI.CancelButton;
-import GUI.DeleteBikerButton;
-import GUI.EditBikerButton;
-
 import java.awt.Component;
+
+import SYS.*;
 
 public class OperatorGUI extends JFrame {
 	private SYS.BicycleGarageManager bgm;
@@ -27,17 +26,20 @@ public class OperatorGUI extends JFrame {
 	private JPanel searchResultPanel;
 	private JPanel panel;
 
-	public JTextField PIN_TEXT_FIELD;
-	public JTextField PINCODE_TEXT_FIELD;
-	public JTextField PHONENUM_TEXT_FIELD;
-	public JTextField BICYCLE_TEXT_FIELD;
-	public JTextField NAME_TEXT_FIELD;
+	public JTextField pinTextField;
+	public JTextField pinCodeTextField;
+	public JTextField phoneNumTextField;
+	public JTextField bicycleTextField;
+	public JTextField nameTextField;
+	public JTextField SEARCH_TEXT_FIELD;
 
-	private String bpin;
-	private String bpinc;
-	private String btfn;
-	private String bnam;
-	private String bbar;
+	private String currentPin;
+	private String currentPinCode;
+	private String currentPhoneNum;
+	private String currentName;
+	private String currentBarcode;
+
+	private User currentBiker;
 
 	public static final int DEFAULT_MODE = 0;
 	public static final int CREATE_MODE = 1;
@@ -77,7 +79,8 @@ public class OperatorGUI extends JFrame {
 		bp = new JPanel();
 		bp.add(new NewBikerButton(this));
 		bp.add(new EditBikerButton(this));
-		bp.add(new SearchForm(this));
+		SEARCH_TEXT_FIELD = new SearchForm(this);
+		bp.add(SEARCH_TEXT_FIELD);
 		bp.add(new SearchButton(this));
 
 		/*
@@ -98,38 +101,38 @@ public class OperatorGUI extends JFrame {
 		dispose();
 		switch (mode) {
 			case CREATE_MODE:
-				PIN_TEXT_FIELD = new JTextField("Personal Identity Number (PIN)");
-				PINCODE_TEXT_FIELD = new JTextField("PIN-code");
-				PHONENUM_TEXT_FIELD = new JTextField("Telephone Number");
-				BICYCLE_TEXT_FIELD = new JTextField("Bicycle");
-				NAME_TEXT_FIELD = new JTextField("Name");
-				startPanel.add(PIN_TEXT_FIELD);
-				startPanel.add(PINCODE_TEXT_FIELD);
-				startPanel.add(PHONENUM_TEXT_FIELD);
-				startPanel.add(BICYCLE_TEXT_FIELD);
-				startPanel.add(NAME_TEXT_FIELD);
+				pinTextField = new JTextField("Personal Identity Number (PIN)");
+				pinCodeTextField = new JTextField("PIN-code");
+				phoneNumTextField = new JTextField("Telephone Number");
+				bicycleTextField = new JTextField("Bicycle");
+				nameTextField = new JTextField("Name");
+				startPanel.add(pinTextField);
+				startPanel.add(pinCodeTextField);
+				startPanel.add(phoneNumTextField);
+				startPanel.add(bicycleTextField);
+				startPanel.add(nameTextField);
 				startPanel.add(new SaveButton(this));
 				startPanel.add(new CancelButton(this));
 				break;
 			case EDIT_MODE:
-				bpin = "910112-1234";    //biker.getPin(); typ JNåntingDialog
-				bpinc = "02034";
-				btfn = "070-1234567";    //biker.getTfn();
-		        bbar = "12345";          //biker.getBar();
-		        bnam = "Sven Svensson";  //biker.getNam();
-		        PIN_TEXT_FIELD = new JTextField(bpin);
-				PINCODE_TEXT_FIELD = new JTextField(bpinc);
-		        PHONENUM_TEXT_FIELD = new JTextField(btfn);
-		        BICYCLE_TEXT_FIELD = new JTextField(bbar);
-		        NAME_TEXT_FIELD = new JTextField(bnam);
-				PIN_TEXT_FIELD.setEditable(false);
-				PINCODE_TEXT_FIELD.setEditable(false);
-				BICYCLE_TEXT_FIELD.setEditable(false);
-		        startPanel.add(PIN_TEXT_FIELD);
-				startPanel.add(PINCODE_TEXT_FIELD);
-		        startPanel.add(PHONENUM_TEXT_FIELD);
-		        startPanel.add(BICYCLE_TEXT_FIELD);
-		        startPanel.add(NAME_TEXT_FIELD);
+				currentPin = currentBiker.getPIN();
+				currentPinCode = currentBiker.getPinCode();
+				currentPhoneNum = currentBiker.getPhoneNum();
+		        currentBarcode = currentBiker.getBicycle().getBarcode();
+		        currentName = currentBiker.getName();
+		        pinTextField = new JTextField(currentPin);
+				pinCodeTextField = new JTextField(currentPinCode);
+		        phoneNumTextField = new JTextField(currentPhoneNum);
+		        bicycleTextField = new JTextField(currentBarcode);
+		        nameTextField = new JTextField(currentName);
+				pinTextField.setEditable(false);
+				pinCodeTextField.setEditable(false);
+				bicycleTextField.setEditable(false);
+		        startPanel.add(pinTextField);
+				startPanel.add(pinCodeTextField);
+		        startPanel.add(phoneNumTextField);
+		        startPanel.add(bicycleTextField);
+		        startPanel.add(nameTextField);
 		        startPanel.add(new SaveButton(this));
 		        startPanel.add(new CancelButton(this));
     		    startPanel.add(new DeleteBikerButton(this));
@@ -147,43 +150,47 @@ public class OperatorGUI extends JFrame {
 				scrollPane.setViewportView(panel);
 				panel.setLayout(new GridLayout(100, 1));
 
-				/*
-				 * Some code that fills the result-area with results...
-				 */
-				for(int i = 0; i < 100; i++) {
-					JPanel panel_1 = new JPanel();
-					JTextField jtf = new JTextField("Sven Svensson");
-					jtf.setEditable(false);
-					panel_1.add(jtf);
-					panel_1.add(new ViewBikerButton(this));
-					if(i % 2 == 0) {
-						panel_1.setBackground(SystemColor.inactiveCaptionBorder);
-					}
-					panel.add(panel_1);
-				}
+				TreeSet<User> result = bgm.searchUsers(SEARCH_TEXT_FIELD.getText());
+                if (result.size() != 0) {
+                    int n = 0;
+                    for (User user : result) {
+                        JPanel panel_1 = new JPanel();
+                        JTextField jtf = new JTextField(user.getName());
+                        jtf.setEditable(false);
+                        panel_1.add(jtf);
+                        panel_1.add(new ViewBikerButton(this, user));
+                        if(n % 2 == 0) {
+                            panel_1.setBackground(SystemColor.inactiveCaptionBorder);
+                        }
+                        panel.add(panel_1);
+                        n++;
+                    }
+                } else {
+                    showMessageDialog("No user found");
+                }
 				searchResultPanel.add(new CancelButton(this));
 				break;
 			case VIEW_MODE:
-				bpin = "910112-1234";    //biker.getPin(); typ JNåntingDialog
-				bpinc = "02034";
-				btfn = "070-1234567";    //biker.getTfn();
-				bbar = "12345";          //biker.getBar();
-				bnam = "Sven Svensson";  //biker.getNam();
-				PIN_TEXT_FIELD = new JTextField(bpin);
-				PINCODE_TEXT_FIELD = new JTextField(bpinc);
-				PHONENUM_TEXT_FIELD = new JTextField(btfn);
-				BICYCLE_TEXT_FIELD = new JTextField(bbar);
-				NAME_TEXT_FIELD = new JTextField(bnam);
-				PIN_TEXT_FIELD.setEditable(false);
-				PINCODE_TEXT_FIELD.setEditable(false);
-				BICYCLE_TEXT_FIELD.setEditable(false);
-				PHONENUM_TEXT_FIELD.setEditable(false);
-				NAME_TEXT_FIELD.setEditable(false);
-				startPanel.add(PIN_TEXT_FIELD);
-				startPanel.add(PINCODE_TEXT_FIELD);
-				startPanel.add(PHONENUM_TEXT_FIELD);
-				startPanel.add(BICYCLE_TEXT_FIELD);
-				startPanel.add(NAME_TEXT_FIELD);
+				currentPin = currentBiker.getPIN();
+				currentPinCode = currentBiker.getPinCode();
+				currentPhoneNum = currentBiker.getPhoneNum();
+				currentBarcode = currentBiker.getBicycle().getBarcode();
+				currentName = currentBiker.getName();
+				pinTextField = new JTextField(currentPin);
+				pinCodeTextField = new JTextField(currentPinCode);
+				phoneNumTextField = new JTextField(currentPhoneNum);
+				bicycleTextField = new JTextField(currentBarcode);
+				nameTextField = new JTextField(currentName);
+				pinTextField.setEditable(false);
+				pinCodeTextField.setEditable(false);
+				bicycleTextField.setEditable(false);
+				phoneNumTextField.setEditable(false);
+				nameTextField.setEditable(false);
+				startPanel.add(pinTextField);
+				startPanel.add(pinCodeTextField);
+				startPanel.add(phoneNumTextField);
+				startPanel.add(bicycleTextField);
+				startPanel.add(nameTextField);
 				startPanel.add(new SaveButton(this));
 				startPanel.add(new CancelButton(this));
 				startPanel.add(new DeleteBikerButton(this));
@@ -200,15 +207,12 @@ public class OperatorGUI extends JFrame {
 				startPanel.add(bikeArea);
 				startPanel.add(new JScrollPane(bikeArea));
 
-				// for (Biker b : bikersInGarage) {
-				//}
 				bikerArea.append("Bikers currently in garage\n");
 				for (int i = 0; i < 10; i++) {
 					bikerArea.append("Sven Svensson");
 					bikerArea.append("\n");
 				}
-				// for (Bike bi : bikesInGarage) {
-				//}
+				
 				bikeArea.append("Bikes currently in garage:\n");
 				for (int i = 0; i < 50; i++) {
 					bikeArea.append("91932");
@@ -222,12 +226,27 @@ public class OperatorGUI extends JFrame {
 		setVisible(true);
 	}
 
+	public void setCurrentBiker(User biker) {
+		currentBiker = biker;
+	}
+
 	public void printBarcode(String bicycleID) {
 		bgm.printBarcode(bicycleID);
 	}
 
 	public void saveUser(String pin, String pinCode, SYS.Bicycle bicycle, String name, String phoneNum) {
 		bgm.addNewUser(pin, pinCode, bicycle, name, phoneNum);
+	}
+
+	public User getUser(String pin) {
+		User u = bgm.getUser(pin);
+		if (u != null) {
+			return u;
+		}
+		else {
+			showErrorDialog("User not found.");
+			return null;
+		}
 	}
 
 	public void showMessageDialog(String msg) {

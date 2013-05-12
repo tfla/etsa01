@@ -97,7 +97,6 @@ public class BicycleGarageManager {
 			return true;
 		}
 		catch (Exception ex){
-			System.out.println("Couldn't");
 			return false;
 		}
 		
@@ -111,7 +110,7 @@ public class BicycleGarageManager {
 		try {
 			PrintStream outprint = new PrintStream(new File("storage.csv"));
 			for(User us: users){
-				outprint.println(us.getPIN() + " " + us.getPinCode() + " " + us.getBicycle().getBarcode() + " " + us.getPhone() + " " + us.getName());
+				outprint.println(us.getPIN() + " " + us.getPinCode() + " " + us.getBicycle().getBarcode() + " " + us.getPhoneNum() + " " + us.getName());
 			}
 			return true; 
 		}
@@ -195,7 +194,7 @@ public class BicycleGarageManager {
 		if (users != null) {
 			if (users.size() > 0) {
 				for (User u : users) {
-					if (u.getPin().equals(pin)) {
+					if (u.getPIN().equals(pin)) {
 						return u;
 					}
 				}
@@ -234,7 +233,26 @@ public class BicycleGarageManager {
 	 * @return A TreeSet<User> containing the search results.
 	 */
 	public TreeSet<User> searchUsers(String searchString) {
-		return null;
+		TreeSet<User> result = new TreeSet<User>();
+		for (User user : users) {
+            String name = user.getName();
+            String phoneNum = user.getPhoneNum();
+            String pinCode = user.getPinCode();
+            String pin = user.getPIN();
+            String barcode = user.getBicycle().getBarcode();
+            if (name.indexOf(searchString) >= 0) {
+                result.add(user);
+            } else if (phoneNum.equals(searchString)) {
+                result.add(user);
+            } else if (pinCode.equals(searchString)) {
+                result.add(user);
+            } else if (pin.equals(searchString)) {
+                result.add(user);
+            } else if (barcode.equals(searchString)) {
+                result.add(user);
+            }
+        }
+        return result;
 	}
 
 	/**
