@@ -13,6 +13,6 @@ public class SaveMenu extends JMenuItem implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		
+		gui.saveGarage(null);
 	}
 }

@@ -104,11 +104,18 @@ public class BicycleGarageManager {
 	
 	/** 
 	 * Saves info to the storage file on the form 'pin pinCode, barcode, name, phoneNum', newline represents a new object.
+	 * @param f The file to save to.
 	 * @return true if no exceptions were thrown.
 	 */
-	public boolean saveGarage(){
+	public boolean saveGarage(File f){
+		PrintStream outprint;
 		try {
-			PrintStream outprint = new PrintStream(new File("storage.csv"));
+			if (f != null) {
+				outprint = new PrintStream(f);
+			}
+			else {
+				outprint = new PrintStream(new File("storage.csv"));
+			}
 			for(User us: users){
 				outprint.println(us.getPIN() + " " + us.getPinCode() + " " + us.getBicycle().getBarcode() + " " + us.getPhoneNum() + " " + us.getName());
 			}
@@ -224,7 +231,7 @@ public class BicycleGarageManager {
 		else {
 			gui.showErrorDialog("The system biker limit has been reached.");
 		}
-		saveGarage();
+		saveGarage(null);
 	}
 
 	/**

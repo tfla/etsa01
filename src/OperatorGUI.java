@@ -1,6 +1,5 @@
 package GUI;
 
-import javax.swing.*;
 import java.util.List;
 import java.util.Set;
 import java.util.Locale;
@@ -10,11 +9,12 @@ import java.awt.Dimension;
 import java.awt.SystemColor;
 import java.awt.Color;
 import java.awt.GridLayout;
-import javax.swing.border.EmptyBorder;
-
 import java.awt.Component;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.io.File;
 
-import SYS.*;
+import SYS.BicycleGarageManager;
 
 public class OperatorGUI extends JFrame {
 	private SYS.BicycleGarageManager bgm;
@@ -47,7 +47,11 @@ public class OperatorGUI extends JFrame {
 	public static final int SEARCH_MODE = 3;
 	public static final int VIEW_MODE = 4;
 
-	public OperatorGUI(SYS.BicycleGarageManager bgm) {
+	/**
+	 * Constructor, creates and populates the GUI.
+	 * @param bgm The BicycleGarageManager to use.
+	 */
+	public OperatorGUI(BicycleGarageManager bgm) {
 		super("Operator Interface");
 		
 		this.bgm = bgm;
@@ -55,10 +59,10 @@ public class OperatorGUI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Locale.setDefault(new Locale("en"));
 		setPreferredSize(new Dimension(600, 600));
-		/* To avoid hardcoded Swedish text on OptionPane dialogs */
+		/** To avoid hardcoded Swedish text on OptionPane dialogs */
 		UIManager.put("OptionPane.cancelButtonText","Cancel");
 		
-		/*
+		/**
 		 * Create and populate the MenuBar.
 		 */
 		setLayout(new BorderLayout());
@@ -73,7 +77,7 @@ public class OperatorGUI extends JFrame {
 		menubar.add(viewMenu);
 		viewMenu.add(new ViewAllMenu(this));
 	
-		/*
+		/**
 		 * Create and populate the ButtonPanel.
 		 */
 		bp = new JPanel();
@@ -83,13 +87,17 @@ public class OperatorGUI extends JFrame {
 		bp.add(SEARCH_TEXT_FIELD);
 		bp.add(new SearchButton(this));
 
-		/*
+		/**
 		 * Create and populate the StartPanel (default view).
 		 */
 		startPanel = new JPanel();
 		changeView(DEFAULT_MODE);
 	}
 
+	/**
+	 * Changes the view of the GUI.
+	 * @param mode One of the static MODE_? fields of this class.
+	 */
 	public void changeView(int mode) {
 		startPanel.removeAll();
 		if (searchResultPanel != null) {
@@ -226,18 +234,40 @@ public class OperatorGUI extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Sets the current biker to biker so that we can view them in edit- and view-mode.
+	 * @param biker The biker to be set as currentBiker.
+	 */
 	public void setCurrentBiker(User biker) {
 		currentBiker = biker;
 	}
 
+	/**
+	 * Prints a barcode.
+	 * @param bicycleID The barcode to print.
+	 */
 	public void printBarcode(String bicycleID) {
 		bgm.printBarcode(bicycleID);
 	}
 
+	/**
+	 * Adds a new User to the system.
+	 * @param pin The PIN of the new user.
+	 * @param pinCode The PIN-Code of the new user.
+	 * @param bicycle The Bicycle of the new user.
+	 * @param name The name of the new user.
+	 * @param phoneNum The telephone number of the new user.
+	 *
+	 */
 	public void saveUser(String pin, String pinCode, SYS.Bicycle bicycle, String name, String phoneNum) {
 		bgm.addNewUser(pin, pinCode, bicycle, name, phoneNum);
 	}
 
+	/**
+	 * Returns the User that has PIN pin, null if there is no User with that PIN.
+	 * @param pin The PIN to check for.
+	 * @return The User with that PIN, if it exists.
+	 */
 	public User getUser(String pin) {
 		User u = bgm.getUser(pin);
 		if (u != null) {
@@ -249,11 +279,27 @@ public class OperatorGUI extends JFrame {
 		}
 	}
 
+	/**
+	 * Shows a Message Dialog with the specified message as an information message.
+	 * @param msg The informational message to display.
+	 */
 	public void showMessageDialog(String msg) {
 		JOptionPane.showMessageDialog(null, msg, "Message", JOptionPane.INFORMATION_MESSAGE);
 	}
 
+	/**
+	 * Shows a Message Dialog with the specified message as an error message.
+	 * @param msg The error message to display.
+	 */
 	public void showErrorDialog(String msg) {
 		JOptionPane.showMessageDialog(null, msg, "Error", JOptionPane.ERROR_MESSAGE);
+	}
+
+	/**
+	 * Saves info to the storage file on the form 'pin pinCode, barcode, name, phoneNum', newline represents a new object.
+	 * @param f The file to save to.
+	 */
+	public void saveGarage(File f) {
+		bgm.saveGarage(f);
 	}
 }
