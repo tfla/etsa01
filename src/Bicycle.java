@@ -1,5 +1,9 @@
 package SYS;
 
+/**
+ * This class defines a Bicycle within the system.
+ *
+ */
 public class Bicycle implements Comparable<Bicycle> {
 	private boolean inGarage;
 	private String barcode;

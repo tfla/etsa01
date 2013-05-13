@@ -15,7 +15,12 @@ import javax.swing.border.EmptyBorder;
 import java.io.File;
 
 import SYS.BicycleGarageManager;
+import SYS.User;
 
+/**
+ * This class creates the main Operator Interface.
+ *
+ */
 public class OperatorGUI extends JFrame {
 	private SYS.BicycleGarageManager bgm;
 	private JTextArea bikeArea;
@@ -31,7 +36,7 @@ public class OperatorGUI extends JFrame {
 	public JTextField phoneNumTextField;
 	public JTextField bicycleTextField;
 	public JTextField nameTextField;
-	public JTextField SEARCH_TEXT_FIELD;
+	public JTextField searchTextField;
 
 	private String currentPin;
 	private String currentPinCode;
@@ -73,9 +78,6 @@ public class OperatorGUI extends JFrame {
 		fileMenu.add(new OpenMenu(this));
 		fileMenu.add(new SaveMenu(this));
 		fileMenu.add(new SaveAsMenu(this));
-		JMenu viewMenu = new JMenu("View");
-		menubar.add(viewMenu);
-		viewMenu.add(new ViewAllMenu(this));
 	
 		/**
 		 * Create and populate the ButtonPanel.
@@ -83,8 +85,8 @@ public class OperatorGUI extends JFrame {
 		bp = new JPanel();
 		bp.add(new NewBikerButton(this));
 		bp.add(new EditBikerButton(this));
-		SEARCH_TEXT_FIELD = new SearchForm(this);
-		bp.add(SEARCH_TEXT_FIELD);
+		searchTextField = new JTextField("Search ...");
+		bp.add(searchTextField);
 		bp.add(new SearchButton(this));
 
 		/**
@@ -158,7 +160,7 @@ public class OperatorGUI extends JFrame {
 				scrollPane.setViewportView(panel);
 				panel.setLayout(new GridLayout(100, 1));
 
-				TreeSet<User> result = bgm.searchUsers(SEARCH_TEXT_FIELD.getText());
+				TreeSet<User> result = bgm.searchUsers(searchTextField.getText());
                 if (result.size() != 0) {
                     int n = 0;
                     for (User user : result) {

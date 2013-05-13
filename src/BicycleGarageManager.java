@@ -6,6 +6,10 @@ import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.TreeSet;
 
+/**
+ * This class links the drivers to the system and connects the GUI operations to actions on Bicycles and/or Users.
+ *
+ */
 public class BicycleGarageManager {
 	private BarcodePrinterTestDriver printer;
 	private BarcodeReaderTestDriver barcodeReader;

@@ -1,6 +1,9 @@
 package SYS;
 
-
+/**
+ * This class defines a User within the system.
+ *
+ */
 public class User implements Comparable<User> {
 	private String name;
 	private Bicycle bicycle;
@@ -57,6 +60,14 @@ public class User implements Comparable<User> {
 	}
 
 	/**
+     * Returns the Telephone Number of the User.
+     * @return The Telephone Number of the User.
+     */
+	public String getPhoneNum() {
+		return phoneNum;
+	}
+	
+	/**
 	 * Sets the name of a user to name.
 	 * @param name The new name for the user.
 	 */
@@ -99,13 +110,5 @@ public class User implements Comparable<User> {
 			System.out.println(s + " " + t);
 		}
 		return (int) (Double.parseDouble(s) - Double.parseDouble(t));
-	}
-    
-	/**
-     * Returns the Telephone Number of the User.
-     * @return The Telephone Number of the User.
-     */
-	public String getPhoneNum() {
-		return phoneNum;
 	}
 }
