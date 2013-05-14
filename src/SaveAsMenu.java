@@ -22,7 +22,7 @@ public class SaveAsMenu extends JMenuItem implements ActionListener {
 		super("Save as ...");
 		this.gui = gui;
 		fc = new JFileChooser();
-		fc.setDialogTitle("Select a path to save the file on");
+		fc.setDialogTitle("Select a path to save the file on.");
 		addActionListener(this);
 	}
 

@@ -1,7 +1,10 @@
 package GUI;
 
-import javax.swing.*;
-import java.awt.event.*;
+import javax.swing.JMenuItem;
+import javax.swing.JFileChooser;
+import java.io.File;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * This class creates a JMenuItem with the text "Open", used to open other storage files.
@@ -10,6 +13,7 @@ import java.awt.event.*;
 @SuppressWarnings("serial")
 public class OpenMenu extends JMenuItem implements ActionListener {
 	private OperatorGUI gui;
+	private JFileChooser fc;
 
 	/**
 	 * Creates a new OpenMenu and sets the text to "Open".
@@ -18,6 +22,8 @@ public class OpenMenu extends JMenuItem implements ActionListener {
 	public OpenMenu(OperatorGUI gui) {
 		super("Open");
 		this.gui = gui;
+		fc = new JFileChooser();
+		fc.setDialogTitle("Select a file to open.");
 		addActionListener(this);
 	}
 
@@ -26,6 +32,11 @@ public class OpenMenu extends JMenuItem implements ActionListener {
 	 *
 	 */
 	public void actionPerformed(ActionEvent e) {
-			
+		int i = fc.showOpenDialog(null);
+		if (i == JFileChooser.APPROVE_OPTION) {
+			File f = fc.getSelectedFile();
+			gui.openGarage(f);
+		}
+		gui.changeView(gui.DEFAULT_MODE);
 	}
 }

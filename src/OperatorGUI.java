@@ -337,4 +337,12 @@ public class OperatorGUI extends JFrame {
 	public void saveGarage(File f) {
 		bgm.saveGarage(f);
 	}
+
+	/**
+     * Reads info from the storage file on the form 'pin pinCode barcode name phoneNum', newline represents a new object.
+     * @param f The file to open.
+     */
+	public void openGarage(File f) {
+		bgm.openGarage(f);
+	}
 }

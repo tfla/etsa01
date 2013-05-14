@@ -32,7 +32,7 @@ public class BicycleGarageManager {
 	public BicycleGarageManager(){
 		users = new TreeSet<User>();
 		bikes = new TreeSet<Bicycle>();
-		openGarage();
+		openGarage(null);
 		gui = new GUI.OperatorGUI(this);
 		registerHardwareDrivers(new BarcodePrinterTestDriver(),
                                 new BarcodeReaderExitTestDriver(),
@@ -71,11 +71,18 @@ public class BicycleGarageManager {
 
 	/** 
 	 * Reads info from the storage file on the form 'pin pinCode barcode name phoneNum', newline represents a new object.
+	 * @param f The file to open.
 	 * @return true if no exceptions were thrown.
 	 */ 
-	public boolean openGarage(){
+	public boolean openGarage(File f){
+		Scanner scan;
 		try {
-			Scanner scan = new Scanner(new File("storage.csv"));
+			if (f != null) {
+				scan = new Scanner(f);
+			}
+			else {
+				scan = new Scanner(new File("storage.csv"));
+			}
 			scan.useDelimiter(",");
 			while (scan.hasNext()){
 				users.add(new User(scan.next(),scan.next(),new Bicycle(scan.next()),scan.next(),scan.next()));
