@@ -184,6 +184,7 @@ public class OperatorGUI extends JFrame {
                     }
                 } else {
                     showMessageDialog("No user found");
+					changeView(DEFAULT_MODE);
                 }
 				searchResultPanel.add(new CancelButton(this));
 				currentMode = SEARCH_MODE;
