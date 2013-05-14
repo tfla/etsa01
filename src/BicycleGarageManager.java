@@ -215,7 +215,7 @@ public class BicycleGarageManager {
 	}
 
 	/**
-	 * Adds a new User to the system.
+	 * Adds a new User to the system and saves the garage to the default file.
 	 * @param pin The PIN of the new user.
 	 * @param pinCode The PIN-Code of the new user.
 	 * @param bicycle The Bicycle of the new user.
@@ -224,6 +224,31 @@ public class BicycleGarageManager {
 	 *
 	 */
 	public void addNewUser(String pin, String pinCode, Bicycle bicycle, String name, String phoneNum) {
+		/** Checks the format of the Personal Identification Number (PIN). */
+		if (!pin.matches("[0-9]{2,2}?(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])[-+][0-9]{4,4}?")) {		
+			gui.showErrorDialog("One or more of the required fields are missing and/or are filled in erroneously.");
+            return;
+		}
+
+		/** Checks the format of the PIN-Code (nnnnn). */
+		if (!pinCode.matches("[0-9]{5,5}?")) {
+            gui.showErrorDialog("One or more of the required fields are missing and/or are filled in erroneously.");
+            return;
+        }
+
+		/** Checks the format of the barcode (nnnnn). */
+		if (!bicycle.getBarcode().matches("[0-9]{5,5}?")) {
+            gui.showErrorDialog("One or more of the required fields are missing and/or are filled in erroneously.");
+            return;
+        }
+
+		/** Checks the Telephone Number. */
+        //if (phoneNum != "Telephone Number") {
+        //    if ( (!s.matches("07[036]{1,1}?[0-9]{6,6}?"))) {
+        //        gui.showErrorDialog("Telephone number not on a valid format.");
+        //    }
+        //}
+
 		if (users.size() <= 10000) {
 			if (users.add(new User(pin, pinCode, bicycle, name, phoneNum))) {
 				gui.showMessageDialog("User was successfully added.");
@@ -235,6 +260,7 @@ public class BicycleGarageManager {
 		else {
 			gui.showErrorDialog("The system biker limit has been reached.");
 		}
+
 		saveGarage(null);
 	}
 
