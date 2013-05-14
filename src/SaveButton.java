@@ -23,7 +23,7 @@ public class SaveButton extends JButton implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// Check the format of the Personal Identification Number (mmddyy-xxxx).
 		s = gui.pinTextField.getText();
-		if (!s.matches("[0-9]{2,2}?[0-1]{1,1}?[0-9]{1,1}?[0-3]{1,1}?[0-9]{1,1}?[-+][0-9]{4,4}?")) {
+		if (!s.matches("[0-9]{2,2}?(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])[-+][0-9]{4,4}?")) {
 			gui.showErrorDialog("One or more of the required fields are missing and/or are filled in erroneously.");
 			return;
 		}
