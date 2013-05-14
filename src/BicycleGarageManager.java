@@ -290,6 +290,15 @@ public class BicycleGarageManager {
 	}
 
 	/**
+	 * Deletes the User u from the system.
+	 * @param u The User to delete.
+	 * @return True if the User was successfully deleted.
+	 */
+	public boolean deleteUser(User u) {
+		return users.remove(u);
+	}
+
+	/**
 	 * Returns a TreeSet<Bicycle> with all the Bicycles that are currently in the garage.
 	 * @return A TreeSet<Bicycle> containing all Bicycles currently in the garage.
 	 */

@@ -289,6 +289,15 @@ public class OperatorGUI extends JFrame {
 	}
 
 	/**
+	 * Deletes the User u from the system.
+	 * @param u The User to delete.
+	 * @return True if the User was successfully deleted.
+	 */
+	public boolean deleteUser(User u) {
+		return bgm.deleteUser(u);
+	}
+
+	/**
 	 * Returns the User that has PIN pin, null if there is no User with that PIN.
 	 * @param pin The PIN to check for.
 	 * @return The User with that PIN, if it exists.
