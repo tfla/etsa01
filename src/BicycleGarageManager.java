@@ -133,6 +133,9 @@ public class BicycleGarageManager {
 					}
 				}
 				terminal.lightLED(terminal.GREEN_LED, 15);
+				if (gui.getCurrentMode() == gui.DEFAULT_MODE) {
+					gui.changeView(gui.DEFAULT_MODE);
+				}				
 				return;
 			}
 		}
@@ -153,6 +156,9 @@ public class BicycleGarageManager {
 					for (User u : users) {
                         if (u.getBicycle().getBarcode() == bicycleID) {
                             u.setInGarage(false);
+							if (gui.getCurrentMode() == gui.DEFAULT_MODE) {
+								gui.changeView(gui.DEFAULT_MODE);
+							}
                         }
                     }
 				}
@@ -179,6 +185,9 @@ public class BicycleGarageManager {
 						entryLock.open(15);
 						terminal.lightLED(terminal.GREEN_LED, 15);
 						u.setInGarage(true);
+						if (gui.getCurrentMode() == gui.DEFAULT_MODE) {
+							gui.changeView(gui.DEFAULT_MODE);
+						}
 						return;
 					}
 				}

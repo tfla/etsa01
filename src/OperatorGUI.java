@@ -55,6 +55,8 @@ public class OperatorGUI extends JFrame {
 	public static final int SEARCH_MODE = 3;
 	public static final int VIEW_MODE = 4;
 
+	private int currentMode;
+
 	/**
 	 * Constructor, creates and populates the GUI.
 	 * @param bgm The BicycleGarageManager to use.
@@ -126,6 +128,7 @@ public class OperatorGUI extends JFrame {
 				startPanel.add(nameTextField);
 				startPanel.add(new SaveButton(this));
 				startPanel.add(new CancelButton(this));
+				currentMode = CREATE_MODE;
 				break;
 			case EDIT_MODE:
 				currentPin = currentBiker.getPIN();
@@ -149,6 +152,7 @@ public class OperatorGUI extends JFrame {
 		        startPanel.add(new SaveButton(this));
 		        startPanel.add(new CancelButton(this));
     		    startPanel.add(new DeleteBikerButton(this));
+				currentMode = EDIT_MODE;
 				break;
 			case SEARCH_MODE:
 				searchResultPanel = new JPanel();
@@ -182,6 +186,7 @@ public class OperatorGUI extends JFrame {
                     showMessageDialog("No user found");
                 }
 				searchResultPanel.add(new CancelButton(this));
+				currentMode = SEARCH_MODE;
 				break;
 			case VIEW_MODE:
 				currentPin = currentBiker.getPIN();
@@ -208,6 +213,7 @@ public class OperatorGUI extends JFrame {
 				startPanel.add(new CancelButton(this));
 				startPanel.add(new DeleteBikerButton(this));
 				startPanel.add(new PrintBarcodeButton(this));
+				currentMode = VIEW_MODE;
 				break;
 			default:
 				bikerArea = new JTextArea(20,20);
@@ -235,7 +241,7 @@ public class OperatorGUI extends JFrame {
 					bikeArea.append(b.getBarcode() + "\n");
 				}
 
-				
+				currentMode = DEFAULT_MODE;
 				break;
 		}
 		add(bp, BorderLayout.PAGE_END);
@@ -258,6 +264,14 @@ public class OperatorGUI extends JFrame {
 	 */
 	public void printBarcode(String bicycleID) {
 		bgm.printBarcode(bicycleID);
+	}
+
+	/**
+	 * Returns an int representing the current mode of the GUI.
+	 * @return An int representing the current mode of the GUI.
+	 */
+	public int getCurrentMode() {
+		return currentMode;
 	}
 
 	/**
