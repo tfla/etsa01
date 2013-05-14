@@ -21,7 +21,7 @@ public class BicycleGarageManager {
 	private GUI.OperatorGUI gui;
 	private TreeSet<User> users;
 	private TreeSet<Bicycle> bikes;
-	
+
 	private String pinCode;
 	private boolean asterix;
 
