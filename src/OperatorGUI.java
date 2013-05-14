@@ -16,6 +16,7 @@ import java.io.File;
 
 import SYS.BicycleGarageManager;
 import SYS.User;
+import SYS.Bicycle;
 
 /**
  * This class creates the main Operator Interface.
@@ -43,6 +44,8 @@ public class OperatorGUI extends JFrame {
 	private String currentPhoneNum;
 	private String currentName;
 	private String currentBarcode;
+
+	private JLabel userCount;
 
 	private User currentBiker;
 
@@ -217,17 +220,22 @@ public class OperatorGUI extends JFrame {
 				startPanel.add(bikeArea);
 				startPanel.add(new JScrollPane(bikeArea));
 
-				bikerArea.append("Bikers currently in garage\n");
-				for (int i = 0; i < 10; i++) {
-					bikerArea.append("Sven Svensson");
-					bikerArea.append("\n");
+				userCount = new JLabel("Registered users: " + bgm.getUserCount());
+				startPanel.add(userCount);
+				
+				bikerArea.append("Bikers currently in garage:" + "\n");
+				TreeSet<User> users = bgm.usersInGarage();
+				for (User u : users) {
+					bikerArea.append(u.getName() + "\n");
 				}
 				
-				bikeArea.append("Bikes currently in garage:\n");
-				for (int i = 0; i < 50; i++) {
-					bikeArea.append("91932");
-					bikeArea.append("\n");
+				bikeArea.append("Bikes currently in garage:" + "\n");
+				TreeSet<Bicycle> bikes = bgm.bicyclesInGarage();
+				for (Bicycle b : bikes) {
+					bikeArea.append(b.getBarcode() + "\n");
 				}
+
+				
 				break;
 		}
 		add(bp, BorderLayout.PAGE_END);
@@ -263,6 +271,7 @@ public class OperatorGUI extends JFrame {
 	 */
 	public void saveUser(String pin, String pinCode, SYS.Bicycle bicycle, String name, String phoneNum) {
 		bgm.addNewUser(pin, pinCode, bicycle, name, phoneNum);
+		userCount.setText("Registered users: " + bgm.getUserCount());
 	}
 
 	/**

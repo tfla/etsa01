@@ -1,5 +1,9 @@
 package SYS;
 
+import javax.swing.Timer;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 /**
  * This class defines a User within the system.
  *
@@ -10,6 +14,8 @@ public class User implements Comparable<User> {
 	private String pinCode;
 	private String phoneNum;
 	private String pin;
+	private boolean inGarage;
+	private Timer t;
 
 	/**
 	 * Creates a new user.
@@ -25,6 +31,12 @@ public class User implements Comparable<User> {
 		this.bicycle = bicycle;
 		this.name = name;
 		this.phoneNum = phoneNum;
+		inGarage = false;
+		t = new Timer(1000, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				t.stop();
+			}
+		});
 	}
 
 	/**
@@ -66,6 +78,14 @@ public class User implements Comparable<User> {
 	public String getPhoneNum() {
 		return phoneNum;
 	}
+
+	/**
+	 * Returns the status of a User (true/false).
+	 * @return The status of a User (true/false).
+	 */
+	public boolean inGarage() {
+		return inGarage;
+	}
 	
 	/**
 	 * Sets the name of a user to name.
@@ -92,6 +112,18 @@ public class User implements Comparable<User> {
 	}
 
 	/**
+	 * Sets the User as "in garage" for a duration of 10 minutes.
+	 *
+	 */
+	public void setInGarage(boolean status) {
+		inGarage = status;
+		if (inGarage) {
+			t.setInitialDelay(600000);
+			t.restart();
+		}
+	}
+
+	/**
      * Compares a User to another.
      * @param u The User to compare to.
      * @return A negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object.
@@ -102,12 +134,10 @@ public class User implements Comparable<User> {
 		for (int i = 0; i < 6; i++) {
 			s += pin.charAt(i);
 			t += u.getPIN().charAt(i);
-			System.out.println(s + " " + t);
 		}
 		for (int i = 7; i < 11; i++) {
 			s += pin.charAt(i);
 			t += u.getPIN().charAt(i);
-			System.out.println(s + " " + t);
 		}
 		return (int) (Double.parseDouble(s) - Double.parseDouble(t));
 	}

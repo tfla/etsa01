@@ -69,32 +69,14 @@ public class BicycleGarageManager {
 		terminal.register(this);
 	}
 
-	/**
-	 * Unlocks the entrance lock and makes the PIN-Code terminal LED light green for 15 seconds if bicycleID is known by the system.
-	 * @param bicycleID The barcode that needs to be checked.
-	 * 
-	 */
-	public void entryBarcode(String bicycleID) {
-		for (Bicycle b : bikes) {
-			if (b.getBarcode().equals(bicycleID)) {
-				entryLock.open(15);
-				if (!b.inGarage()) {
-					b.setInGarage(true);
-				}
-				terminal.lightLED(terminal.GREEN_LED, 15);
-				return;
-			}
-		}
-		terminal.lightLED(terminal.RED_LED, 15);
-	}
-
 	/** 
 	 * Reads info from the storage file on the form 'pin pinCode barcode name phoneNum', newline represents a new object.
 	 * @return true if no exceptions were thrown.
 	 */ 
 	public boolean openGarage(){
 		try {
-			Scanner scan = new Scanner(new File("storage.csv"));
+			Scanner scan = new Scanner("storage.csv");
+			scan.useDelimiter("'");
 			while (scan.hasNext()){
 				users.add(new User(scan.next(),scan.next(),new Bicycle(scan.next()),scan.next(),scan.next())); 
 			}
@@ -121,13 +103,37 @@ public class BicycleGarageManager {
 				outprint = new PrintStream(new File("storage.csv"));
 			}
 			for(User us: users){
-				outprint.println("'" + us.getPIN() + "','" + us.getPinCode() + "','" + us.getBicycle().getBarcode() + "','" + us.getPhoneNum() + "','" + us.getName() + "'");
+				outprint.println(us.getPIN() + "," + us.getPinCode() + "," + us.getBicycle().getBarcode() + "," + us.getPhoneNum() + "," + us.getName());
 			}
 			return true; 
 		}
 		catch (Exception ex){
 			return false;
 		}	
+	}
+
+	/**
+	 * Unlocks the entrance lock and makes the PIN-Code terminal LED light green for 15 seconds if bicycleID is known by the system.
+	 * @param bicycleID The barcode that needs to be checked.
+	 * 
+	 */
+	public void entryBarcode(String bicycleID) {
+		for (Bicycle b : bikes) {
+			if (b.getBarcode().equals(bicycleID)) {
+				entryLock.open(15);
+				if (!b.inGarage()) {
+					b.setInGarage(true);
+					for (User u : users) {
+						if (u.getBicycle().getBarcode() == bicycleID) {
+							u.setInGarage(true);
+						}
+					}
+				}
+				terminal.lightLED(terminal.GREEN_LED, 15);
+				return;
+			}
+		}
+		terminal.lightLED(terminal.RED_LED, 15);
 	}
 	
 	/**
@@ -141,6 +147,11 @@ public class BicycleGarageManager {
 				entryLock.open(15);
 				if (b.inGarage()) {
 					b.setInGarage(false);
+					for (User u : users) {
+                        if (u.getBicycle().getBarcode() == bicycleID) {
+                            u.setInGarage(false);
+                        }
+                    }
 				}
 				terminal.lightLED(terminal.GREEN_LED, 15);
 				return;
@@ -164,6 +175,7 @@ public class BicycleGarageManager {
 					if (u.getPinCode().equals(pinCode)) {
 						entryLock.open(15);
 						terminal.lightLED(terminal.GREEN_LED, 15);
+						u.setInGarage(true);
 						return;
 					}
 				}
@@ -252,6 +264,7 @@ public class BicycleGarageManager {
 		if (users.size() <= 10000) {
 			if (users.add(new User(pin, pinCode, bicycle, name, phoneNum))) {
 				gui.showMessageDialog("User was successfully added.");
+				bikes.add(bicycle);
 			}
 			else {
 				gui.showErrorDialog("The Personal Identity Number is entered on an incorrect form and/or is already registered to another biker.");
@@ -262,6 +275,34 @@ public class BicycleGarageManager {
 		}
 
 		saveGarage(null);
+	}
+
+	/**
+	 * Returns a TreeSet<Bicycle> with all the Bicycles that are currently in the garage.
+	 * @return A TreeSet<Bicycle> containing all Bicycles currently in the garage.
+	 */
+	public TreeSet<Bicycle> bicyclesInGarage() {
+		TreeSet<Bicycle> result = new TreeSet<Bicycle>();
+		for (Bicycle b : bikes) {
+			if (b.inGarage()) {
+				result.add(b);
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Returns a TreeSet<User> with all the Users that are currently in the garage.
+	 * @return A TreeSet<User> containing all Users currently in the garage.
+	 */
+	public TreeSet<User> usersInGarage() {
+		TreeSet<User> result = new TreeSet<User>();
+		for (User u : users) {
+			if (u.inGarage()) {
+				result.add(u);
+			}
+		}
+		return result;
 	}
 
 	/**
@@ -290,6 +331,14 @@ public class BicycleGarageManager {
             }
         }
         return result;
+	}
+
+	/**
+	 * Returns the number of Users registered to the system.
+	 * @return The number of Users registered to the system.
+	 */
+	public int getUserCount() {
+		return users.size();
 	}
 
 	/**

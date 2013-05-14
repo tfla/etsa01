@@ -18,8 +18,8 @@ public class Bicycle implements Comparable<Bicycle> {
 	}
 
 	/**
-	 * Returns the status of a bike (true/false).
-	 * @return The status of a bike (true/false).
+	 * Returns the status of a Bicycle (true/false).
+	 * @return The status of a Bicycle (true/false).
 	 */
 	public boolean inGarage() {
 		return inGarage;
