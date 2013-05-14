@@ -5,18 +5,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * This class creates a JButton with the text "Create biker", used to change to "create-mode".
+ * This class creates a JButton with the text "Create user", used to change to "create-mode".
  *
  */
-public class NewBikerButton extends JButton implements ActionListener {
+public class NewUserButton extends JButton implements ActionListener {
 	private OperatorGUI gui;
 
 	/**
-	 * Creates a new NewBikerButton and sets the text to "Create biker".
+	 * Creates a new NewUserButton and sets the text to "Create user".
 	 *
 	 */
-	public NewBikerButton(OperatorGUI gui) {
-		super("Create biker");
+	public NewUserButton(OperatorGUI gui) {
+		super("Create user");
 		this.gui = gui;
 		addActionListener(this);
 	}

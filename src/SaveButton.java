@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import SYS.Bicycle;
 
 /**
- * This class creates a new JButton with the text "Save", used to add bikers to the system.
+ * This class creates a new JButton with the text "Save", used to add users to the system.
  *
  */
 public class SaveButton extends JButton implements ActionListener {

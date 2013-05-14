@@ -279,11 +279,11 @@ public class BicycleGarageManager {
 				bikes.add(bicycle);
 			}
 			else {
-				gui.showErrorDialog("The Personal Identity Number is entered on an incorrect form and/or is already registered to another biker.");
+				gui.showErrorDialog("The Personal Identity Number is entered on an incorrect form and/or is already registered to another user.");
 			}
 		}
 		else {
-			gui.showErrorDialog("The system biker limit has been reached.");
+			gui.showErrorDialog("The system user limit has been reached.");
 		}
 
 		saveGarage(null);

@@ -25,7 +25,7 @@ import SYS.Bicycle;
 public class OperatorGUI extends JFrame {
 	private SYS.BicycleGarageManager bgm;
 	private JTextArea bikeArea;
-	private JTextArea bikerArea;
+	private JTextArea userArea;
 
 	private JPanel startPanel;
 	private JPanel bp;
@@ -47,7 +47,7 @@ public class OperatorGUI extends JFrame {
 
 	private JLabel userCount;
 
-	private User currentBiker;
+	private User currentUser;
 
 	public static final int DEFAULT_MODE = 0;
 	public static final int CREATE_MODE = 1;
@@ -88,8 +88,8 @@ public class OperatorGUI extends JFrame {
 		 * Create and populate the ButtonPanel.
 		 */
 		bp = new JPanel();
-		bp.add(new NewBikerButton(this));
-		bp.add(new EditBikerButton(this));
+		bp.add(new NewUserButton(this));
+		bp.add(new EditUserButton(this));
 		searchTextField = new JTextField("Search ...");
 		bp.add(searchTextField);
 		bp.add(new SearchButton(this));
@@ -131,11 +131,11 @@ public class OperatorGUI extends JFrame {
 				currentMode = CREATE_MODE;
 				break;
 			case EDIT_MODE:
-				currentPin = currentBiker.getPIN();
-				currentPinCode = currentBiker.getPinCode();
-				currentPhoneNum = currentBiker.getPhoneNum();
-		        currentBarcode = currentBiker.getBicycle().getBarcode();
-		        currentName = currentBiker.getName();
+				currentPin = currentUser.getPIN();
+				currentPinCode = currentUser.getPinCode();
+				currentPhoneNum = currentUser.getPhoneNum();
+		        currentBarcode = currentUser.getBicycle().getBarcode();
+		        currentName = currentUser.getName();
 		        pinTextField = new JTextField(currentPin);
 				pinCodeTextField = new JTextField(currentPinCode);
 		        phoneNumTextField = new JTextField(currentPhoneNum);
@@ -151,7 +151,7 @@ public class OperatorGUI extends JFrame {
 		        startPanel.add(nameTextField);
 		        startPanel.add(new SaveButton(this));
 		        startPanel.add(new CancelButton(this));
-    		    startPanel.add(new DeleteBikerButton(this));
+    		    startPanel.add(new DeleteUserButton(this));
 				currentMode = EDIT_MODE;
 				break;
 			case SEARCH_MODE:
@@ -175,7 +175,7 @@ public class OperatorGUI extends JFrame {
                         JTextField jtf = new JTextField(user.getName());
                         jtf.setEditable(false);
                         panel_1.add(jtf);
-                        panel_1.add(new ViewBikerButton(this, user));
+                        panel_1.add(new ViewUserButton(this, user));
                         if(n % 2 == 0) {
                             panel_1.setBackground(SystemColor.inactiveCaptionBorder);
                         }
@@ -189,11 +189,11 @@ public class OperatorGUI extends JFrame {
 				currentMode = SEARCH_MODE;
 				break;
 			case VIEW_MODE:
-				currentPin = currentBiker.getPIN();
-				currentPinCode = currentBiker.getPinCode();
-				currentPhoneNum = currentBiker.getPhoneNum();
-				currentBarcode = currentBiker.getBicycle().getBarcode();
-				currentName = currentBiker.getName();
+				currentPin = currentUser.getPIN();
+				currentPinCode = currentUser.getPinCode();
+				currentPhoneNum = currentUser.getPhoneNum();
+				currentBarcode = currentUser.getBicycle().getBarcode();
+				currentName = currentUser.getName();
 				pinTextField = new JTextField(currentPin);
 				pinCodeTextField = new JTextField(currentPinCode);
 				phoneNumTextField = new JTextField(currentPhoneNum);
@@ -211,15 +211,15 @@ public class OperatorGUI extends JFrame {
 				startPanel.add(nameTextField);
 				startPanel.add(new SaveButton(this));
 				startPanel.add(new CancelButton(this));
-				startPanel.add(new DeleteBikerButton(this));
+				startPanel.add(new DeleteUserButton(this));
 				startPanel.add(new PrintBarcodeButton(this));
 				currentMode = VIEW_MODE;
 				break;
 			default:
-				bikerArea = new JTextArea(20,20);
-				bikerArea.setEditable(false);
-				startPanel.add(bikerArea);
-				startPanel.add(new JScrollPane(bikerArea));
+				userArea = new JTextArea(20,20);
+				userArea.setEditable(false);
+				startPanel.add(userArea);
+				startPanel.add(new JScrollPane(userArea));
 
 				bikeArea = new JTextArea(20,20);
 				bikeArea.setEditable(false);
@@ -229,10 +229,10 @@ public class OperatorGUI extends JFrame {
 				userCount = new JLabel("Registered users: " + bgm.getUserCount());
 				startPanel.add(userCount);
 				
-				bikerArea.append("Bikers currently in garage:" + "\n");
+				userArea.append("Users currently in garage:" + "\n");
 				TreeSet<User> users = bgm.usersInGarage();
 				for (User u : users) {
-					bikerArea.append(u.getName() + "\n");
+					userArea.append(u.getName() + "\n");
 				}
 				
 				bikeArea.append("Bikes currently in garage:" + "\n");
@@ -251,11 +251,11 @@ public class OperatorGUI extends JFrame {
 	}
 
 	/**
-	 * Sets the current biker to biker so that we can view them in edit- and view-mode.
-	 * @param biker The biker to be set as currentBiker.
+	 * Sets the current user to user so that we can view them in edit- and view-mode.
+	 * @param user The user to be set as currentUser.
 	 */
-	public void setCurrentBiker(User biker) {
-		currentBiker = biker;
+	public void setCurrentUser(User user) {
+		currentUser = user;
 	}
 
 	/**
