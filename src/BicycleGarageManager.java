@@ -32,6 +32,7 @@ public class BicycleGarageManager {
 	public BicycleGarageManager(){
 		users = new TreeSet<User>();
 		bikes = new TreeSet<Bicycle>();
+		openGarage();
 		gui = new GUI.OperatorGUI(this);
 		registerHardwareDrivers(new BarcodePrinterTestDriver(),
                                 new BarcodeReaderExitTestDriver(),
@@ -39,7 +40,6 @@ public class BicycleGarageManager {
                                 new ElectronicLockTestDriver("Entry"),
                                 new ElectronicLockTestDriver("Exit"),
                                 new PinCodeTerminalTestDriver());
-		openGarage();
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class BicycleGarageManager {
 	public boolean openGarage(){
 		try {
 			Scanner scan = new Scanner(new File("storage.csv"));
-			scan.useDelimiter("'");
+			scan.useDelimiter(",");
 			while (scan.hasNext()){
 				users.add(new User(scan.next(),scan.next(),new Bicycle(scan.next()),scan.next(),scan.next()));
 				for (User u : users) {
