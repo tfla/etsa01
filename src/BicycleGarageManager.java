@@ -75,10 +75,13 @@ public class BicycleGarageManager {
 	 */ 
 	public boolean openGarage(){
 		try {
-			Scanner scan = new Scanner("storage.csv");
+			Scanner scan = new Scanner(new File("storage.csv"));
 			scan.useDelimiter("'");
 			while (scan.hasNext()){
-				users.add(new User(scan.next(),scan.next(),new Bicycle(scan.next()),scan.next(),scan.next())); 
+				users.add(new User(scan.next(),scan.next(),new Bicycle(scan.next()),scan.next(),scan.next()));
+				for (User u : users) {
+					bikes.add(u.getBicycle());
+				}
 			}
 			return true;
 		}
@@ -103,7 +106,7 @@ public class BicycleGarageManager {
 				outprint = new PrintStream(new File("storage.csv"));
 			}
 			for(User us: users){
-				outprint.println(us.getPIN() + "," + us.getPinCode() + "," + us.getBicycle().getBarcode() + "," + us.getPhoneNum() + "," + us.getName());
+				outprint.println(us.getPIN() + "," + us.getPinCode() + "," + us.getBicycle().getBarcode() + "," + us.getPhoneNum() + "," + us.getName() + ",");
 			}
 			return true; 
 		}

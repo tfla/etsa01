@@ -25,5 +25,6 @@ public class SaveButton extends JButton implements ActionListener {
 						new Bicycle(gui.bicycleTextField.getText()),
 						gui.nameTextField.getText(),
 						gui.phoneNumTextField.getText());
+		gui.changeView(OperatorGUI.DEFAULT_MODE);
 	}
 }
