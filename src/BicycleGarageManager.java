@@ -113,7 +113,7 @@ public class BicycleGarageManager {
 				outprint = new PrintStream(new File("storage.csv"));
 			}
 			for(User us: users){
-				outprint.println(us.getPIN() + "," + us.getPinCode() + "," + us.getBicycle().getBarcode() + "," + us.getPhoneNum() + "," + us.getName() + ",");
+				outprint.println(us.getPIN() + "," + us.getPinCode() + "," + us.getBicycle().getBarcode() + "," + us.getName() + "," + us.getPhoneNum() + ",");
 			}
 			return true; 
 		}
@@ -281,12 +281,23 @@ public class BicycleGarageManager {
         //}
 
 		if (users.size() <= 10000) {
+			for (User u : users) {
+				if (u.getPinCode() == pinCode) {
+					gui.showErrorDialog("The PIN-Code is already registered to another User.");
+					return;
+				}
+				if (u.getPIN() == pin) {
+					gui.showErrorDialog("The Personal Identification Number (PIN) is already registered to another user.");
+					return;
+				}
+				if (u.getBicycle().getBarcode() == bicycle.getBarcode()) {
+					gui.showErrorDialog("The Bicycle with that barcode is already registered to another user.");
+					return;
+				}
+			}
 			if (users.add(new User(pin, pinCode, bicycle, name, phoneNum))) {
 				gui.showMessageDialog("User was successfully added.");
 				bikes.add(bicycle);
-			}
-			else {
-				gui.showErrorDialog("The Personal Identity Number is entered on an incorrect form and/or is already registered to another user.");
 			}
 		}
 		else {

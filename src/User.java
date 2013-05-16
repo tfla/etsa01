@@ -16,6 +16,7 @@ public class User implements Comparable<User> {
 	private String pin;
 	private boolean inGarage;
 	private Timer t;
+	private OperatorGUI gui;
 
 	/**
 	 * Creates a new user.
@@ -34,6 +35,9 @@ public class User implements Comparable<User> {
 		inGarage = false;
 		t = new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+//				if (gui.getCurrentMode() == gui.DEFAULT_MODE) {
+//					gui.changeView(gui.DEFAULT_MODE);
+//				}
 				t.stop();
 			}
 		});
