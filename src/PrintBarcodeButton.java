@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
  * This class creates a JButton with the text "Print barcode", used to print barcodes.
  *
  */
+@SuppressWarnings("serial")
 public class PrintBarcodeButton extends JButton implements ActionListener {
 	private OperatorGUI gui;
 

@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
  * This class creates a JButton with the text "Create user", used to change to "create-mode".
  *
  */
+@SuppressWarnings("serial")
 public class NewUserButton extends JButton implements ActionListener {
 	private OperatorGUI gui;
 

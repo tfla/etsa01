@@ -2,10 +2,8 @@ package GUI;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import java.io.File;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
 
 import SYS.User;
 
@@ -13,6 +11,7 @@ import SYS.User;
  * This class creates a JButton with the text "Delete", used to delete a user from the system.
  *
  */
+@SuppressWarnings("serial")
 public class DeleteUserButton extends JButton implements ActionListener {
 	private OperatorGUI gui;
 	private JFileChooser fc;
@@ -41,6 +40,6 @@ public class DeleteUserButton extends JButton implements ActionListener {
 				gui.showMessageDialog("User successfully removed.");
 			}
 		}
-		gui.changeView(gui.DEFAULT_MODE);
+		gui.changeView(OperatorGUI.DEFAULT_MODE);
 	}
 }

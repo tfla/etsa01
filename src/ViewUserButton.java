@@ -3,9 +3,6 @@ package GUI;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
-import SYS.User;
-
-import java.io.File;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,6 +10,7 @@ import java.awt.event.ActionListener;
  * This class creates a new JButton with the text "View", used to view a selected user's information.
  *
  */
+@SuppressWarnings("serial")
 public class ViewUserButton extends JButton implements ActionListener {
 	private OperatorGUI gui;
 	private JFileChooser fc;

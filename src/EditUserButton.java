@@ -10,6 +10,7 @@ import SYS.User;
  * This class creates a JButton with the text "Edit user", used to edit users.
  *
  */
+@SuppressWarnings("serial")
 public class EditUserButton extends JButton implements ActionListener {
 	private OperatorGUI gui;
 

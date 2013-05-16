@@ -10,6 +10,7 @@ import SYS.Bicycle;
  * This class creates a new JButton with the text "Save", used to add users to the system.
  *
  */
+@SuppressWarnings("serial")
 public class SaveButton extends JButton implements ActionListener {
 	private OperatorGUI gui;
 
@@ -22,6 +23,7 @@ public class SaveButton extends JButton implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (gui.getCurrentMode() == OperatorGUI.EDIT_MODE){
 			gui.editUser();
+			gui.changeView(OperatorGUI.DEFAULT_MODE);
 			return;
 		}
 		gui.saveUser(gui.pinTextField.getText(),

@@ -1,18 +1,23 @@
 package GUI;
 
-import java.util.List;
-import java.util.Set;
 import java.util.Locale;
 import java.util.TreeSet;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.SystemColor;
-import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.Component;
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.io.File;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 import SYS.BicycleGarageManager;
 import SYS.User;
@@ -20,8 +25,9 @@ import SYS.Bicycle;
 
 /**
  * This class creates the main Operator Interface.
- *
+ * 
  */
+@SuppressWarnings("serial")
 public class OperatorGUI extends JFrame {
 	private SYS.BicycleGarageManager bgm;
 	private JTextArea bikeArea;
@@ -58,19 +64,21 @@ public class OperatorGUI extends JFrame {
 
 	/**
 	 * Constructor, creates and populates the GUI.
-	 * @param bgm The BicycleGarageManager to use.
+	 * 
+	 * @param bgm
+	 *            The BicycleGarageManager to use.
 	 */
 	public OperatorGUI(BicycleGarageManager bgm) {
 		super("Operator Interface");
-		
+
 		this.bgm = bgm;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Locale.setDefault(new Locale("en"));
 		setPreferredSize(new Dimension(600, 600));
 		/** To avoid hardcoded Swedish text on OptionPane dialogs */
-		UIManager.put("OptionPane.cancelButtonText","Cancel");
-		
+		UIManager.put("OptionPane.cancelButtonText", "Cancel");
+
 		/**
 		 * Create and populate the MenuBar.
 		 */
@@ -82,7 +90,7 @@ public class OperatorGUI extends JFrame {
 		fileMenu.add(new OpenMenu(this));
 		fileMenu.add(new SaveMenu(this));
 		fileMenu.add(new SaveAsMenu(this));
-	
+
 		/**
 		 * Create and populate the ButtonPanel.
 		 */
@@ -90,7 +98,7 @@ public class OperatorGUI extends JFrame {
 		bp.add(new NewUserButton(this));
 		bp.add(new EditUserButton(this));
 		searchTextField = new JTextField("Search ...");
-		searchTextField.setPreferredSize(new Dimension(100,30));
+		searchTextField.setPreferredSize(new Dimension(100, 30));
 		bp.add(searchTextField);
 		bp.add(new SearchButton(this));
 
@@ -103,7 +111,9 @@ public class OperatorGUI extends JFrame {
 
 	/**
 	 * Changes the view of the GUI.
-	 * @param mode One of the static MODE_? fields of this class.
+	 * 
+	 * @param mode
+	 *            One of the static MODE_? fields of this class.
 	 */
 	public void changeView(int mode) {
 		startPanel.removeAll();
@@ -115,129 +125,129 @@ public class OperatorGUI extends JFrame {
 		}
 		dispose();
 		switch (mode) {
-			case CREATE_MODE:
-				pinTextField = new JTextField("Personal Identity Number (PIN)");
-				pinCodeTextField = new JTextField("PIN-code");
-				phoneNumTextField = new JTextField("Telephone Number");
-				bicycleTextField = new JTextField("Bicycle");
-				nameTextField = new JTextField("Name");
-				startPanel.add(pinTextField);
-				startPanel.add(pinCodeTextField);
-				startPanel.add(phoneNumTextField);
-				startPanel.add(bicycleTextField);
-				startPanel.add(nameTextField);
-				startPanel.add(new SaveButton(this));
-				startPanel.add(new CancelButton(this));
-				currentMode = CREATE_MODE;
-				break;
-			case EDIT_MODE:
-				currentPin = currentUser.getPIN();
-				currentPinCode = currentUser.getPinCode();
-				currentPhoneNum = currentUser.getPhoneNum();
-		        currentBarcode = currentUser.getBicycle().getBarcode();
-		        currentName = currentUser.getName();
-		        pinTextField = new JTextField(currentPin);
-		        pinTextField.setPreferredSize(new Dimension(110, 30));
-				pinCodeTextField = new JTextField(currentPinCode);
-				pinCodeTextField.setPreferredSize(new Dimension(60, 30));
-		        phoneNumTextField = new JTextField(currentPhoneNum);
-		        phoneNumTextField.setPreferredSize(new Dimension(110, 30));
-		        bicycleTextField = new JTextField(currentBarcode);
-		        bicycleTextField.setPreferredSize(new Dimension(60, 30));
-		        nameTextField = new JTextField(currentName);
-		        nameTextField.setPreferredSize(new Dimension(150, 30));
-				pinTextField.setEditable(false);
-				pinCodeTextField.setEditable(false);
-				bicycleTextField.setEditable(false);
-		        startPanel.add(pinTextField);
-				startPanel.add(pinCodeTextField);
-		        startPanel.add(phoneNumTextField);
-		        startPanel.add(bicycleTextField);
-		        startPanel.add(nameTextField);
-		        startPanel.add(new SaveButton(this));
-		        startPanel.add(new CancelButton(this));
-    		    startPanel.add(new DeleteUserButton(this));
-				currentMode = EDIT_MODE;
-				break;
-			case SEARCH_MODE:
-				searchResultPanel = new JPanel();
-				setContentPane(searchResultPanel);
-				searchResultPanel.setLayout(null);
+		case CREATE_MODE:
+			pinTextField = new JTextField("Personal Identity Number (PIN)");
+			pinCodeTextField = new JTextField("PIN-code");
+			phoneNumTextField = new JTextField("Telephone Number");
+			bicycleTextField = new JTextField("Bicycle");
+			nameTextField = new JTextField("Name");
+			startPanel.add(pinTextField);
+			startPanel.add(pinCodeTextField);
+			startPanel.add(phoneNumTextField);
+			startPanel.add(bicycleTextField);
+			startPanel.add(nameTextField);
+			startPanel.add(new SaveButton(this));
+			startPanel.add(new CancelButton(this));
+			currentMode = CREATE_MODE;
+			break;
+		case EDIT_MODE:
+			currentPin = currentUser.getPIN();
+			currentPinCode = currentUser.getPinCode();
+			currentPhoneNum = currentUser.getPhoneNum();
+			currentBarcode = currentUser.getBicycle().getBarcode();
+			currentName = currentUser.getName();
+			pinTextField = new JTextField(currentPin);
+			pinTextField.setPreferredSize(new Dimension(110, 30));
+			pinCodeTextField = new JTextField(currentPinCode);
+			pinCodeTextField.setPreferredSize(new Dimension(60, 30));
+			phoneNumTextField = new JTextField(currentPhoneNum);
+			phoneNumTextField.setPreferredSize(new Dimension(110, 30));
+			bicycleTextField = new JTextField(currentBarcode);
+			bicycleTextField.setPreferredSize(new Dimension(60, 30));
+			nameTextField = new JTextField(currentName);
+			nameTextField.setPreferredSize(new Dimension(150, 30));
+			pinTextField.setEditable(false);
+			pinCodeTextField.setEditable(false);
+			bicycleTextField.setEditable(false);
+			startPanel.add(pinTextField);
+			startPanel.add(pinCodeTextField);
+			startPanel.add(phoneNumTextField);
+			startPanel.add(bicycleTextField);
+			startPanel.add(nameTextField);
+			startPanel.add(new SaveButton(this));
+			startPanel.add(new CancelButton(this));
+			startPanel.add(new DeleteUserButton(this));
+			currentMode = EDIT_MODE;
+			break;
+		case SEARCH_MODE:
+			searchResultPanel = new JPanel();
+			setContentPane(searchResultPanel);
+			searchResultPanel.setLayout(null);
 
-				JScrollPane scrollPane = new JScrollPane();
-				scrollPane.setBounds(32, 32, 500, 400);
-				searchResultPanel.add(scrollPane);
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(32, 32, 500, 400);
+			searchResultPanel.add(scrollPane);
 
-				panel = new JPanel();
-				scrollPane.setViewportView(panel);
-				panel.setLayout(new GridLayout(100, 1));
+			panel = new JPanel();
+			scrollPane.setViewportView(panel);
+			panel.setLayout(new GridLayout(100, 1));
 
-				TreeSet<User> result = bgm.searchUsers(searchTextField.getText());
-                if (result.size() != 0) {
-                    int n = 0;
-                    for (User user : result) {
-                        JPanel panel_1 = new JPanel();
-                        JTextField jtf = new JTextField(user.getName());
-                        jtf.setEditable(false);
-                        panel_1.add(jtf);
-                        panel_1.add(new ViewUserButton(this, user));
-                        if(n % 2 == 0) {
-                            panel_1.setBackground(SystemColor.inactiveCaptionBorder);
-                        }
-                        panel.add(panel_1);
-                        n++;
-                    }
-                } else {
-                    showMessageDialog("No user found");
-					changeView(DEFAULT_MODE);
-                }
-				searchResultPanel.add(new CancelButton(this));
-				currentMode = SEARCH_MODE;
-				break;
-			case VIEW_MODE:
-				currentPin = currentUser.getPIN();
-				currentPinCode = currentUser.getPinCode();
-				currentPhoneNum = currentUser.getPhoneNum();
-				currentBarcode = currentUser.getBicycle().getBarcode();
-				currentName = currentUser.getName();
-				pinTextField = new JTextField(currentPin);
-				pinCodeTextField = new JTextField(currentPinCode);
-				phoneNumTextField = new JTextField(currentPhoneNum);
-				bicycleTextField = new JTextField(currentBarcode);
-				nameTextField = new JTextField(currentName);
-				pinTextField.setEditable(false);
-				pinCodeTextField.setEditable(false);
-				bicycleTextField.setEditable(false);
-				phoneNumTextField.setEditable(false);
-				nameTextField.setEditable(false);
-				startPanel.add(pinTextField);
-				startPanel.add(pinCodeTextField);
-				startPanel.add(phoneNumTextField);
-				startPanel.add(bicycleTextField);
-				startPanel.add(nameTextField);
-				startPanel.add(new SaveButton(this));
-				startPanel.add(new CancelButton(this));
-				startPanel.add(new DeleteUserButton(this));
-				startPanel.add(new PrintBarcodeButton(this));
-				currentMode = VIEW_MODE;
-				break;
-			default:
-				bikeArea = new JTextArea(20,20);
-				bikeArea.setEditable(false);
-				startPanel.add(bikeArea);
-				startPanel.add(new JScrollPane(bikeArea));
-
-				userCount = new JLabel("Registered users: " + bgm.getUserCount());
-				startPanel.add(userCount);
-				
-				bikeArea.append("Bikes currently in garage:" + "\n");
-				TreeSet<Bicycle> bikes = bgm.bicyclesInGarage();
-				for (Bicycle b : bikes) {
-					bikeArea.append(b.getBarcode() + "\n");
+			TreeSet<User> result = bgm.searchUsers(searchTextField.getText());
+			if (result.size() != 0) {
+				int n = 0;
+				for (User user : result) {
+					JPanel panel_1 = new JPanel();
+					JTextField jtf = new JTextField(user.getName());
+					jtf.setEditable(false);
+					panel_1.add(jtf);
+					panel_1.add(new ViewUserButton(this, user));
+					if (n % 2 == 0) {
+						panel_1.setBackground(SystemColor.inactiveCaptionBorder);
+					}
+					panel.add(panel_1);
+					n++;
 				}
+			} else {
+				showMessageDialog("No user found");
+				changeView(DEFAULT_MODE);
+			}
+			searchResultPanel.add(new CancelButton(this));
+			currentMode = SEARCH_MODE;
+			break;
+		case VIEW_MODE:
+			currentPin = currentUser.getPIN();
+			currentPinCode = currentUser.getPinCode();
+			currentPhoneNum = currentUser.getPhoneNum();
+			currentBarcode = currentUser.getBicycle().getBarcode();
+			currentName = currentUser.getName();
+			pinTextField = new JTextField(currentPin);
+			pinCodeTextField = new JTextField(currentPinCode);
+			phoneNumTextField = new JTextField(currentPhoneNum);
+			bicycleTextField = new JTextField(currentBarcode);
+			nameTextField = new JTextField(currentName);
+			pinTextField.setEditable(false);
+			pinCodeTextField.setEditable(false);
+			bicycleTextField.setEditable(false);
+			phoneNumTextField.setEditable(false);
+			nameTextField.setEditable(false);
+			startPanel.add(pinTextField);
+			startPanel.add(pinCodeTextField);
+			startPanel.add(phoneNumTextField);
+			startPanel.add(bicycleTextField);
+			startPanel.add(nameTextField);
+			startPanel.add(new SaveButton(this));
+			startPanel.add(new CancelButton(this));
+			startPanel.add(new DeleteUserButton(this));
+			startPanel.add(new PrintBarcodeButton(this));
+			currentMode = VIEW_MODE;
+			break;
+		default:
+			bikeArea = new JTextArea(20, 20);
+			bikeArea.setEditable(false);
+			startPanel.add(bikeArea);
+			startPanel.add(new JScrollPane(bikeArea));
 
-				currentMode = DEFAULT_MODE;
-				break;
+			userCount = new JLabel("Registered users: " + bgm.getUserCount());
+			startPanel.add(userCount);
+
+			bikeArea.append("Bikes currently in garage:" + "\n");
+			TreeSet<Bicycle> bikes = bgm.bicyclesInGarage();
+			for (Bicycle b : bikes) {
+				bikeArea.append(b.getBarcode() + "\n");
+			}
+
+			currentMode = DEFAULT_MODE;
+			break;
 		}
 		add(bp, BorderLayout.PAGE_END);
 		add(startPanel, BorderLayout.CENTER);
@@ -246,8 +256,11 @@ public class OperatorGUI extends JFrame {
 	}
 
 	/**
-	 * Sets the current user to user so that we can view them in edit- and view-mode.
-	 * @param user The user to be set as currentUser.
+	 * Sets the current user to user so that we can view them in edit- and
+	 * view-mode.
+	 * 
+	 * @param user
+	 *            The user to be set as currentUser.
 	 */
 	public void setCurrentUser(User user) {
 		currentUser = user;
@@ -255,7 +268,9 @@ public class OperatorGUI extends JFrame {
 
 	/**
 	 * Prints a barcode.
-	 * @param bicycleID The barcode to print.
+	 * 
+	 * @param bicycleID
+	 *            The barcode to print.
 	 */
 	public void printBarcode(String bicycleID) {
 		bgm.printBarcode(bicycleID);
@@ -263,6 +278,7 @@ public class OperatorGUI extends JFrame {
 
 	/**
 	 * Returns an int representing the current mode of the GUI.
+	 * 
 	 * @return An int representing the current mode of the GUI.
 	 */
 	public int getCurrentMode() {
@@ -271,21 +287,30 @@ public class OperatorGUI extends JFrame {
 
 	/**
 	 * Adds a new User to the system.
-	 * @param pin The PIN of the new user.
-	 * @param pinCode The PIN-Code of the new user.
-	 * @param bicycle The Bicycle of the new user.
-	 * @param name The name of the new user.
-	 * @param phoneNum The telephone number of the new user.
-	 *
+	 * 
+	 * @param pin
+	 *            The PIN of the new user.
+	 * @param pinCode
+	 *            The PIN-Code of the new user.
+	 * @param bicycle
+	 *            The Bicycle of the new user.
+	 * @param name
+	 *            The name of the new user.
+	 * @param phoneNum
+	 *            The telephone number of the new user.
+	 * 
 	 */
-	public void saveUser(String pin, String pinCode, SYS.Bicycle bicycle, String name, String phoneNum) {
+	public void saveUser(String pin, String pinCode, SYS.Bicycle bicycle,
+			String name, String phoneNum) {
 		bgm.addNewUser(pin, pinCode, bicycle, name, phoneNum);
 		userCount.setText("Registered users: " + bgm.getUserCount());
 	}
 
 	/**
 	 * Deletes the User u from the system.
-	 * @param u The User to delete.
+	 * 
+	 * @param u
+	 *            The User to delete.
 	 * @return True if the User was successfully deleted.
 	 */
 	public boolean deleteUser(User u) {
@@ -293,55 +318,71 @@ public class OperatorGUI extends JFrame {
 	}
 
 	/**
-	 * Returns the User that has PIN pin, null if there is no User with that PIN.
-	 * @param pin The PIN to check for.
+	 * Returns the User that has PIN pin, null if there is no User with that
+	 * PIN.
+	 * 
+	 * @param pin
+	 *            The PIN to check for.
 	 * @return The User with that PIN, if it exists.
 	 */
 	public User getUser(String pin) {
 		User u = bgm.getUser(pin);
 		if (u != null) {
 			return u;
-		}
-		else {
+		} else {
 			showErrorDialog("User not found.");
 			return null;
 		}
 	}
 
 	/**
-	 * Shows a Message Dialog with the specified message as an information message.
-	 * @param msg The informational message to display.
+	 * Shows a Message Dialog with the specified message as an information
+	 * message.
+	 * 
+	 * @param msg
+	 *            The informational message to display.
 	 */
 	public void showMessageDialog(String msg) {
-		JOptionPane.showMessageDialog(null, msg, "Message", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, msg, "Message",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	/**
 	 * Shows a Message Dialog with the specified message as an error message.
-	 * @param msg The error message to display.
+	 * 
+	 * @param msg
+	 *            The error message to display.
 	 */
 	public void showErrorDialog(String msg) {
-		JOptionPane.showMessageDialog(null, msg, "Error", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, msg, "Error",
+				JOptionPane.ERROR_MESSAGE);
 	}
 
 	/**
-	 * Saves info to the storage file on the form 'pin pinCode, barcode, name, phoneNum', newline represents a new object.
-	 * @param f The file to save to.
+	 * Saves info to the storage file on the form 'pin pinCode, barcode, name,
+	 * phoneNum', newline represents a new object.
+	 * 
+	 * @param f
+	 *            The file to save to.
 	 */
 	public void saveGarage(File f) {
 		bgm.saveGarage(f);
 	}
 
 	/**
-     * Reads info from the storage file on the form 'pin pinCode barcode name phoneNum', newline represents a new object.
-     * @param f The file to open.
-     */
+	 * Reads info from the storage file on the form 'pin pinCode barcode name
+	 * phoneNum', newline represents a new object.
+	 * 
+	 * @param f
+	 *            The file to open.
+	 */
 	public void openGarage(File f) {
 		bgm.openGarage(f);
 	}
 
 	public void editUser() {
-		bgm.editUser(nameTextField.getText(), phoneNumTextField.getText(), currentUser);
-		
+		bgm.editUser(nameTextField.getText(), phoneNumTextField.getText(),
+				currentUser);
+
 	}
 }
