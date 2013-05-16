@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.TreeSet;
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * This class links the drivers to the system and connects the GUI operations to actions on Bicycles and/or Users.
@@ -21,7 +24,7 @@ public class BicycleGarageManager {
 	private GUI.OperatorGUI gui;
 	private TreeSet<User> users;
 	private TreeSet<Bicycle> bikes;
-
+	private Timer t;
 	private String pinCode;
 	private boolean asterix;
 
@@ -40,6 +43,14 @@ public class BicycleGarageManager {
                                 new ElectronicLockTestDriver("Entry"),
                                 new ElectronicLockTestDriver("Exit"),
                                 new PinCodeTerminalTestDriver());
+		t = new Timer(1000, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (gui.getCurrentMode() == gui.DEFAULT_MODE) {
+                    gui.changeView(gui.DEFAULT_MODE);
+                }
+                t.stop();
+            }
+        });
 	}
 
 	/**
@@ -136,6 +147,7 @@ public class BicycleGarageManager {
 					for (User u : users) {
 						if (u.getBicycle().getBarcode() == bicycleID) {
 							u.setInGarage(true);
+							userInGarageTimer(u);
 						}
 					}
 				}
@@ -192,6 +204,7 @@ public class BicycleGarageManager {
 						entryLock.open(15);
 						terminal.lightLED(terminal.GREEN_LED, 15);
 						u.setInGarage(true);
+						userInGarageTimer(u);
 						if (gui.getCurrentMode() == gui.DEFAULT_MODE) {
 							gui.changeView(gui.DEFAULT_MODE);
 						}
@@ -370,6 +383,18 @@ public class BicycleGarageManager {
             }
         }
         return result;
+	}
+
+	/**
+	 *
+	 *
+	 */
+	public void userInGarageTimer(User u) {
+		if (u.inGarage()) {
+			t.setInitialDelay(10000); //600000
+            t.restart();
+//			u.setInGarage(false);
+		}
 	}
 
 	/**

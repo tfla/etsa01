@@ -1,8 +1,8 @@
 package SYS;
 
-import javax.swing.Timer;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+//import javax.swing.Timer;
+//import java.awt.event.ActionListener;
+//import java.awt.event.ActionEvent;
 
 /**
  * This class defines a User within the system.
@@ -15,8 +15,7 @@ public class User implements Comparable<User> {
 	private String phoneNum;
 	private String pin;
 	private boolean inGarage;
-	private Timer t;
-	private OperatorGUI gui;
+//	private Timer t;
 
 	/**
 	 * Creates a new user.
@@ -33,14 +32,14 @@ public class User implements Comparable<User> {
 		this.name = name;
 		this.phoneNum = phoneNum;
 		inGarage = false;
-		t = new Timer(1000, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+//		t = new Timer(1000, new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
 //				if (gui.getCurrentMode() == gui.DEFAULT_MODE) {
 //					gui.changeView(gui.DEFAULT_MODE);
 //				}
-				t.stop();
-			}
-		});
+//				t.stop();
+//			}
+//		});
 	}
 
 	/**
@@ -121,10 +120,10 @@ public class User implements Comparable<User> {
 	 */
 	public void setInGarage(boolean status) {
 		inGarage = status;
-		if (inGarage) {
-			t.setInitialDelay(600000);
-			t.restart();
-		}
+//		if (inGarage) {
+//			t.setInitialDelay(600000);
+//			t.restart();
+//		}
 	}
 
 	/**
