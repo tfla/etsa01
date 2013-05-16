@@ -208,7 +208,6 @@ public class OperatorGUI extends JFrame {
 					}
 					panel.add(panel_1);
 					n++;
->>>>>>> 24f040723fd6ece18663c492edb961fac0f8af5a
 				}
 			} else {
 				showMessageDialog("No user found");

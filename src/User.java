@@ -27,37 +27,29 @@ private String pin;
 		this.phoneNum = phoneNum;
 	}
 
-/**
-* Returns the PIN-code of a user.
-* @return The PIN-code of a user.
-*/
-public String getPinCode() {
-return pinCode;
-}
+	/**
+	 * Returns the PIN-code of a user.
+	 * @return The PIN-code of a user.
+	 */
+	public String getPinCode() {
+		return pinCode;
+	}
 
-/**
-* Returns the Personal Identity Number (PIN) of a user.
-* @return The Personal Identity Numer (PIN) of a user.
-*/
-public String getPIN() {
-return pin;
-}
+	/**
+	* Returns the Personal Identity Number (PIN) of a user.
+	* @return The Personal Identity Numer (PIN) of a user.
+	*/
+	public String getPIN() {
+		return pin;
+	}
 
-/**
-* Returns the name of a user.
-* @return The name of a user.
-*/
-public String getName() {
-return name;
-}
-
-/**
-* Returns the Bicycle of a user.
-* @return The Bicycle of a user.
-*/
-public Bicycle getBicycle() {
-return bicycle;
-}
+	/**
+	* Returns the name of a user.
+	* @return The name of a user.
+	*/
+	public String getName() {
+		return name;
+	}
 
 	/**
 	 * Returns the Bicycle of a user.
@@ -75,21 +67,21 @@ return bicycle;
 		return phoneNum;
 	}
 
-/**
-* Sets the name of a user to name.
-* @param name The new name for the user.
-*/
-public void setName(String name) {
-this.name = name;
-}
+	/**
+	 * Sets the name of a user to name.
+	 * @param name The new name for the user.
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
-/**
-* Sets the phone number of a user to phoneNum.
-* @param phoneNum The new phone number of a user.
-*/
-public void setPhone(String phoneNum) {
-this.phoneNum = phoneNum;
-}
+	/**
+	 * Sets the phone number of a user to phoneNum.
+	 * @param phoneNum The new phone number of a user.
+	 */
+	public void setPhone(String phoneNum) {
+		this.phoneNum = phoneNum;
+	}
 
 	/**
 	 * Sets the barcode of a user to barcode.
@@ -99,22 +91,22 @@ this.phoneNum = phoneNum;
 		this.bicycle = bicycle;
 	}
 
-/**
-* Compares a User to another.
-* @param u The User to compare to.
-* @return A negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object.
-*/
-public int compareTo(User u) {
-String s = "";
-String t = "";
-for (int i = 0; i < 6; i++) {
-s += pin.charAt(i);
-t += u.getPIN().charAt(i);
-}
-for (int i = 7; i < 11; i++) {
-s += pin.charAt(i);
-t += u.getPIN().charAt(i);
-}
-return (int) (Double.parseDouble(s) - Double.parseDouble(t));
-}
+	/**
+	 * Compares a User to another.
+	 * @param u The User to compare to.
+	 * @return A negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object.
+	 */
+	public int compareTo(User u) {
+		String s = "";
+		String t = "";
+		for (int i = 0; i < 6; i++) {
+			s += pin.charAt(i);
+			t += u.getPIN().charAt(i);
+		}
+		for (int i = 7; i < 11; i++) {
+			s += pin.charAt(i);
+			t += u.getPIN().charAt(i);
+		}
+		return (int) (Double.parseDouble(s) - Double.parseDouble(t));
+	}
 }

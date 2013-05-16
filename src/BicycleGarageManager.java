@@ -5,7 +5,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.TreeSet;
 import GUI.OperatorGUI;
-
+import SYS.*;
 /**
  * This class links the drivers to the system and connects the GUI operations to actions on Bicycles and/or Users.
  *
@@ -51,7 +51,8 @@ public class BicycleGarageManager {
 	 * @param entryLock The ElectronicLockDriver to register for entrance.
 	 * @param exitLock The ElectronicLockDriver to register for exit.
 	 * @param terminal The PinCodeTerminalDriver to register.
-	 *
+	 */
+	public void registerHardwareDrivers(BarcodePrinterTestDriver printer,
 			BarcodeReaderExitTestDriver exitBarcodeReader,
 			BarcodeReaderEntryTestDriver entryBarcodeReader,
 			ElectronicLockTestDriver entryLock,
@@ -252,24 +253,24 @@ public class BicycleGarageManager {
 	 * @param phoneNum The telephone number of the new user.
 	 *
 	 */
-	public void addNewUser(String pin, String pinCode, Bicycle bicycle,
+	public boolean addNewUser(String pin, String pinCode, Bicycle bicycle,
 			String name, String phoneNum) {
 		/** Checks the format of the Personal Identification Number (PIN). */
 		if (!pin.matches("[0-9]{2,2}?(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])[-+][0-9]{4,4}?")) {
 			gui.showErrorDialog("One or more of the required fields are missing and/or are filled in erroneously.");
-			return;
+			return false;
 		}
 
 		/** Checks the format of the PIN-Code (nnnnn). */
 		if (!pinCode.matches("[0-9]{5,5}?")) {
 			gui.showErrorDialog("One or more of the required fields are missing and/or are filled in erroneously.");
-			return;
+			return false;
 		}
 
 		/** Checks the format of the barcode (nnnnn). */
 		if (!bicycle.getBarcode().matches("[0-9]{5,5}?")) {
 			gui.showErrorDialog("One or more of the required fields are missing and/or are filled in erroneously.");
-			return;
+			return false;
 		}
 
 		/** Checks the Telephone Number. */
@@ -283,15 +284,15 @@ public class BicycleGarageManager {
 			for (User u : users) {
 				if (u.getPinCode() == pinCode) {
 					gui.showErrorDialog("The PIN-Code is already registered to another User.");
-					return;
+					return false;
 				}
 				if (u.getPIN() == pin) {
 					gui.showErrorDialog("The Personal Identification Number (PIN) is already registered to another user.");
-					return;
+					return false;
 				}
 				if (u.getBicycle().getBarcode() == bicycle.getBarcode()) {
 					gui.showErrorDialog("The Bicycle with that barcode is already registered to another user.");
-					return;
+					return false;
 				}
 			}
 			if (users.add(new User(pin, pinCode, bicycle, name, phoneNum))) {
