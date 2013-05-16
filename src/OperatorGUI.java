@@ -91,6 +91,7 @@ public class OperatorGUI extends JFrame {
 		bp.add(new NewUserButton(this));
 		bp.add(new EditUserButton(this));
 		searchTextField = new JTextField("Search ...");
+		searchTextField.setPreferredSize(new Dimension(100,30));
 		bp.add(searchTextField);
 		bp.add(new SearchButton(this));
 
@@ -137,10 +138,15 @@ public class OperatorGUI extends JFrame {
 		        currentBarcode = currentUser.getBicycle().getBarcode();
 		        currentName = currentUser.getName();
 		        pinTextField = new JTextField(currentPin);
+		        pinTextField.setPreferredSize(new Dimension(110, 30));
 				pinCodeTextField = new JTextField(currentPinCode);
+				pinCodeTextField.setPreferredSize(new Dimension(60, 30));
 		        phoneNumTextField = new JTextField(currentPhoneNum);
+		        phoneNumTextField.setPreferredSize(new Dimension(110, 30));
 		        bicycleTextField = new JTextField(currentBarcode);
+		        bicycleTextField.setPreferredSize(new Dimension(60, 30));
 		        nameTextField = new JTextField(currentName);
+		        nameTextField.setPreferredSize(new Dimension(150, 30));
 				pinTextField.setEditable(false);
 				pinCodeTextField.setEditable(false);
 				bicycleTextField.setEditable(false);
@@ -344,5 +350,10 @@ public class OperatorGUI extends JFrame {
      */
 	public void openGarage(File f) {
 		bgm.openGarage(f);
+	}
+
+	public void editUser() {
+		bgm.editUser(nameTextField.getText(), phoneNumTextField.getText(), currentUser);
+		
 	}
 }

@@ -2,6 +2,9 @@ package GUI;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+
+import SYS.User;
+
 import java.io.File;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

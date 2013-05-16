@@ -20,6 +20,10 @@ public class SaveButton extends JButton implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		if (gui.getCurrentMode() == OperatorGUI.EDIT_MODE){
+			gui.editUser();
+			return;
+		}
 		gui.saveUser(gui.pinTextField.getText(),
 						gui.pinCodeTextField.getText(),
 						new Bicycle(gui.bicycleTextField.getText()),

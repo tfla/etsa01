@@ -6,6 +6,8 @@ import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.TreeSet;
 import javax.swing.Timer;
+
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -320,6 +322,11 @@ public class BicycleGarageManager {
 		saveGarage(null);
 	}
 
+	public void editUser(String name, String phoneNum, User u) {
+		u.setName(name);
+		u.setPhone(phoneNum);
+	}
+	
 	/**
 	 * Deletes the User u from the system.
 	 * @param u The User to delete.
@@ -364,7 +371,7 @@ public class BicycleGarageManager {
 	 */
 	public TreeSet<User> searchUsers(String searchString) {
 		TreeSet<User> result = new TreeSet<User>();
-		if (searchString == "*" || searchString == "") {
+		if (searchString.equals("*") || searchString.equals("")) {
 			return users;
 		}
 		for (User user : users) {

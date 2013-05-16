@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 
+
 /**
  * This class simulates a pin code terminal. 
  * It can be used when BicycleGarageManager is tested.
