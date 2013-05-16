@@ -25,7 +25,6 @@ import SYS.Bicycle;
 public class OperatorGUI extends JFrame {
 	private SYS.BicycleGarageManager bgm;
 	private JTextArea bikeArea;
-	private JTextArea userArea;
 
 	private JPanel startPanel;
 	private JPanel bp;
@@ -223,11 +222,6 @@ public class OperatorGUI extends JFrame {
 				currentMode = VIEW_MODE;
 				break;
 			default:
-				userArea = new JTextArea(20,20);
-				userArea.setEditable(false);
-				startPanel.add(userArea);
-				startPanel.add(new JScrollPane(userArea));
-
 				bikeArea = new JTextArea(20,20);
 				bikeArea.setEditable(false);
 				startPanel.add(bikeArea);
@@ -235,12 +229,6 @@ public class OperatorGUI extends JFrame {
 
 				userCount = new JLabel("Registered users: " + bgm.getUserCount());
 				startPanel.add(userCount);
-				
-				userArea.append("Users currently in garage:" + "\n");
-				TreeSet<User> users = bgm.usersInGarage();
-				for (User u : users) {
-					userArea.append(u.getName() + "\n");
-				}
 				
 				bikeArea.append("Bikes currently in garage:" + "\n");
 				TreeSet<Bicycle> bikes = bgm.bicyclesInGarage();

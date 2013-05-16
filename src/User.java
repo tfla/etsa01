@@ -1,9 +1,5 @@
 package SYS;
 
-//import javax.swing.Timer;
-//import java.awt.event.ActionListener;
-//import java.awt.event.ActionEvent;
-
 /**
  * This class defines a User within the system.
  *
@@ -14,8 +10,6 @@ public class User implements Comparable<User> {
 	private String pinCode;
 	private String phoneNum;
 	private String pin;
-	private boolean inGarage;
-//	private Timer t;
 
 	/**
 	 * Creates a new user.
@@ -31,15 +25,6 @@ public class User implements Comparable<User> {
 		this.bicycle = bicycle;
 		this.name = name;
 		this.phoneNum = phoneNum;
-		inGarage = false;
-//		t = new Timer(1000, new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				if (gui.getCurrentMode() == gui.DEFAULT_MODE) {
-//					gui.changeView(gui.DEFAULT_MODE);
-//				}
-//				t.stop();
-//			}
-//		});
 	}
 
 	/**
@@ -83,14 +68,6 @@ public class User implements Comparable<User> {
 	}
 
 	/**
-	 * Returns the status of a User (true/false).
-	 * @return The status of a User (true/false).
-	 */
-	public boolean inGarage() {
-		return inGarage;
-	}
-	
-	/**
 	 * Sets the name of a user to name.
 	 * @param name The new name for the user.
 	 */
@@ -112,18 +89,6 @@ public class User implements Comparable<User> {
 	 */
 	public void setBicycle(Bicycle bicycle) {
 		this.bicycle = bicycle;
-	}
-
-	/**
-	 * Sets the User as "in garage" for a duration of 10 minutes.
-	 *
-	 */
-	public void setInGarage(boolean status) {
-		inGarage = status;
-//		if (inGarage) {
-//			t.setInitialDelay(600000);
-//			t.restart();
-//		}
 	}
 
 	/**

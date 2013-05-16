@@ -5,11 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.TreeSet;
-import javax.swing.Timer;
-
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * This class links the drivers to the system and connects the GUI operations to actions on Bicycles and/or Users.
@@ -26,7 +21,6 @@ public class BicycleGarageManager {
 	private GUI.OperatorGUI gui;
 	private TreeSet<User> users;
 	private TreeSet<Bicycle> bikes;
-	private Timer t;
 	private String pinCode;
 	private boolean asterix;
 
@@ -45,14 +39,6 @@ public class BicycleGarageManager {
                                 new ElectronicLockTestDriver("Entry"),
                                 new ElectronicLockTestDriver("Exit"),
                                 new PinCodeTerminalTestDriver());
-		t = new Timer(1000, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (gui.getCurrentMode() == gui.DEFAULT_MODE) {
-                    gui.changeView(gui.DEFAULT_MODE);
-                }
-                t.stop();
-            }
-        });
 	}
 
 	/**
@@ -146,12 +132,6 @@ public class BicycleGarageManager {
 				entryLock.open(15);
 				if (!b.inGarage()) {
 					b.setInGarage(true);
-					for (User u : users) {
-						if (u.getBicycle().getBarcode() == bicycleID) {
-							u.setInGarage(true);
-							userInGarageTimer(u);
-						}
-					}
 				}
 				terminal.lightLED(terminal.GREEN_LED, 15);
 				if (gui.getCurrentMode() == gui.DEFAULT_MODE) {
@@ -174,16 +154,11 @@ public class BicycleGarageManager {
 				entryLock.open(15);
 				if (b.inGarage()) {
 					b.setInGarage(false);
-					for (User u : users) {
-                        if (u.getBicycle().getBarcode() == bicycleID) {
-                            u.setInGarage(false);
-							if (gui.getCurrentMode() == gui.DEFAULT_MODE) {
-								gui.changeView(gui.DEFAULT_MODE);
-							}
-                        }
-                    }
 				}
 				terminal.lightLED(terminal.GREEN_LED, 15);
+				if (gui.getCurrentMode() == gui.DEFAULT_MODE) {
+                    gui.changeView(gui.DEFAULT_MODE);
+                }
 				return;
 			}
 		}
@@ -205,11 +180,6 @@ public class BicycleGarageManager {
 					if (u.getPinCode().equals(pinCode)) {
 						entryLock.open(15);
 						terminal.lightLED(terminal.GREEN_LED, 15);
-						u.setInGarage(true);
-						userInGarageTimer(u);
-						if (gui.getCurrentMode() == gui.DEFAULT_MODE) {
-							gui.changeView(gui.DEFAULT_MODE);
-						}
 						return;
 					}
 				}
@@ -351,20 +321,6 @@ public class BicycleGarageManager {
 	}
 
 	/**
-	 * Returns a TreeSet<User> with all the Users that are currently in the garage.
-	 * @return A TreeSet<User> containing all Users currently in the garage.
-	 */
-	public TreeSet<User> usersInGarage() {
-		TreeSet<User> result = new TreeSet<User>();
-		for (User u : users) {
-			if (u.inGarage()) {
-				result.add(u);
-			}
-		}
-		return result;
-	}
-
-	/**
 	 * Returns a TreeSet<User> of search results for the searchString.
 	 * @param searchString The string to search for.
 	 * @return A TreeSet<User> containing the search results.
@@ -393,18 +349,6 @@ public class BicycleGarageManager {
             }
         }
         return result;
-	}
-
-	/**
-	 *
-	 *
-	 */
-	public void userInGarageTimer(User u) {
-		if (u.inGarage()) {
-			t.setInitialDelay(10000); //600000
-            t.restart();
-//			u.setInGarage(false);
-		}
 	}
 
 	/**
