@@ -333,7 +333,13 @@ public class BicycleGarageManager {
 		saveGarage(null);
 		return true;
 	}
-
+	/**
+	 * Edits the User u in the system.
+	 * 
+	 * @param u
+	 *            The User to edit.
+	 * @return True if the User was successfully edited.
+	 */
 	public boolean editUser(String name, String phoneNum, User u) {
 		u.setName(name);
 		u.setPhone(phoneNum);

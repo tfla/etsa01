@@ -1,11 +1,16 @@
 package GUI;
 
 import javax.swing.JButton;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import SYS.Bicycle;
 
+/**
+ * This class creates a new JButton with the text "Save", used to add users to the system.
+ *
+ */
+@SuppressWarnings("serial")
 public class SaveButton extends JButton implements ActionListener {
 	private OperatorGUI gui;
 
@@ -16,10 +21,14 @@ public class SaveButton extends JButton implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		gui.saveUser(gui.PIN_TEXT_FIELD.getText(),
-						gui.PINCODE_TEXT_FIELD.getText(),
-						new SYS.Bicycle(gui.BICYCLE_TEXT_FIELD.getText()),
-						gui.NAME_TEXT_FIELD.getText(),
-						gui.PHONENUM_TEXT_FIELD.getText());
+		if (gui.getCurrentMode() == OperatorGUI.EDIT_MODE){
+			gui.editUser();
+		} else {
+			gui.saveUser(gui.pinTextField.getText(),
+							gui.pinCodeTextField.getText(),
+							new Bicycle(gui.bicycleTextField.getText()),
+							gui.nameTextField.getText(),
+							gui.phoneNumTextField.getText());
+		}
 	}
 }
