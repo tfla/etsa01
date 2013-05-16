@@ -10,9 +10,7 @@ import java.awt.event.ActionListener;
  * This class creates a JButton with the text "Cancel", used to go back to "default-mode".
  *
  */
-<<<<<<< HEAD
 @SuppressWarnings("serial")
->>>>>>> 34b7eb0a39ad59cf1a53ebce9417c22a8371b60c
 public class CancelButton extends JButton implements ActionListener {
 	private OperatorGUI gui;
 

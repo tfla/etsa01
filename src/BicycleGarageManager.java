@@ -1,18 +1,14 @@
 package SYS;
 
 import java.io.File;
-<<<<<<< HEAD
->>>>>>> 34b7eb0a39ad59cf1a53ebce9417c22a8371b60c
 import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.TreeSet;
 import GUI.OperatorGUI;
 
 /**
-<<<<<<< HEAD
  * This class links the drivers to the system and connects the GUI operations to actions on Bicycles and/or Users.
  *
->>>>>>> 34b7eb0a39ad59cf1a53ebce9417c22a8371b60c
  */
 public class BicycleGarageManager {
 	private BarcodePrinterTestDriver printer;
@@ -40,18 +36,15 @@ public class BicycleGarageManager {
 		openGarage(null);
 		gui = new GUI.OperatorGUI(this);
 		registerHardwareDrivers(new BarcodePrinterTestDriver(),
-<<<<<<< HEAD
 				new BarcodeReaderExitTestDriver(),
 				new BarcodeReaderEntryTestDriver(),
 				new ElectronicLockTestDriver("Entry"),
 				new ElectronicLockTestDriver("Exit"),
 				new PinCodeTerminalTestDriver());
->>>>>>> 34b7eb0a39ad59cf1a53ebce9417c22a8371b60c
 	}
 
 	/**
 	 * Registers the hardware drivers for the system.
-<<<<<<< HEAD
 	 * @param printer The BarcodePrinterDriver to register.
 	 * @param exitBarcodeReader The BarcodeReaderDriver to register for exit.
 	 * @param entryBarcodeReader The BarcodeReaderDriver to register for entrance.
@@ -59,9 +52,6 @@ public class BicycleGarageManager {
 	 * @param exitLock The ElectronicLockDriver to register for exit.
 	 * @param terminal The PinCodeTerminalDriver to register.
 	 *
->>>>>>> 34b7eb0a39ad59cf1a53ebce9417c22a8371b60c
-	 */
-	public void registerHardwareDrivers(BarcodePrinterTestDriver printer,
 			BarcodeReaderExitTestDriver exitBarcodeReader,
 			BarcodeReaderEntryTestDriver entryBarcodeReader,
 			ElectronicLockTestDriver entryLock,
@@ -78,19 +68,16 @@ public class BicycleGarageManager {
 		terminal.register(this);
 	}
 
-<<<<<<< HEAD
 	/** 
 	 * Reads info from the storage file on the form 'pin pinCode barcode name phoneNum', newline represents a new object.
 	 * @param f The file to open.
 	 * @return true if no exceptions were thrown.
 	 */ 
 	public boolean openGarage(File f){
->>>>>>> 34b7eb0a39ad59cf1a53ebce9417c22a8371b60c
 		Scanner scan;
 		try {
 			if (f != null) {
 				scan = new Scanner(f);
-<<<<<<< HEAD
 			} else {
 				scan = new Scanner(new File("storage.csv"));
 			}
@@ -100,12 +87,10 @@ public class BicycleGarageManager {
 			while (scan.hasNext()) {
 				users.add(new User(scan.next(), scan.next(), new Bicycle(scan
 						.next()), scan.next(), scan.next()));
->>>>>>> 34b7eb0a39ad59cf1a53ebce9417c22a8371b60c
 				for (User u : users) {
 					bikes.add(u.getBicycle());
 				}
 			}
-<<<<<<< HEAD
 			scan.close();
 			return true;
 		} catch (Exception ex) {
@@ -123,12 +108,10 @@ public class BicycleGarageManager {
 	 * @return true if no exceptions were thrown.
 	 */
 	public boolean saveGarage(File f) {
->>>>>>> 34b7eb0a39ad59cf1a53ebce9417c22a8371b60c
 		PrintStream outprint;
 		try {
 			if (f != null) {
 				outprint = new PrintStream(f);
-<<<<<<< HEAD
 			} else {
 				outprint = new PrintStream(new File("storage.csv"));
 			}
@@ -149,7 +132,6 @@ public class BicycleGarageManager {
 	 * 
 	 * @param bicycleID
 	 *            The barcode that needs to be checked.
->>>>>>> 34b7eb0a39ad59cf1a53ebce9417c22a8371b60c
 	 * 
 	 */
 	public void entryBarcode(String bicycleID) {
@@ -159,7 +141,6 @@ public class BicycleGarageManager {
 				if (!b.inGarage()) {
 					b.setInGarage(true);
 				}
-<<<<<<< HEAD
 				terminal.lightLED(PinCodeTerminal.GREEN_LED, 15);
 				if (gui.getCurrentMode() == OperatorGUI.DEFAULT_MODE) {
 					gui.changeView(OperatorGUI.DEFAULT_MODE);
@@ -168,15 +149,12 @@ public class BicycleGarageManager {
 			}
 		}
 		terminal.lightLED(PinCodeTerminal.RED_LED, 15);
->>>>>>> 34b7eb0a39ad59cf1a53ebce9417c22a8371b60c
 	}
-	
+
 	/**
-<<<<<<< HEAD
 	 * Unlocks the exit lock and makes the PIN-Code terminal LED light green for 15 seconds if bicycleID is known by the system.
      * @param bicycleID The barcode that needs to be checked.
 	 *
->>>>>>> 34b7eb0a39ad59cf1a53ebce9417c22a8371b60c
 	 */
 	public void exitBarcode(String bicycleID) {
 		for (Bicycle b : bikes) {
@@ -185,7 +163,6 @@ public class BicycleGarageManager {
 				if (b.inGarage()) {
 					b.setInGarage(false);
 				}
-<<<<<<< HEAD
 				terminal.lightLED(PinCodeTerminal.GREEN_LED, 15);
 				if (gui.getCurrentMode() == OperatorGUI.DEFAULT_MODE) {
 					gui.changeView(OperatorGUI.DEFAULT_MODE);
@@ -202,7 +179,6 @@ public class BicycleGarageManager {
 	 * 
 	 * @param c
 	 *            The character that needs to be checked.
->>>>>>> 34b7eb0a39ad59cf1a53ebce9417c22a8371b60c
 	 */
 	public void entryCharacter(char c) {
 		if (c == '*') {
@@ -214,7 +190,6 @@ public class BicycleGarageManager {
 				for (User u : users) {
 					if (u.getPinCode().equals(pinCode)) {
 						entryLock.open(15);
-<<<<<<< HEAD
 						terminal.lightLED(PinCodeTerminal.GREEN_LED, 15);
 						return;
 					}
@@ -222,7 +197,6 @@ public class BicycleGarageManager {
 				terminal.lightLED(PinCodeTerminal.RED_LED, 15);
 			} else {
 				terminal.lightLED(PinCodeTerminal.RED_LED, 15);
->>>>>>> 34b7eb0a39ad59cf1a53ebce9417c22a8371b60c
 			}
 		}
 		if (c != '*' && c != '#' && asterix) {
@@ -231,10 +205,11 @@ public class BicycleGarageManager {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Returns the Bicycle that has barcode barcode, null if there is no Bicycle with that barcode.
-	 * @param barcode The barcode to check for.
->>>>>>> 34b7eb0a39ad59cf1a53ebce9417c22a8371b60c
+	 * Returns the Bicycle that has barcode barcode, null if there is no Bicycle
+	 * with that barcode.
+	 * 
+	 * @param barcode
+	 *            The barcode to check for.
 	 * @return The Bicycle with that barcode, if it exists.
 	 */
 	public Bicycle getBicycle(String barcode) {
@@ -251,7 +226,6 @@ public class BicycleGarageManager {
 	}
 
 	/**
-<<<<<<< HEAD
 	 * Returns the User that has PIN pin, null if there is no User with that PIN.
 	 * @param pin The PIN to check for.
 	 * @return The User with that PIN, if it exists.
@@ -271,7 +245,6 @@ public class BicycleGarageManager {
 
 	/**
 	 * Adds a new User to the system and saves the garage to the default file.
-<<<<<<< HEAD
 	 * @param pin The PIN of the new user.
 	 * @param pinCode The PIN-Code of the new user.
 	 * @param bicycle The Bicycle of the new user.
@@ -279,31 +252,32 @@ public class BicycleGarageManager {
 	 * @param phoneNum The telephone number of the new user.
 	 *
 	 */
-	public void addNewUser(String pin, String pinCode, Bicycle bicycle, String name, String phoneNum) {
+	public void addNewUser(String pin, String pinCode, Bicycle bicycle,
+			String name, String phoneNum) {
 		/** Checks the format of the Personal Identification Number (PIN). */
-		if (!pin.matches("[0-9]{2,2}?(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])[-+][0-9]{4,4}?")) {		
+		if (!pin.matches("[0-9]{2,2}?(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])[-+][0-9]{4,4}?")) {
 			gui.showErrorDialog("One or more of the required fields are missing and/or are filled in erroneously.");
-            return;
+			return;
 		}
 
 		/** Checks the format of the PIN-Code (nnnnn). */
 		if (!pinCode.matches("[0-9]{5,5}?")) {
-            gui.showErrorDialog("One or more of the required fields are missing and/or are filled in erroneously.");
-            return;
-        }
+			gui.showErrorDialog("One or more of the required fields are missing and/or are filled in erroneously.");
+			return;
+		}
 
 		/** Checks the format of the barcode (nnnnn). */
 		if (!bicycle.getBarcode().matches("[0-9]{5,5}?")) {
-            gui.showErrorDialog("One or more of the required fields are missing and/or are filled in erroneously.");
-            return;
-        }
+			gui.showErrorDialog("One or more of the required fields are missing and/or are filled in erroneously.");
+			return;
+		}
 
 		/** Checks the Telephone Number. */
-        //if (phoneNum != "Telephone Number") {
-        //    if ( (!s.matches("07[036]{1,1}?[0-9]{6,6}?"))) {
-        //        gui.showErrorDialog("Telephone number not on a valid format.");
-        //    }
-        //}
+		// if (phoneNum != "Telephone Number") {
+		// if ( (!s.matches("07[036]{1,1}?[0-9]{6,6}?"))) {
+		// gui.showErrorDialog("Telephone number not on a valid format.");
+		// }
+		// }
 
 		if (users.size() <= 10000) {
 			for (User u : users) {
@@ -318,14 +292,12 @@ public class BicycleGarageManager {
 				if (u.getBicycle().getBarcode() == bicycle.getBarcode()) {
 					gui.showErrorDialog("The Bicycle with that barcode is already registered to another user.");
 					return;
->>>>>>> 34b7eb0a39ad59cf1a53ebce9417c22a8371b60c
 				}
 			}
 			if (users.add(new User(pin, pinCode, bicycle, name, phoneNum))) {
 				gui.showMessageDialog("User was successfully added.");
 				bikes.add(bicycle);
 			}
-<<<<<<< HEAD
 		} else {
 			gui.showErrorDialog("The system user limit has been reached.");
 			return false;
@@ -380,7 +352,6 @@ public class BicycleGarageManager {
 	 * 
 	 * @param searchString
 	 *            The string to search for.
->>>>>>> 34b7eb0a39ad59cf1a53ebce9417c22a8371b60c
 	 * @return A TreeSet<User> containing the search results.
 	 */
 	public TreeSet<User> searchUsers(String searchString) {
@@ -389,7 +360,6 @@ public class BicycleGarageManager {
 			return users;
 		}
 		for (User user : users) {
-<<<<<<< HEAD
 			String name = user.getName();
 			String phoneNum = user.getPhoneNum();
 			String pinCode = user.getPinCode();
@@ -408,13 +378,10 @@ public class BicycleGarageManager {
 			}
 		}
 		return result;
->>>>>>> 34b7eb0a39ad59cf1a53ebce9417c22a8371b60c
 	}
 
 	/**
 	 * Returns the number of Users registered to the system.
-<<<<<<< HEAD
->>>>>>> 34b7eb0a39ad59cf1a53ebce9417c22a8371b60c
 	 * @return The number of Users registered to the system.
 	 */
 	public int getUserCount() {
@@ -423,9 +390,7 @@ public class BicycleGarageManager {
 
 	/**
 	 * Prints a barcode.
-<<<<<<< HEAD
 	 * @param barcode The barcode to print.
->>>>>>> 34b7eb0a39ad59cf1a53ebce9417c22a8371b60c
 	 */
 	public void printBarcode(String barcode) {
 		printer.printBarcode(barcode);
