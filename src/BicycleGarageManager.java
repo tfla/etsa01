@@ -364,6 +364,9 @@ public class BicycleGarageManager {
 	 */
 	public TreeSet<User> searchUsers(String searchString) {
 		TreeSet<User> result = new TreeSet<User>();
+		if (searchString == "*" || searchString == "") {
+			return users;
+		}
 		for (User user : users) {
             String name = user.getName();
             String phoneNum = user.getPhoneNum();
