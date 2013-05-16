@@ -7,6 +7,7 @@ import java.awt.event.*;
  * This class creates a JMenuItem with the text "Save", used to save the storage file to its default location with its default name.
  *
  */
+@SuppressWarnings("serial")
 public class SaveMenu extends JMenuItem implements ActionListener {
 	private OperatorGUI gui;
 

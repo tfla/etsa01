@@ -12,7 +12,7 @@ public class User implements Comparable<User> {
 	private String pin;
 
 	/**
-	 * Creates a new user.
+ 	* Creates a new user.
 	 * @param pin The PIN of the user.
 	 * @param pinCode The PIN-code of the user.
 	 * @param barcode The barcode of the user.
@@ -60,6 +60,14 @@ public class User implements Comparable<User> {
 	}
 
 	/**
+	 * Returns the Bicycle of a user.
+	 * @return The Bicycle of a user.
+	 */
+	public Bicycle getBicycle() {
+		return bicycle;
+	}
+
+	/**
      * Returns the Telephone Number of the User.
      * @return The Telephone Number of the User.
      */
@@ -86,7 +94,7 @@ public class User implements Comparable<User> {
 	/**
 	 * Sets the barcode of a user to barcode.
 	 * @param barcode The new barcode of a user.
-	 */
+	*/
 	public void setBicycle(Bicycle bicycle) {
 		this.bicycle = bicycle;
 	}

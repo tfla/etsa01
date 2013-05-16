@@ -1,12 +1,5 @@
 package GUI;
 
-import java.util.Random;
-import java.lang.StringBuilder;
-import java.util.LinkedList;
-import java.util.List;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
 
 import SYS.BicycleGarageManager;
 
@@ -21,6 +14,6 @@ public class Main {
 	 *
 	 */
 	public static void main(String[] args) {	
-		BicycleGarageManager bgm = new BicycleGarageManager();
+		new BicycleGarageManager();
 	}
 }

@@ -37,6 +37,6 @@ public class OpenMenu extends JMenuItem implements ActionListener {
 			File f = fc.getSelectedFile();
 			gui.openGarage(f);
 		}
-		gui.changeView(gui.DEFAULT_MODE);
+		gui.changeView(OperatorGUI.DEFAULT_MODE);
 	}
 }

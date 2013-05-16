@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
  * This class creates a new JButton with the text "Search", used to query the system for information.
  *
  */
+@SuppressWarnings("serial")
 public class SearchButton extends JButton implements ActionListener {
 	private OperatorGUI gui;
 

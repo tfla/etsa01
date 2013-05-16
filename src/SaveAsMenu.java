@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
  * This class creates a JMenuItem with the text "Save as ...", used to save the storage file to a new location and/or with a new name.
  *
  */
+@SuppressWarnings("serial")
 public class SaveAsMenu extends JMenuItem implements ActionListener {
 	private OperatorGUI gui;
 	private JFileChooser fc;
