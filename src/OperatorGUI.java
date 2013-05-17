@@ -401,9 +401,7 @@ public class OperatorGUI extends JFrame {
 	 *            The telephone number of the new user.
 	 * 
 	 */
-	public void saveUser(String pin, String pinCode, SYS.Bicycle bicycle,
-			String name, String phoneNum) {
-		bgm.addNewUser(pin, pinCode, bicycle, name, phoneNum);
+	public void saveUser(String pin, String pinCode, SYS.Bicycle bicycle, String name, String phoneNum) {
 		boolean b = bgm.addNewUser(pin, pinCode, bicycle, name, phoneNum);
 		if (b) {
 			userCount.setText("Registered users: " + bgm.getUserCount());
