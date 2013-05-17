@@ -4,23 +4,10 @@ import java.util.Locale;
 import java.util.TreeSet;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.SystemColor;
 import java.awt.GridLayout;
-import java.awt.Component;
-import javax.swing.border.EmptyBorder;
 import java.io.File;
-import java.io.File;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -48,6 +35,9 @@ public class OperatorGUI extends JFrame {
 	private JPanel startPanel;
 	private JPanel bp;
 	private JPanel searchResultPanel;
+	private JPanel formPanel;
+	private JPanel labelPanel;
+	private JPanel textFieldPanel;
 	private JPanel panel;
 
 	public JTextField pinTextField;
@@ -56,6 +46,12 @@ public class OperatorGUI extends JFrame {
 	public JTextField bicycleTextField;
 	public JTextField nameTextField;
 	public JTextField searchTextField;
+	
+	private JLabel pinLabel;
+	private JLabel pinCodeLabel;
+	private JLabel phoneNumLabel;
+	private JLabel bicycleLabel;
+	private JLabel nameLabel;
 
 	private String currentPin;
 	private String currentPinCode;
@@ -113,11 +109,36 @@ public class OperatorGUI extends JFrame {
 		searchTextField.setPreferredSize(new Dimension(100, 30));
 		bp.add(searchTextField);
 		bp.add(new SearchButton(this));
-
+		
 		/**
 		 * Create and populate the StartPanel (default view).
 		 */
 		startPanel = new JPanel();
+		pinLabel = new JLabel("Personal Identity Number");
+		pinCodeLabel = new JLabel("PIN-Code");
+		phoneNumLabel = new JLabel("Phone number");
+		bicycleLabel = new JLabel("Barcode");
+		nameLabel = new JLabel("Name");
+		
+		pinLabel.setPreferredSize(new Dimension(150, 30));
+		pinCodeLabel.setPreferredSize(new Dimension(60, 30));
+		phoneNumLabel.setPreferredSize(new Dimension(110, 30));
+		bicycleLabel.setPreferredSize(new Dimension(60, 30));
+		nameLabel.setPreferredSize(new Dimension(150, 30));
+		
+		pinTextField = new JTextField();
+		pinCodeTextField = new JTextField();
+		phoneNumTextField = new JTextField();
+		bicycleTextField = new JTextField();
+		nameTextField = new JTextField();
+		searchTextField = new JTextField();
+		
+		pinTextField.setPreferredSize(new Dimension(150, 30));
+		pinCodeTextField.setPreferredSize(new Dimension(60, 30));
+		phoneNumTextField.setPreferredSize(new Dimension(110, 30));
+		bicycleTextField.setPreferredSize(new Dimension(60, 30));
+		nameTextField.setPreferredSize(new Dimension(150, 30));
+		
 		changeView(DEFAULT_MODE);
 	}
 
@@ -138,16 +159,40 @@ public class OperatorGUI extends JFrame {
 		dispose();
 		switch (mode) {
 		case CREATE_MODE:
-			pinTextField = new JTextField("Personal Identity Number (PIN)");
-			pinCodeTextField = new JTextField("PIN-code");
-			phoneNumTextField = new JTextField("Telephone Number");
-			bicycleTextField = new JTextField("Bicycle");
-			nameTextField = new JTextField("Name");
-			startPanel.add(pinTextField);
-			startPanel.add(pinCodeTextField);
-			startPanel.add(phoneNumTextField);
-			startPanel.add(bicycleTextField);
-			startPanel.add(nameTextField);
+			pinTextField.setText("");
+			pinCodeTextField.setText("");
+			phoneNumTextField.setText("");
+			bicycleTextField.setText("");
+			nameTextField.setText("");
+			pinTextField.setEditable(true);
+			pinCodeTextField.setEditable(true);
+			bicycleTextField.setEditable(true);
+			phoneNumTextField.setEditable(true);
+			nameTextField.setEditable(true);
+			
+			formPanel = new JPanel();
+			formPanel.setLayout(new GridLayout(2, 1));
+			
+			labelPanel = new JPanel();
+			labelPanel.setLayout(new FlowLayout());
+			labelPanel.add(pinLabel);
+			labelPanel.add(pinCodeLabel);
+			labelPanel.add(phoneNumLabel);
+			labelPanel.add(bicycleLabel);
+			labelPanel.add(nameLabel);
+			
+			textFieldPanel = new JPanel();
+			textFieldPanel.setLayout(new FlowLayout());
+			textFieldPanel.add(pinTextField);
+			textFieldPanel.add(pinCodeTextField);
+			textFieldPanel.add(phoneNumTextField);
+			textFieldPanel.add(bicycleTextField);
+			textFieldPanel.add(nameTextField);
+			
+			formPanel.add(labelPanel);
+			formPanel.add(textFieldPanel);
+			
+			startPanel.add(formPanel);
 			startPanel.add(new SaveButton(this));
 			startPanel.add(new CancelButton(this));
 			currentMode = CREATE_MODE;
@@ -158,24 +203,40 @@ public class OperatorGUI extends JFrame {
 			currentPhoneNum = currentUser.getPhoneNum();
 			currentBarcode = currentUser.getBicycle().getBarcode();
 			currentName = currentUser.getName();
-			pinTextField = new JTextField(currentPin);
-			pinTextField.setPreferredSize(new Dimension(110, 30));
-			pinCodeTextField = new JTextField(currentPinCode);
-			pinCodeTextField.setPreferredSize(new Dimension(60, 30));
-			phoneNumTextField = new JTextField(currentPhoneNum);
-			phoneNumTextField.setPreferredSize(new Dimension(110, 30));
-			bicycleTextField = new JTextField(currentBarcode);
-			bicycleTextField.setPreferredSize(new Dimension(60, 30));
-			nameTextField = new JTextField(currentName);
-			nameTextField.setPreferredSize(new Dimension(150, 30));
+			pinTextField.setText(currentPin);
+			pinCodeTextField.setText(currentPinCode);
+			phoneNumTextField.setText(currentPhoneNum);
+			bicycleTextField.setText(currentBarcode);
+			nameTextField.setText(currentName);
 			pinTextField.setEditable(false);
 			pinCodeTextField.setEditable(false);
 			bicycleTextField.setEditable(false);
-			startPanel.add(pinTextField);
-			startPanel.add(pinCodeTextField);
-			startPanel.add(phoneNumTextField);
-			startPanel.add(bicycleTextField);
-			startPanel.add(nameTextField);
+			phoneNumTextField.setEditable(true);
+			nameTextField.setEditable(true);
+			
+			formPanel = new JPanel();
+			formPanel.setLayout(new GridLayout(2, 1));
+			
+			labelPanel = new JPanel();
+			labelPanel.setLayout(new FlowLayout());
+			labelPanel.add(pinLabel);
+			labelPanel.add(pinCodeLabel);
+			labelPanel.add(phoneNumLabel);
+			labelPanel.add(bicycleLabel);
+			labelPanel.add(nameLabel);
+			
+			textFieldPanel = new JPanel();
+			textFieldPanel.setLayout(new FlowLayout());
+			textFieldPanel.add(pinTextField);
+			textFieldPanel.add(pinCodeTextField);
+			textFieldPanel.add(phoneNumTextField);
+			textFieldPanel.add(bicycleTextField);
+			textFieldPanel.add(nameTextField);
+			
+			formPanel.add(labelPanel);
+			formPanel.add(textFieldPanel);
+			
+			startPanel.add(formPanel);
 			startPanel.add(new SaveButton(this));
 			startPanel.add(new CancelButton(this));
 			startPanel.add(new DeleteUserButton(this));
@@ -200,6 +261,7 @@ public class OperatorGUI extends JFrame {
 				for (User user : result) {
 					JPanel panel_1 = new JPanel();
 					JTextField jtf = new JTextField(user.getName());
+					jtf.setPreferredSize(new Dimension(150, 30));
 					jtf.setEditable(false);
 					panel_1.add(jtf);
 					panel_1.add(new ViewUserButton(this, user));
@@ -222,24 +284,41 @@ public class OperatorGUI extends JFrame {
 			currentPhoneNum = currentUser.getPhoneNum();
 			currentBarcode = currentUser.getBicycle().getBarcode();
 			currentName = currentUser.getName();
-			pinTextField = new JTextField(currentPin);
-			pinCodeTextField = new JTextField(currentPinCode);
-			phoneNumTextField = new JTextField(currentPhoneNum);
-			bicycleTextField = new JTextField(currentBarcode);
-			nameTextField = new JTextField(currentName);
+			pinTextField.setText(currentPin);
+			pinCodeTextField.setText(currentPinCode);
+			phoneNumTextField.setText(currentPhoneNum);
+			bicycleTextField.setText(currentBarcode);
+			nameTextField.setText(currentName);
 			pinTextField.setEditable(false);
 			pinCodeTextField.setEditable(false);
 			bicycleTextField.setEditable(false);
 			phoneNumTextField.setEditable(false);
 			nameTextField.setEditable(false);
-			startPanel.add(pinTextField);
-			startPanel.add(pinCodeTextField);
-			startPanel.add(phoneNumTextField);
-			startPanel.add(bicycleTextField);
-			startPanel.add(nameTextField);
-			startPanel.add(new SaveButton(this));
+			
+			formPanel = new JPanel();
+			formPanel.setLayout(new GridLayout(2, 1));
+			
+			labelPanel = new JPanel();
+			labelPanel.setLayout(new FlowLayout());
+			labelPanel.add(pinLabel);
+			labelPanel.add(pinCodeLabel);
+			labelPanel.add(phoneNumLabel);
+			labelPanel.add(bicycleLabel);
+			labelPanel.add(nameLabel);	
+			
+			textFieldPanel = new JPanel();
+			textFieldPanel.setLayout(new FlowLayout());
+			textFieldPanel.add(pinTextField);
+			textFieldPanel.add(pinCodeTextField);
+			textFieldPanel.add(phoneNumTextField);
+			textFieldPanel.add(bicycleTextField);
+			textFieldPanel.add(nameTextField);
+			
+			formPanel.add(labelPanel);
+			formPanel.add(textFieldPanel);
+			
+			startPanel.add(formPanel);
 			startPanel.add(new CancelButton(this));
-			startPanel.add(new DeleteUserButton(this));
 			startPanel.add(new PrintBarcodeButton(this));
 			currentMode = VIEW_MODE;
 			break;
@@ -276,6 +355,16 @@ public class OperatorGUI extends JFrame {
 	 */
 	public void setCurrentUser(User user) {
 		currentUser = user;
+	}
+	
+	/**
+	 * Get the current user
+	 * 
+	 * @return User
+	 *            The current user that is viewed in the GUI.
+	 */
+	public User getCurrentUser() {
+		return currentUser;
 	}
 
 	/**
@@ -381,7 +470,12 @@ public class OperatorGUI extends JFrame {
 	 *            The file to save to.
 	 */
 	public void saveGarage(File f) {
-		bgm.saveGarage(f);
+		boolean b = bgm.saveGarage(f);
+		if (b) {
+			showMessageDialog("Save succesfull");
+		} else {
+			showMessageDialog("Save not sucessfull");
+		}
 	}
 
 	/**
@@ -394,8 +488,18 @@ public class OperatorGUI extends JFrame {
 	public void openGarage(File f) {
 		bgm.openGarage(f);
 	}
-
-	public void editUser() {
+	
+	/**
+	 *  Edits the user with the name and phone number
+	 *  
+	 *  @param name
+	 *  	The name to be changed for the user.
+	 *  @param phoneNum
+	 *  	The phone number to be changed for the user.
+	 *  @param user
+	 *  	The user that is be to be changed.
+	 */
+	public void editUser(String name, String phoneNum, User user) {
 		boolean b = bgm.editUser(nameTextField.getText(), phoneNumTextField.getText(),
 				    currentUser);
 		if (b) {

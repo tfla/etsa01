@@ -1,6 +1,8 @@
 package GUI;
 
 import javax.swing.JButton;
+
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import SYS.Bicycle;
@@ -19,9 +21,12 @@ public class SaveButton extends JButton implements ActionListener {
 		addActionListener(this);
 	}
 	
+	/**
+	 * Called when the button is pressed, saves the user to the system.
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if (gui.getCurrentMode() == OperatorGUI.EDIT_MODE){
-			gui.editUser();
+			gui.editUser(gui.nameTextField.getText(), gui.phoneNumTextField.getText(), gui.getCurrentUser());
 		} else {
 			gui.saveUser(gui.pinTextField.getText(),
 							gui.pinCodeTextField.getText(),
