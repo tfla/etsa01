@@ -76,6 +76,7 @@ public class BicycleGarageManager {
 	 */ 
 	public boolean openGarage(File f){
 		Scanner scan;
+		int i = 0;
 		try {
 			if (f != null) {
 				scan = new Scanner(f);
@@ -86,8 +87,11 @@ public class BicycleGarageManager {
 			bikes.clear();
 			scan.useDelimiter(",");
 			while (scan.hasNext()) {
-				users.add(new User(scan.next(), scan.next(), new Bicycle(scan
+				if (i < 10000) {
+					users.add(new User(scan.next(), scan.next(), new Bicycle(scan
 						.next()), scan.next(), scan.next()));
+					i++;
+				}
 				for (User u : users) {
 					bikes.add(u.getBicycle());
 				}
@@ -161,7 +165,7 @@ public class BicycleGarageManager {
 	public void exitBarcode(String bicycleID) {
 		for (Bicycle b : bikes) {
 			if (b.getBarcode().equals(bicycleID)) {
-				entryLock.open(15);
+				exitLock.open(15);
 				if (b.inGarage()) {
 					b.setInGarage(false);
 				}
