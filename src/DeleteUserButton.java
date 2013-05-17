@@ -2,6 +2,8 @@ package GUI;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -29,7 +31,7 @@ public class DeleteUserButton extends JButton implements ActionListener {
 	}
 
 	/**
-	 * Called when the button is pressed, deleted the user from the system.
+	 * Called when the button is pressed, deletes the user from the system.
 	 *
 	 */
 	public void actionPerformed(ActionEvent e) {
