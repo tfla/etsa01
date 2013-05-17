@@ -12,12 +12,12 @@ private String phoneNum;
 private String pin;
 
 	/**
- 	* Creates a new user.
-	 * @param pin The PIN of the user.
-	 * @param pinCode The PIN-code of the user.
-	 * @param barcode The barcode of the user.
-	 * @param name The name of the user.
-	 * @param phoneNum The telephone number of the user.
+ 	* Creates a new User.
+	 * @param pin The PIN of the User.
+	 * @param pinCode The PIN-code of the User.
+	 * @param barcode The barcode of the User.
+	 * @param name The name of the User.
+	 * @param phoneNum The telephone number of the User.
 	 */
 	public User(String pin, String pinCode, Bicycle bicycle, String name, String phoneNum) {
 		this.pin = pin;
@@ -28,32 +28,32 @@ private String pin;
 	}
 
 	/**
-	 * Returns the PIN-code of a user.
-	 * @return The PIN-code of a user.
+	 * Returns the PIN-code of a User.
+	 * @return The PIN-code of a User.
 	 */
 	public String getPinCode() {
 		return pinCode;
 	}
 
 	/**
-	* Returns the Personal Identity Number (PIN) of a user.
-	* @return The Personal Identity Numer (PIN) of a user.
+	* Returns the Personal Identity Number (PIN) of a User.
+	* @return The Personal Identity Numer (PIN) of a User.
 	*/
 	public String getPIN() {
 		return pin;
 	}
 
 	/**
-	* Returns the name of a user.
-	* @return The name of a user.
+	* Returns the name of a User.
+	* @return The name of a User.
 	*/
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * Returns the Bicycle of a user.
-	 * @return The Bicycle of a user.
+	 * Returns the Bicycle of a User.
+	 * @return The Bicycle of a User.
 	 */
 	public Bicycle getBicycle() {
 		return bicycle;
@@ -69,23 +69,23 @@ private String pin;
 
 	/**
 	 * Sets the name of a user to name.
-	 * @param name The new name for the user.
+	 * @param name The new name for the User.
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * Sets the phone number of a user to phoneNum.
-	 * @param phoneNum The new phone number of a user.
+	 * Sets the phone number of a User to phoneNum.
+	 * @param phoneNum The new phone number of a User.
 	 */
 	public void setPhone(String phoneNum) {
 		this.phoneNum = phoneNum;
 	}
 
 	/**
-	 * Sets the barcode of a user to barcode.
-	 * @param barcode The new barcode of a user.
+	 * Sets the barcode of a User to barcode.
+	 * @param barcode The new barcode of a User.
 	*/
 	public void setBicycle(Bicycle bicycle) {
 		this.bicycle = bicycle;

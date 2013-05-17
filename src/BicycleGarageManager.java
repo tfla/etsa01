@@ -118,9 +118,9 @@ public class BicycleGarageManager {
 				outprint = new PrintStream(new File("storage.csv"));
 			}
 			for (User us : users) {
-				outprint.println(us.getPIN() + "," + us.getPinCode() + ","
+				outprint.println(","+us.getPIN() + "," + us.getPinCode() + ","
 						+ us.getBicycle().getBarcode() + "," + us.getName()
-						+ "," + us.getPhoneNum() + ",");
+						+ "," + us.getPhoneNum());
 			}
 			return true;
 		} catch (Exception ex) {
