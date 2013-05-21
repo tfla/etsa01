@@ -208,6 +208,9 @@ public class BicycleGarageManager {
 		if (c != '*' && c != '#' && asterix) {
 			pinCode += c;
 		}
+		else if (c == '#' && !asterix) {
+			terminal.lightLED(PinCodeTerminal.RED_LED, 15);
+		}
 	}
 
 	/**
