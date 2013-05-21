@@ -350,7 +350,16 @@ public class BicycleGarageManager {
 	 * @return True if the User was successfully deleted.
 	 */
 	public boolean deleteUser(User u) {
-		return users.remove(u);
+		Bicycle b = u.getBicycle();
+		if (b.inGarage()) {
+			b.setInGarage(false);
+			bikes.remove(b);
+		}
+		if (!users.remove(u)) {
+			return false;
+		}
+		saveGarage(null);
+		return true;
 	}
 
 	/**
