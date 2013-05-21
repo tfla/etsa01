@@ -32,7 +32,7 @@ public class SaveButton extends JButton implements ActionListener {
 							gui.pinCodeTextField.getText(),
 							new Bicycle(gui.bicycleTextField.getText()),
 							gui.nameTextField.getText(),
-							gui.phoneNumTextField.getText());
+							gui.phoneNumTextField.getText());	
 		}
 	}
 }

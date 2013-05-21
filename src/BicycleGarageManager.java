@@ -75,30 +75,41 @@ public class BicycleGarageManager {
 	 * @return true if no exceptions were thrown and garage could be loaded.
 	 */ 
 	public boolean openGarage(File f){
-		Scanner scan;
+		Scanner storage;
+		Scanner ingarage;
 		int i = 0;
 		try {
 			if (f != null) {
-				scan = new Scanner(f);
+				storage = new Scanner(f);
 			} else {
-				scan = new Scanner(new File("storage.csv"));
+				storage = new Scanner(new File("storage.csv"));
 			}
 			users.clear();
 			bikes.clear();
-			scan.useDelimiter(",");
-			while (scan.hasNext()) {
+			storage.useDelimiter(",");
+			while (storage.hasNext()) {
 				if (i < 10000) {
-					users.add(new User(scan.next(), scan.next(), new Bicycle(scan
-						.next()), scan.next(), scan.next()));
+					users.add(new User(storage.next(), storage.next(), new Bicycle(storage.next()), storage.next(), storage.next()));
 					i++;
 				}
 				for (User u : users) {
 					bikes.add(u.getBicycle());
 				}
 			}
-			scan.close();
+			storage.close();
+			ingarage = new Scanner(new File("ingarage.csv"));
+			while (ingarage.hasNext()) {
+				String readLine = ingarage.next();
+				for (Bicycle b : bikes) {
+					if (readLine.equals(b.getBarcode())) {
+						b.setInGarage(true);
+					}
+				}
+			}
+			ingarage.close();
 			return true;
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			return false;
 		}
 
@@ -114,20 +125,27 @@ public class BicycleGarageManager {
 	 */
 	@SuppressWarnings("resource")
 	public boolean saveGarage(File f) {
-		PrintStream outprint;
+		PrintStream storage;
+		PrintStream ingarage;
 		try {
 			if (f != null) {
-				outprint = new PrintStream(f);
+				storage = new PrintStream(f);
 			} else {
-				outprint = new PrintStream(new File("storage.csv"));
+				storage = new PrintStream(new File("storage.csv"));
 			}
 			for (User us : users) {
-				outprint.println(","+us.getPIN() + "," + us.getPinCode() + ","
+				storage.println(","+us.getPIN() + "," + us.getPinCode() + ","
 						+ us.getBicycle().getBarcode() + "," + us.getName()
 						+ "," + us.getPhoneNum());
 			}
+			ingarage = new PrintStream(new File("ingarage.csv"));
+			TreeSet<Bicycle> bicyclesInGarage = bicyclesInGarage();
+			for (Bicycle b : bicyclesInGarage) {
+				ingarage.println(b.getBarcode());
+			}
 			return true;
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			return false;
 		}
 	}
@@ -146,6 +164,7 @@ public class BicycleGarageManager {
 				entryLock.open(15);
 				if (!b.inGarage()) {
 					b.setInGarage(true);
+					saveGarage(null);
 				}
 				terminal.lightLED(PinCodeTerminal.GREEN_LED, 15);
 				if (gui.getCurrentMode() == OperatorGUI.DEFAULT_MODE) {
@@ -168,6 +187,7 @@ public class BicycleGarageManager {
 				exitLock.open(15);
 				if (b.inGarage()) {
 					b.setInGarage(false);
+					saveGarage(null);
 				}
 				terminal.lightLED(PinCodeTerminal.GREEN_LED, 15);
 				if (gui.getCurrentMode() == OperatorGUI.DEFAULT_MODE) {
