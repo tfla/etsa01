@@ -272,7 +272,7 @@ public class OperatorGUI extends JFrame {
 					n++;
 				}
 			} else {
-				showMessageDialog("No user found");
+				showMessageDialog("The biker-object cannot be found.");
 				changeView(DEFAULT_MODE);
 			}
 			searchResultPanel.add(new CancelButton(this));
@@ -433,7 +433,7 @@ public class OperatorGUI extends JFrame {
 		if (u != null) {
 			return u;
 		} else {
-			showErrorDialog("User not found.");
+			showErrorDialog("The biker-object cannot be found.");
 			return null;
 		}
 	}
