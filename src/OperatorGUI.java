@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.SystemColor;
 import java.awt.GridLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -118,6 +120,14 @@ public class OperatorGUI extends JFrame {
 		searchTextField = new JTextField("Search ...");
 		searchTextField.setPreferredSize(new Dimension(100, 30));
 		bp.add(searchTextField);
+		searchTextField.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				if (key == KeyEvent.VK_ENTER) {
+					changeView(SEARCH_MODE);
+				}
+			}
+		});
 		bp.add(new SearchButton(this));
 		
 		/**
