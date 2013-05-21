@@ -13,10 +13,10 @@ private String pin;
 
 	/**
  	* Creates a new User.
-	 * @param pin The PIN of the User.
-	 * @param pinCode The PIN-code of the User.
-	 * @param barcode The barcode of the User.
-	 * @param name The name of the User.
+	 * @param pin The Users Personal Identification Number (PIN).
+	 * @param pinCode The Users PIN-code.
+	 * @param bicycle The Users barcode.
+	 * @param name The Users name.
 	 * @param phoneNum The telephone number of the User.
 	 */
 	public User(String pin, String pinCode, Bicycle bicycle, String name, String phoneNum) {
@@ -85,7 +85,7 @@ private String pin;
 
 	/**
 	 * Sets the barcode of a User to barcode.
-	 * @param barcode The new barcode of a User.
+	 * @param bicycle The new barcode of a User.
 	*/
 	public void setBicycle(Bicycle bicycle) {
 		this.bicycle = bicycle;

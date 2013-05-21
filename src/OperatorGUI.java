@@ -40,12 +40,17 @@ public class OperatorGUI extends JFrame {
 	private JPanel textFieldPanel;
 	private JPanel panel;
 
+	/** The JTextField for entering the Users Personal Identification Number (PIN). */
 	public JTextField pinTextField;
+	/** The JTextField for entering the Users PIN-Code. */
 	public JTextField pinCodeTextField;
+	/** The JTextField for entering the Users telephone number. */
 	public JTextField phoneNumTextField;
+	/** The JTextField for entering the barcode of the bicycle. */
 	public JTextField bicycleTextField;
+	/** The JTextField for entering the Users name. */
 	public JTextField nameTextField;
-	public JTextField searchTextField;
+	private JTextField searchTextField;
 	
 	private JLabel pinLabel;
 	private JLabel pinCodeLabel;
@@ -63,10 +68,15 @@ public class OperatorGUI extends JFrame {
 
 	private User currentUser;
 
+	/** An int representing the "default-mode". */
 	public static final int DEFAULT_MODE = 0;
+	/** An int representing the "create-mode". */
 	public static final int CREATE_MODE = 1;
+	/** An int representing the "edit-mode". */
 	public static final int EDIT_MODE = 2;
+	/** An int representing the "search-mode". */
 	public static final int SEARCH_MODE = 3;
+	/** An int representing the "view-mode". */
 	public static final int VIEW_MODE = 4;
 
 	private int currentMode;
@@ -131,7 +141,6 @@ public class OperatorGUI extends JFrame {
 		phoneNumTextField = new JTextField();
 		bicycleTextField = new JTextField();
 		nameTextField = new JTextField();
-		searchTextField = new JTextField();
 		
 		pinTextField.setPreferredSize(new Dimension(150, 30));
 		pinCodeTextField.setPreferredSize(new Dimension(60, 30));
