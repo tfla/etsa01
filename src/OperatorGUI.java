@@ -271,7 +271,7 @@ public class OperatorGUI extends JFrame {
 			searchResultPanel.setLayout(null);
 
 			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(32, 32, 500, 400);
+			scrollPane.setBounds(32, 32, getWidth()-64, getHeight()-232);
 			searchResultPanel.add(scrollPane);
 
 			panel = new JPanel();
@@ -298,8 +298,12 @@ public class OperatorGUI extends JFrame {
 				showMessageDialog("The biker-object cannot be found.");
 				changeView(DEFAULT_MODE);
 			}
-			searchResultPanel.add(new LoadMoreResultsButton(this));
-			searchResultPanel.add(new CancelButton(this));
+			LoadMoreResultsButton loadMoreResultsButton = new LoadMoreResultsButton(this);
+			CancelButton cancelButton = new CancelButton(this);
+			loadMoreResultsButton.setBounds(284, 450, 175, 30);
+			cancelButton.setBounds(209, 450, 75, 30);
+			searchResultPanel.add(loadMoreResultsButton);
+			searchResultPanel.add(cancelButton);
 			currentMode = SEARCH_MODE;
 			break;
 		case VIEW_MODE:
