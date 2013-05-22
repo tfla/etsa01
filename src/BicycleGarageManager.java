@@ -86,10 +86,20 @@ public class BicycleGarageManager {
 			}
 			users.clear();
 			bikes.clear();
-			storage.useDelimiter(",");
 			while (storage.hasNext()) {
 				if (i < 10000) {
-					addNewUser(storage.next(), storage.next(), new Bicycle(storage.next()), storage.next(), storage.next(), false);
+					String temp_0 = storage.nextLine();
+					String[] temp_1 = temp_0.split(",");
+					//for (int i = 0; i < temp_1.length; i++) {
+					//	System.out.println(temp_1[i]);
+					//}
+					String pin = temp_1[0];
+					System.out.println(pin);
+					String pinCode = temp_1[1];
+					String barcode = temp_1[2];
+					String name = temp_1[3];
+					String phoneNum = temp_1[4];
+					addNewUser(pin, pinCode, new Bicycle(barcode), name, phoneNum, false);
 					i++;
 				}
 				for (User u : users) {
@@ -134,7 +144,7 @@ public class BicycleGarageManager {
 				storage = new PrintStream(new File("storage.csv"));
 			}
 			for (User us : users) {
-				storage.println(","+us.getPIN() + "," + us.getPinCode() + ","
+				storage.println(us.getPIN() + "," + us.getPinCode() + ","
 						+ us.getBicycle().getBarcode() + "," + us.getName()
 						+ "," + us.getPhoneNum());
 			}
@@ -342,7 +352,9 @@ public class BicycleGarageManager {
 			}
 			return false;
 		}
-		saveGarage(null);
+		if (showMessages) {
+			saveGarage(null);
+		}
 		return true;
 	}
 	/**
