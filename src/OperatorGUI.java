@@ -7,9 +7,12 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.SystemColor;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -20,7 +23,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
-
 import SYS.BicycleGarageManager;
 import SYS.User;
 import SYS.Bicycle;
@@ -82,6 +84,8 @@ public class OperatorGUI extends JFrame {
 	public static final int VIEW_MODE = 4;
 
 	private int currentMode;
+
+	private int searchSize = 100;
 
 	/**
 	 * Constructor, creates and populates the GUI.
@@ -274,7 +278,7 @@ public class OperatorGUI extends JFrame {
 			scrollPane.setViewportView(panel);
 			panel.setLayout(new GridLayout(100, 1));
 
-			TreeSet<User> result = bgm.searchUsers(searchTextField.getText());
+			TreeSet<User> result = bgm.searchUsers(searchTextField.getText(), searchSize);
 			if (result.size() != 0) {
 				int n = 0;
 				for (User user : result) {
@@ -294,6 +298,7 @@ public class OperatorGUI extends JFrame {
 				showMessageDialog("The biker-object cannot be found.");
 				changeView(DEFAULT_MODE);
 			}
+			searchResultPanel.add(new LoadMoreResultsButton(this));
 			searchResultPanel.add(new CancelButton(this));
 			currentMode = SEARCH_MODE;
 			break;
@@ -525,5 +530,26 @@ public class OperatorGUI extends JFrame {
 		bgm.editUser(nameTextField.getText(), phoneNumTextField.getText(),
 				currentUser);
 
+	}
+
+	/**
+	 * Increases the size of searches, be wary though; this might slow the system down, limit is 10000.
+	 * @return true if successful.
+	 */
+	public boolean increaseSearchSize() {
+		if (searchSize < 10000) {
+			searchSize += 100;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Sets the search size to 100 (default).
+	 *
+	 */
+	public void resetSearchSize() {
+		searchSize = 100;
 	}
 }

@@ -384,32 +384,47 @@ public class BicycleGarageManager {
 	 * 
 	 * @param searchString
 	 *            The string to search for.
+	 * @param size
+	 *            The wanted size of the returned TreeSet<User>.
 	 * @return A TreeSet<User> containing the search results.
 	 */
-	public TreeSet<User> searchUsers(String searchString) {
+	public TreeSet<User> searchUsers(String searchString, int size) {
 		TreeSet<User> result = new TreeSet<User>();
+		int i = 0;
 		if (searchString.equals("*") || searchString.equals("")) {
-			return users;
-		}
-		for (User user : users) {
-			String name = user.getName();
-			String phoneNum = user.getPhoneNum();
-			String pinCode = user.getPinCode();
-			String pin = user.getPIN();
-			String barcode = user.getBicycle().getBarcode();
-			if (name.indexOf(searchString) >= 0) {
-				result.add(user);
-			} else if (phoneNum.equals(searchString)) {
-				result.add(user);
-			} else if (pinCode.equals(searchString)) {
-				result.add(user);
-			} else if (pin.equals(searchString)) {
-				result.add(user);
-			} else if (barcode.equals(searchString)) {
-				result.add(user);
+			for (User u : users) {
+				result.add(u);
+				i++;
+				if (i == size) {
+					return result;
+				}
 			}
+			return result;
+		} else {
+			for (User u : users) {
+				String name = u.getName();
+				String phoneNum = u.getPhoneNum();
+				String pinCode = u.getPinCode();
+				String pin = u.getPIN();
+				String barcode = u.getBicycle().getBarcode();
+				if (name.indexOf(searchString) >= 0) {
+					result.add(u);
+				} else if (phoneNum.equals(searchString)) {
+					result.add(u);
+				} else if (pinCode.equals(searchString)) {
+					result.add(u);
+				} else if (pin.equals(searchString)) {
+					result.add(u);
+				} else if (barcode.equals(searchString)) {
+					result.add(u);
+				}
+				i++;
+				if (i == size) {
+					return result;
+				}
+			}
+			return result;
 		}
-		return result;
 	}
 
 	/**
