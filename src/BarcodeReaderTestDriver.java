@@ -39,10 +39,12 @@ abstract public class BarcodeReaderTestDriver implements BarcodeReader, ActionLi
 	 * Create a BarcodeReaderTestDriver.
 	 * @param windowName text to be written in window frame.
 	 */
-	public BarcodeReaderTestDriver(String windowName) {
+	public BarcodeReaderTestDriver(String windowName,int pos) {
 		frame = new JFrame(windowName);
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 				// make the window impossible to close
+		frame.setLocation(600,pos);
+		frame.setAlwaysOnTop(true);
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
 		

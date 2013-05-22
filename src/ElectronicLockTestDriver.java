@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.Timer;
+
+import java.awt.Dimension;
 import java.awt.event.*;
 
 /**
@@ -22,13 +24,15 @@ public class ElectronicLockTestDriver implements ElectronicLock {
 	 * Create an ElectronicLockTestDriver
 	 * @param doorIdentifier a string identifying the door, e.g. "entry" or "exit"
 	 */
-	public ElectronicLockTestDriver(String doorIdentifier) {
+	public ElectronicLockTestDriver(String doorIdentifier,int pos) {
 		JFrame frame = new JFrame(doorIdentifier);
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		JPanel panel = new JPanel();
 		frame.add(panel);
 		panel.add(state);
-		
+		frame.setPreferredSize(new Dimension(200, 55));
+		frame.setLocation(600,pos);
+		frame.setAlwaysOnTop(true);
 		frame.pack();
 		frame.setVisible(true);
 		

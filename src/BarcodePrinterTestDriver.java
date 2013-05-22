@@ -25,7 +25,8 @@ public class BarcodePrinterTestDriver implements BarcodePrinter {
 		textArea = new JTextArea(5, 20);		
 		JScrollPane scrollPane = new JScrollPane(textArea); 
 		textArea.setEditable(false);
-
+		frame.setLocation(600,410);
+		frame.setAlwaysOnTop(true);
 		frame.add(scrollPane);
 		frame.pack();
 		frame.setVisible(true);

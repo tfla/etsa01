@@ -13,7 +13,7 @@ public class BarcodeReaderEntryTestDriver extends BarcodeReaderTestDriver {
 	 * Construct an instance of BarcodeReaderEntryTestDriver.
 	 */
 	public BarcodeReaderEntryTestDriver() {
-		super("Entry door barcode reader");
+		super("Entry door barcode reader",150);
 	}
 	
 	/**

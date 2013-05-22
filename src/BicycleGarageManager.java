@@ -38,8 +38,8 @@ public class BicycleGarageManager {
 		registerHardwareDrivers(new BarcodePrinterTestDriver(),
 				new BarcodeReaderExitTestDriver(),
 				new BarcodeReaderEntryTestDriver(),
-				new ElectronicLockTestDriver("Entry"),
-				new ElectronicLockTestDriver("Exit"),
+				new ElectronicLockTestDriver("Entry",300),
+				new ElectronicLockTestDriver("Exit",355),
 				new PinCodeTerminalTestDriver());
 	}
 
@@ -94,7 +94,6 @@ public class BicycleGarageManager {
 					//	System.out.println(temp_1[i]);
 					//}
 					String pin = temp_1[0];
-					System.out.println(pin);
 					String pinCode = temp_1[1];
 					String barcode = temp_1[2];
 					String name = temp_1[3];

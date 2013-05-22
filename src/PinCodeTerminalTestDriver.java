@@ -64,6 +64,8 @@ public class PinCodeTerminalTestDriver implements PinCodeTerminal, ActionListene
 		JFrame frame = new JFrame("Pin code terminal");
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); 
 		          // make the window impossible to close
+		frame.setLocation(600,0);
+		frame.setAlwaysOnTop(true);
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
 		JPanel LEDPanel = new JPanel();

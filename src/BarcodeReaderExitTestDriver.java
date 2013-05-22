@@ -13,7 +13,7 @@ public class BarcodeReaderExitTestDriver extends BarcodeReaderTestDriver {
 	 * Construct an instance of BarcodeReaderExitTestDriver.
 	 */
 	public BarcodeReaderExitTestDriver() {
-		super("Exit door barcode reader");
+		super("Exit door barcode reader",225);
 	}
 
 	/**
