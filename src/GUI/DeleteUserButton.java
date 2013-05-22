@@ -2,6 +2,7 @@ package GUI;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -29,17 +30,20 @@ public class DeleteUserButton extends JButton implements ActionListener {
 	}
 
 	/**
-	 * Called when the button is pressed, deleted the user from the system.
+	 * Called when the button is pressed, deletes the user from the system.
 	 *
 	 */
 	public void actionPerformed(ActionEvent e) {
 		String pin = gui.pinTextField.getText();
 		User u = gui.getUser(pin);
-		if (u != null) {
-			if (gui.deleteUser(u)) {
-				gui.showMessageDialog("User successfully removed.");
+		int confirm = JOptionPane.showConfirmDialog(null, "This action is irreversible and will delete the User from the system.", "Really delete the user?", JOptionPane.YES_NO_OPTION);
+		if (confirm == JOptionPane.YES_OPTION) {
+			if (u != null) {
+				if (gui.deleteUser(u)) {
+					gui.showMessageDialog("User successfully removed.");
+				}
 			}
+			gui.changeView(OperatorGUI.DEFAULT_MODE);
 		}
-		gui.changeView(OperatorGUI.DEFAULT_MODE);
 	}
 }
