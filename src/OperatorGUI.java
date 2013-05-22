@@ -149,7 +149,7 @@ public class OperatorGUI extends JFrame {
 		phoneNumLabel.setPreferredSize(new Dimension(110, 30));
 		bicycleLabel.setPreferredSize(new Dimension(60, 30));
 		nameLabel.setPreferredSize(new Dimension(150, 30));
-		
+
 		pinTextField = new JTextField();
 		pinCodeTextField = new JTextField();
 		phoneNumTextField = new JTextField();
@@ -276,7 +276,7 @@ public class OperatorGUI extends JFrame {
 
 			panel = new JPanel();
 			scrollPane.setViewportView(panel);
-			panel.setLayout(new GridLayout(100, 1));
+			panel.setLayout(new GridLayout(searchSize, 1));
 
 			TreeSet<User> result = bgm.searchUsers(searchTextField.getText(), searchSize);
 			if (result.size() != 0) {
@@ -286,8 +286,17 @@ public class OperatorGUI extends JFrame {
 					JTextField jtf = new JTextField(user.getName());
 					jtf.setPreferredSize(new Dimension(150, 30));
 					jtf.setEditable(false);
+					JTextField btf = new JTextField();
+					if (user.getBicycle().inGarage()) {
+						btf.setText("Bicycle is in garage.");
+					} else {
+						btf.setText("Bicycle is not in garage.");
+					}
+					btf.setPreferredSize(new Dimension(175, 30));
+					btf.setEditable(false);
 					panel_1.add(jtf);
 					panel_1.add(new ViewUserButton(this, user));
+					panel_1.add(btf);
 					if (n % 2 == 0) {
 						panel_1.setBackground(SystemColor.inactiveCaptionBorder);
 					}
@@ -300,8 +309,8 @@ public class OperatorGUI extends JFrame {
 			}
 			LoadMoreResultsButton loadMoreResultsButton = new LoadMoreResultsButton(this);
 			CancelButton cancelButton = new CancelButton(this);
-			loadMoreResultsButton.setBounds(284, 450, 175, 30);
-			cancelButton.setBounds(209, 450, 75, 30);
+			loadMoreResultsButton.setBounds(250, 450, 175, 30);
+			cancelButton.setBounds(175, 450, 75, 30);
 			searchResultPanel.add(loadMoreResultsButton);
 			searchResultPanel.add(cancelButton);
 			currentMode = SEARCH_MODE;
@@ -333,7 +342,7 @@ public class OperatorGUI extends JFrame {
 			labelPanel.add(phoneNumLabel);
 			labelPanel.add(bicycleLabel);
 			labelPanel.add(nameLabel);	
-			
+		
 			textFieldPanel = new JPanel();
 			textFieldPanel.setLayout(new FlowLayout());
 			textFieldPanel.add(pinTextField);
