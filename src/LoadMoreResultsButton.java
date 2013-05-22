@@ -19,7 +19,7 @@ public class LoadMoreResultsButton extends JButton implements ActionListener {
     }
 
     /**
-     * Called when the button is pressed, saves the user to the system.
+     * Called when the button is pressed, loads more results in search-mode.
      */
     public void actionPerformed(ActionEvent e) {
 		if (gui.increaseSearchSize()) {
