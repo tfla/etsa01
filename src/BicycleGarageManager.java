@@ -89,7 +89,7 @@ public class BicycleGarageManager {
 			storage.useDelimiter(",");
 			while (storage.hasNext()) {
 				if (i < 10000) {
-					users.add(new User(storage.next(), storage.next(), new Bicycle(storage.next()), storage.next(), storage.next()));
+					addNewUser(storage.next(), storage.next(), new Bicycle(storage.next()), storage.next(), storage.next(), false);
 					i++;
 				}
 				for (User u : users) {
@@ -279,50 +279,67 @@ public class BicycleGarageManager {
 	 * @param bicycle The Bicycle of the new user.
 	 * @param name The name of the new user.
 	 * @param phoneNum The telephone number of the new user.
+	 * @param showMessages True if Information and Error messages should be displayed.
 	 * @return boolean True if the user could be added. False otherwise.
 	 *
 	 */
 	public boolean addNewUser(String pin, String pinCode, Bicycle bicycle,
-			String name, String phoneNum) {
+			String name, String phoneNum, boolean showMessages) {
 		/** Checks the format of the Personal Identification Number (PIN). */
 		if (!pin.matches("[0-9]{2,2}?(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])[-+][0-9]{4,4}?")) {
-			gui.showErrorDialog("One or more of the required fields are missing and/or are filled in erroneously.");
+			if (showMessages) {
+				gui.showErrorDialog("One or more of the required fields are missing and/or are filled in erroneously.");
+			}
 			return false;
 		}
 
 		/** Checks the format of the PIN-Code (nnnnn). */
 		if (!pinCode.matches("[0-9]{5,5}?")) {
-			gui.showErrorDialog("One or more of the required fields are missing and/or are filled in erroneously.");
+			if (showMessages) {
+				gui.showErrorDialog("One or more of the required fields are missing and/or are filled in erroneously.");
+			}
 			return false;
 		}
 
 		/** Checks the format of the barcode (nnnnn). */
 		if (!bicycle.getBarcode().matches("[0-9]{5,5}?")) {
-			gui.showErrorDialog("One or more of the required fields are missing and/or are filled in erroneously.");
+			if (showMessages) {
+				gui.showErrorDialog("One or more of the required fields are missing and/or are filled in erroneously.");
+			}
 			return false;
 		}
 		
 		if (users.size() <= 10000) {
 			for (User u : users) {
 				if (u.getPinCode().equals(pinCode)) {
-					gui.showErrorDialog("The PIN-Code is already registered to another User.");
+					if (showMessages) {
+						gui.showErrorDialog("The PIN-Code is already registered to another User.");
+					}
 					return false;
 				}
 				if (u.getPIN().equals(pin)) {
-					gui.showErrorDialog("The Personal Identification Number (PIN) is already registered to another user.");
+					if (showMessages) {
+						gui.showErrorDialog("The Personal Identification Number (PIN) is already registered to another user.");
+					}
 					return false;
 				}
 				if (u.getBicycle().getBarcode().equals(bicycle.getBarcode())) {
-					gui.showErrorDialog("The Bicycle with that barcode is already registered to another user.");
+					if (showMessages) {
+						gui.showErrorDialog("The Bicycle with that barcode is already registered to another user.");
+					}
 					return false;
 				}
 			}
 			if (users.add(new User(pin, pinCode, bicycle, name, phoneNum))) {
-				gui.showMessageDialog("User was successfully added.");
+				if (showMessages) {
+					gui.showMessageDialog("User was successfully added.");
+				}
 				bikes.add(bicycle);
 			}
 		} else {
-			gui.showErrorDialog("The system user limit has been reached.");
+			if (showMessages) {
+				gui.showErrorDialog("The system user limit has been reached.");
+			}
 			return false;
 		}
 		saveGarage(null);

@@ -439,7 +439,7 @@ public class OperatorGUI extends JFrame {
 	 * 
 	 */
 	public void saveUser(String pin, String pinCode, SYS.Bicycle bicycle, String name, String phoneNum) {
-		boolean b = bgm.addNewUser(pin, pinCode, bicycle, name, phoneNum);
+		boolean b = bgm.addNewUser(pin, pinCode, bicycle, name, phoneNum, true);
 		if (b) {
 			userCount.setText("Registered users: " + bgm.getUserCount());
 			changeView(OperatorGUI.DEFAULT_MODE);
